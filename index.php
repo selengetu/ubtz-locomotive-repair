@@ -1,5 +1,3 @@
 <?php 
-
-header('Location: /passport/public/');
-
+	header('Location: /repair/public/');
 ?>
