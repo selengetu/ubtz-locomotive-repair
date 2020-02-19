@@ -46,7 +46,6 @@ class EdangiController extends Controller
         $enddate=  Carbon::today()->toDateString();
         $depo=DB::table('SET_DEPO')->get();
         $stat=Station::all();
-        $zaspart=DB::table('V_ZASZUT')->get();
         $seri=Seri::orderby('seri_name')->get();
         $part=Part::orderby('part_name')->get();
         if(Session::has('loc_depo')) {
