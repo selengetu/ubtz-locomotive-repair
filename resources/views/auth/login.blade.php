@@ -1,7 +1,7 @@
 <div class="body"></div>
         <div class="grad"></div>
         <div class="header">
-            <div><span>Цахим пасспортын</span> <br><span>програм хангамж</span></div>
+            <div><span>Илчит тэрэгний</span> <br><span> засвар бүртгэл</span></div>
         </div>
         <br>
         <div class="login">
