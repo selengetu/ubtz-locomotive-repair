@@ -11,7 +11,7 @@
                         <i class="icon-settings font-green">
                         </i>
                         <span class="caption-subject font-green sbold uppercase">
-                           Цахим дэвтэр                           
+                         Төлөвлөгөөт засвар
                         </span>
                     </div>
                         <div class="actions">
@@ -183,7 +183,7 @@
                                       <td>{{$zasparts->tr3_date}}</td>
                                       <td>{{$zasparts->tr2_guilt}}</td>
                                       <td>{{$zasparts->tr2_date}}</td>
-                                      <td><a class="btn btn-xs btn-danger"  href="{{route('zaspart.destroy', $zasparts->part_id)}}"onclick="return confirm('Энэ эд ангийг устгах уу?')" ><span class="glyphicon glyphicon-trash"></span></a></td>
+                                      <td><a class="btn btn-xs btn-danger"  href=""onclick="return confirm('Энэ эд ангийг устгах уу?')" ><span class="glyphicon glyphicon-trash"></span></a></td>
                                 </tr>
                                 <?php $no++; ?>
                                 @endforeach

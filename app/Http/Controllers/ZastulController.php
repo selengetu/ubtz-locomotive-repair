@@ -39,7 +39,7 @@ class ZastulController extends Controller
         $locserial=LocSerial::orderBy('sericode', 'ASC')->get();
         $start_year= Carbon::now()->format('Y');;
         $start_month=  Request::input('start_month');
-        $zastul=DB::select('select * from ZUTGUUR.ZASTUL t where  zasyear = '.$start_year.'');
+        $zastul=DB::select('select * from V_ZASTUL t where  zasyear = '.$start_year.'');
         return view('devter.zastul')->with(['start_year' =>$start_year, 'start_month' => $start_month,'locserial' => $locserial, 'zastul' => $zastul,'rep' => $rep]);
     }
 
@@ -50,7 +50,8 @@ class ZastulController extends Controller
         $locserial=LocSerial::orderBy('sericode', 'ASC')->get();
         $start_year= Request::input('start_year');
         $start_month=  Request::input('start_month');
-
+        $loc_seri=  Request::input('loc_seri');
+        $loc_depo=  Auth::user()->depo_id;
         $query = "";
 
         if ($start_year!=NULL &&  $start_year!=0) {
@@ -65,7 +66,19 @@ class ZastulController extends Controller
         else {
             $query .= " ";
         }
-        $zastul=DB::select("select * from ZUTGUUR.ZASTUL t where t.depocode = ".Auth::user()->depo_id. " ".$query." ");
+        if ($loc_seri!=NULL &&  $loc_seri!=0) {
+            $query.=" and sericode = '".$loc_seri."'";
+        }
+        else {
+            $query .= " ";
+        }
+        if ($loc_depo!=NULL &&  $loc_depo!=0) {
+            $query.=" and depocode = '".$loc_depo."'";
+        }
+        else {
+            $query .= " ";
+        }
+        $zastul=DB::select("select * from V_ZASTUL t where t.depocode = ".Auth::user()->depo_id. " ".$query."");
         return view('devter.zastul')->with(['locserial' => $locserial, 'start_year' =>$start_year, 'start_month' => $start_month, 'zastul' => $zastul,'rep' => $rep]);
     }
 
@@ -83,19 +96,14 @@ class ZastulController extends Controller
         $zastul->repshname =  $rep;
         $zastul->plantoo = Request::input('plantoo');
         $zastul->save();
-
+        return back();
     }
     public function updatezastul()
     {
-
-        $department = DB::table('Attention')
-            ->where('attention_id', Request::input('anhaaramj_fault'))->update(['fromstation' =>Request::input('anhaaramj_frommodal') ,'tostation' =>Request::input('anhaaramj_tomodal'),'speed' =>Request::input('anhaaramjspeed'),'updated_at' => Carbon::now()]);
-
-
-        return response()->json([
-            'success' => 'Record has been updated successfully!'
-        ]);
-
+        $department = DB::table('ZUTGUUR.ZASTUL')
+            ->where('zasyear', Request::input('zasyear'),'zasmonth', Request::input('zasmonth'),'sericode', Request::input('sericode'),'depocode', Request::input('depocode'))
+            ->update(['plantoo' =>Request::input('plantoo')]);
+        return back();
 
     }
 }

@@ -67,7 +67,25 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-md-3">
 
+                                                <div class="form-group form-md-line-input has-success">
+                                                    <div class="input-icon">
+                                                        <select class="form-control select2" id="loc_seri" name="loc_seri" >
+                                                            <option value="0">Бүгд</option>
+                                                            @foreach($locserial as $locserials)
+                                                                <option value= "{{$locserials->sericode}}">{{$locserials->seriname}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        <label for="form_control_1" style="font-size:12px;">
+                                                            Илчит тэрэгний сери
+                                                        </label>
+                                                        <span class="help-block">
+                                                                    </span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                                          <div class="col-md-2">
                                                             <div class="form-group form-md-line-input has-success">
@@ -97,7 +115,6 @@
                       <th>Сар</th>
                       <th>Депо</th>
                       <th>И/т сери </th>
-                      <th>Төрлийн код</th>
                       <th>Засварын төрөл</th>
                       <th>Төлөвлөгөө</th>
                   </tr>
@@ -110,9 +127,8 @@
                           <td>{{$no}}</td>
                           <td>{{$zastuls->zasyear}}</td>
                           <td>{{$zastuls->zasmonth}}</td>
-                          <td>{{$zastuls->depocode}}</td>
+                          <td>{{$zastuls->deposhname}}</td>
                           <td>{{$zastuls->seriname}}</td>
-                          <td>{{$zastuls->repid}}</td>
                           <td>{{$zastuls->repshname}}</td>
                           <td>{{$zastuls->plantoo}}</td>
                       </tr>

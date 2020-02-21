@@ -1,7 +1,7 @@
 <div class="body"></div>
         <div class="grad"></div>
         <div class="header">
-            <div><span>Илчит тэрэгний</span> <br><span> засвар бүртгэл</span></div>
+            <div><span>Илчит тэрэгний</span> <br><span> засвар бvртгэл</span></div>
         </div>
         <br>
         <div class="login">

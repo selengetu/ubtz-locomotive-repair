@@ -14,7 +14,7 @@
                     </a>
                     <!-- END RESPONSIVE MENU TOGGLER -->
                     <!-- BEGIN TOP NAVIGATION MENU -->
-                    <div class="title">ЗҮТГҮҮРИЙН ЭД АНГИЙН ЦАХИМ ПАССПОРТ</div>
+                    <div class="title">ИЛЧИТ ТЭРЭГНИЙ ЗАСВАРЫН ПРОГРАМ</div>
                     <div class="top-menu">
                         <ul class="nav navbar-nav pull-right">
          

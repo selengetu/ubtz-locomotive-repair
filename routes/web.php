@@ -78,11 +78,11 @@ Route::get('/repfill/{id?}/{seri?}',function($id = 0,$seri = 0){
     return $dt;
 });
 
-Route::get('/getrep/{id?}',function($id = 0){	
-				$dt=DB::table('V_REP')
-                ->where('reptype','=',$id)->orderby('repid')->get();
-				return $dt;
-		});
+Route::get('/getrep/{id?}',function($id = 0){
+    $dt=DB::table('V_REP')
+        ->where('reptype','=',$id)->orderby('repid')->get();
+    return $dt;
+});
 Route::get('/seri', 'SeriController@index')->name('seri');
 Route::post('/addseri','SeriController@store');
 Route::get('/part', 'PartController@index')->name('part');
