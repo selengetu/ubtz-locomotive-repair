@@ -41,7 +41,15 @@ Route::get('/zastypefill/{id?}',function($id = 0){
     $dt=App\Zastype::where('seri_code','=',$id)->get();
     return $dt;
 });
-
+Route::match(['get', 'post'],'/gemteltype', 'GemteltypeController@index')->name('gemteltype');
+Route::get('/destroygemteltype/{id}/delete', ['as' => 'gemteltype.destroy', 'uses' => 'GemteltypeController@destroy']);
+Route::post('/addgemteltype','GemteltypeController@store');
+Route::post('/searchgemteltype','GemteltypeController@search');
+Route::post('/updategemteltype','GemteltypeController@update');
+Route::get('/gemteltypefill/{id?}',function($id = 0){
+    $dt=App\GemteltypeController::where('gemtel_id','=',$id)->get();
+    return $dt;
+});
 Route::match(['get', 'post'],'/zasplan', 'ZasplanController@index')->name('zasplan');
 Route::get('/destroyzasplan/{id}/delete', ['as' => 'zasplan.destroy', 'uses' => 'ZasplanController@destroy']);
 Route::post('/addzasplan','ZasplanController@store');
