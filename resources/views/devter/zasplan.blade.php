@@ -37,12 +37,12 @@
                                             <div id="sear" class="panel-collapse collapse in">
                                                 <div class="panel-body">
                                                     <fieldset class="scheduler-border">
-                                                     <form method="post" action="tuuzorchuulsan">
+                                                     <form method="post" action="zasplan">
                                         <div class="col-md-12">
                                             <div class="col-md-3">
                                                 <div class="form-group form-md-line-input has-success">
                                                     <div class="input-icon">
-                                                        <input class="form-control datepicker" id="mach_start" name="mach_start" type="text">
+                                                        <input class="form-control datepicker" id="zas_start" name="zas_start" type="text" value="{{$startdate}}">
                                                         <label for="form_control_1" style="font-size:12px;">
                                                             Эхлэх огноо
                                                         </label>
@@ -56,7 +56,7 @@
                                             <div class="col-md-3">
                                                 <div class="form-group form-md-line-input has-success">
                                                     <div class="input-icon">
-                                                        <input class="form-control datepicker" id="mach_end" name="mach_end" type="text">
+                                                        <input class="form-control datepicker" id="zas_end" name="zas_end" type="text" value="{{$enddate}}">
                                                         <label for="form_control_1" style="font-size:12px;">
                                                             Дуусах огноо
                                                         </label>
@@ -192,13 +192,26 @@
 
                           <div class="tab-content">
                               <div id="home" class="tab-pane fade in active">
-                                  <form method="post" action="addzastype">
+                                  <form method="post" action="addzasplan">
                                       <div class="col-md-12">
+                                      {{ csrf_field() }}
+                                      <div class="col-md-3">
+                                              <div class="form-group">
+                                                  <label for="name">Татах хэсэг</label>
+                                                  <select class="form-control select2" id="zas_owndepo" name="zas_owndepo" >
+                                                      <option value="5">ТЧ-1</option>
+                                                      <option value="2">ТЧ-2</option>
+                                                      <option value="3">ТЧ-3</option>
+                                                      <option value="1">Сүхбаатар</option>
+                                                      <option value="13">Замын-Үүд</option>
+                                                  </select>
 
+                                              </div>
+                                          </div>
                                           <div class="col-md-3">
                                               <div class="form-group">
                                                   <label for="name">Зүтгүүрийн сери</label>
-                                                  <select class="form-control select2" id="seri_code" name="seri_code" >
+                                                  <select class="form-control select2" id="zas_seri" name="zas_seri" required="true">
                                                       <option value="0">Бүгд</option>
                                                       @foreach($locserial as $locserials)
                                                           <option value= "{{$locserials->sericode}}"> {{$locserials->sericode}} - {{$locserials->seriname}}</option>
@@ -210,7 +223,10 @@
                                           <div class="col-md-3">
                                               <div class="form-group">
                                                   <label for="name">Зүтгүүрийн дугаар</label>
-                                                  <input type="text" class="form-control inputtext" id="zutnumber" name="zutnumber">
+                                                  <select class="form-control select2" id="zas_zutnumber" name="zas_zutnumber" >
+
+
+                                                  </select>
                                               </div>
 
                                           </div>
@@ -225,26 +241,32 @@
                                               </div>
 
                                           </div>
-
                                           <div class="col-md-3">
-
-                                              <div class="form-group">
-                                                  <label for="name">Засварт орсон огноо</label>
-                                                  <input type="text" class="form-control inputtext" id="respondent" name="respondent" >
-                                              </div>
-
-                                          </div>
-                                          <div class="col-md-3">
-                                              <div class="form-group">
-                                                  <label for="name">Засварт гарсан огноо</label>
-                                                  <input type="text" class="form-control inputtext" id="reprate" name="reprate">
-                                              </div>
-
-                                          </div>
+                                                <div class="form-group">
+                                                    <div class="input-icon">
+                                                    <label for="form_control_1">
+                                                        Засварт орсон огноо
+                                                        </label>
+                                                        <input class="form-control datepicker" id="repindate" name="repindate" type="text" value="{{$enddate}}">
+                                                
+                                                    </div>
+                                                </div>
+                                            </div>     <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <div class="input-icon">
+                                                       
+                                                        <label for="form_control_1">
+                                                        Засвараас гарсан огноо
+                                                        </label>
+                                                        <input class="form-control datepicker" id="repoutdate" name="repoutdate" type="text" value="{{$enddate}}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                       
                                           <div class="col-md-3">
                                               <div class="form-group">
                                                   <label for="name">Нийт цаг</label>
-                                                  <input type="number" class="form-control inputtext" id="stopday" name="stopday" readonly="true">
+                                                  <input type="number" class="form-control inputtext" id="stopsum" name="stopsum" >
                                               </div>
 
                                           </div>
@@ -252,42 +274,43 @@
                                           <div class="col-md-3">
                                               <div class="form-group">
                                                   <label for="name">Засварын зогсолт</label>
-                                                  <input type="number" class="form-control inputtext" id="priority" name="priority" readonly="true">
+                                                  <input type="number" class="form-control inputtext" id="stoprep" name="stoprep" >
                                               </div>
 
                                           </div>
                                           <div class="col-md-3">
                                               <div class="form-group">
                                                   <label for="name">Гүйлт</label>
-                                                  <input type="number" class="form-control inputtext" id="priority" name="priority">
+                                                  <input type="number" class="form-control inputtext" id="zasrun" name="zasrun">
                                               </div>
 
                                           </div>
                                           <div class="col-md-3">
                                               <div class="form-group">
                                                   <label for="name">ТО-4</label>
-                                                  <input type="number" class="form-control inputtext" id="priority" name="priority">
+                                                  <input type="number" class="form-control inputtext" id="stopto4" name="stopto4">
                                               </div>
 
                                           </div>
                                           <div class="col-md-3">
                                               <div class="form-group">
                                                   <label for="name">Нэмэлт зогсолт</label>
-                                                  <input type="number" class="form-control inputtext" id="priority" name="priority">
+                                                  <input type="number" class="form-control inputtext" id="stopadd" name="stopadd">
                                               </div>
 
                                           </div>
                                           <div class="col-md-3">
                                               <div class="form-group">
                                                   <label for="name">Хүлээн авагч</label>
-                                                  <input type="text" class="form-control inputtext" id="priority" name="priority">
+                                                  <input type="text" class="form-control inputtext" id="reciever" name="reciever">
                                               </div>
 
                                           </div>
                                           <div class="col-md-3">
                                               <div class="form-group">
                                                   <label for="name">.</label><br>
-                                                  <button class="btn btn-success">Хадгалах</button>
+                                                  <a class="btn btn-primary back">Go Back</a>
+                                                 <a class="btn btn-primary continue">Place Order</a>
                                               </div>
                                           </div>
                                       </div>
@@ -299,31 +322,31 @@
                                      <div class="col-md-3">
                                          <div class="form-group">
                                              <label for="name">Төрөл</label>
-                                             <input type="text" class="form-control inputtext" id="priority" name="priority">
+                                             <input type="text" class="form-control inputtext" id="addplantype" name="addplantype">
                                          </div>
                                      </div>
                                      <div class="col-md-3">
                                          <div class="form-group">
                                              <label for="name">Ажлын код</label>
-                                             <input type="text" class="form-control inputtext" id="priority" name="priority">
+                                             <input type="text" class="form-control inputtext" id="addplancode" name="addplancode">
                                          </div>
                                      </div>
                                      <div class="col-md-3">
                                          <div class="form-group">
                                              <label for="name">Нэмэлт ажлын нэр</label>
-                                             <input type="text" class="form-control inputtext" id="priority" name="priority">
+                                             <input type="text" class="form-control inputtext" id="addplanname" name="addplanname">
                                          </div>
                                      </div>
                                      <div class="col-md-3">
                                          <div class="form-group">
                                              <label for="name">Ажлын цаг</label>
-                                             <input type="text" class="form-control inputtext" id="priority" name="priority">
+                                             <input type="text" class="form-control inputtext" id="worktime" name="worktime">
                                          </div>
                                      </div>
                                      <div class="col-md-3">
                                          <div class="form-group">
                                              <label for="name">Нийт цаг</label>
-                                             <input type="text" class="form-control inputtext" id="priority" name="priority">
+                                             <input type="text" class="form-control inputtext" id="totaltime" name="totaltime">
                                          </div>
                                      </div>
                                      <div class="col-md-3">
@@ -356,19 +379,19 @@
                                       <div class="col-md-3">
                                           <div class="form-group">
                                               <label for="name">Код</label>
-                                              <input type="text" class="form-control inputtext" id="priority" name="priority">
+                                              <input type="text" class="form-control inputtext" id="plandepcode" name="plandepcode">
                                           </div>
                                       </div>
                                       <div class="col-md-3">
                                           <div class="form-group">
                                               <label for="name">Байгууллагын нэр</label>
-                                              <input type="text" class="form-control inputtext" id="priority" name="priority">
+                                              <input type="text" class="form-control inputtext" id="plandep" name="plandep">
                                           </div>
                                       </div>
                                       <div class="col-md-3">
                                           <div class="form-group">
                                               <label for="name">Тооцох газар</label>
-                                              <input type="text" class="form-control inputtext" id="priority" name="priority">
+                                              <input type="text" class="form-control inputtext" id="planbaig" name="planbaig">
                                           </div>
                                       </div>
                                       <div class="col-md-3">
@@ -417,13 +440,13 @@
                                       <div class="col-md-3">
                                           <div class="form-group">
                                               <label for="name">Эд ангийн сери</label>
-                                              <input type="text" class="form-control inputtext" id="priority" name="priority">
+                                              <input type="text" class="form-control inputtext" id="ed_seri" name="ed_seri">
                                           </div>
                                       </div>
                                       <div class="col-md-3">
                                           <div class="form-group">
                                               <label for="name">Эд ангийн дугаар</label>
-                                              <input type="text" class="form-control inputtext" id="priority" name="priority">
+                                              <input type="text" class="form-control inputtext" id="ed_dugaar" name="ed_dugaar">
                                           </div>
                                       </div>
                                       <div class="col-md-3">
@@ -461,11 +484,27 @@
             @endsection
             @section('cscript')
           <script type="text/javascript">
-            $("#datepicker").datepicker( {
-    format: "mm-yyyy",
-    viewMode: "months", 
-    minViewMode: "months"
+            $("#zas_start").datepicker( {
+    format: "yyyy-mm-dd",
+
 });
+$("#zas_end").datepicker( {
+    format: "yyyy-mm-dd",
+
+});
+$("#zas_end").datepicker( {
+    format: "yyyy-mm-dd HH:SS",
+
+});
+$("#repindate").datetimepicker({format: 'YYYY-MM-DD HH:mm'});
+$("#repoutdate").datetimepicker({format: 'YYYY-MM-DD HH:mm'});
+$("#repoutdate").change(function(){  
+         var date1 = $("#repoutdate").val();
+          console.log(date1);
+        var date2 = $("#repindate").val();
+        diff = Math.abs(date1 - date2) / 36e5;
+        console.log(diff);
+    });  
  function printDiv() {
 
      var printContents = document.getElementById('printarea').innerHTML;
@@ -533,7 +572,55 @@
 
 
                   } );
+                  $('.continue').click(function(){
+                        $('.nav-tabs > .active').next('li').find('a').trigger('click');
+                        });
+                        $('.back').click(function(){
+                        $('.nav-tabs > .active').prev('li').find('a').trigger('click');
+                    });
+                  $('#zas_seri').change(function(){
+                      var itag=$(this).val();
+                      var itag1=$('#zas_owndepo').val();
+                      $.get('getzut/'+itag+'/'+itag1,function(data){
+                          $('#zas_zutnumber').empty();
 
+                          $.each(data,function(i,qwe){
+                              $('#zas_zutnumber').append($('<option>', {
+                                  value: qwe.zutnumber,
+                                  id: qwe.zutnumber,
+                                  text: qwe.zutnumber
+                              })).trigger('change');
+                          });
+                      });
+                      $.get('getzasplanbase/'+itag,function(data){
+                          $('#repid').empty();
+
+                          $.each(data,function(i,qwe){
+                              $('#repid').append($('<option>', {
+                                  value: qwe.repid,
+                                  id: qwe.repid,
+                                  text: qwe.repshname
+                              })).trigger('change');
+                          });
+                      });
+                  });
+
+                  $('#zas_owndepo').change(function(){
+                      var itag=$(this).val();
+                      $.get('getloc/'+itag,function(data){
+                          $('#zas_seri').empty();
+
+                          $.each(data,function(i,qwe){
+                              console.log(qwe);
+                              $('#zas_seri').append($('<option>', {
+                                  value: qwe.sericode,
+                                  id: qwe.sericode,
+                                  text: qwe.seriname
+                              })).trigger('change');
+                          });
+                      });
+                  });
+                  
               } );
           </script>
 @endsection

@@ -27,8 +27,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-       $speed=AttentionSpeed::all();
+     
     
-        return view('devter.achaa')->with(['speed'=>$speed]);
+        return view('welcome');
     }
 }

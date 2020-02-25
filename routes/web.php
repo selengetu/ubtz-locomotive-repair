@@ -74,6 +74,10 @@ Route::get('/getzasdetail/{id?}',function($id = 0){
     $dt=DB::table('V_ZAS_SOLILT_DETAIL')->where('solilt_id','=',$id)->get();
     return $dt;
 });
+Route::get('/getzasplanbase/{id?}',function($id = 0){
+    $dt=DB::table('ZUTGUUR.ZASPLANBASE')->where('sericode','=',$id)->get();
+    return $dt;
+});
 Route::match(['get', 'post'],'/zastul', 'ZastulController@index')->name('zastul');
 Route::get('/destroyzastul/{id}/delete', ['as' => 'zastul.destroy', 'uses' => 'ZastulController@destroy']);
 Route::post('/addzastul','ZastulController@store');

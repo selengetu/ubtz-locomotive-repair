@@ -30,7 +30,7 @@
                        
                          <li class="nav-item  ">
                              <a href="" class="nav-link nav-toggle">
-                                 <i class="icon-settings"></i>
+                                 <i class="icon-bar-chart"></i>
                                  <span class="">Засварын гүйлт</span>
                              </a>
 
