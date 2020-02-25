@@ -11,6 +11,7 @@ use App\Station;
 use App\Zastype;
 use App\Part;
 use App\Rep;
+use App\Zasaddbase;
 use App\LocSerial;
 use App\Zasplan;
 use Carbon\Carbon;
@@ -37,7 +38,8 @@ class ZasplanController extends Controller
     {
         $part=Part::orderby('part_name')->get();
         $rep=Rep::all();
-        
+        $addbase=DB::select("select * from zutguur.zasaddbase");
+        $zasbaig=DB::select("select * from zutguur.zasbaig");
         $locserial=LocSerial::orderBy('sericode', 'ASC')->get();
         $startdate=Input::get('zas_start'); 
         $enddate= Input::get('zas_end'); 
@@ -58,7 +60,8 @@ class ZasplanController extends Controller
   
          }
          $zasplan=DB::select('select * from V_ZASPLAN where 1=1 '.$query.'');
-        return view('devter.zasplan')->with(['part'=>$part, 'locserial' => $locserial, 'startdate' =>$startdate, 'enddate' => $enddate, 'zasplan' => $zasplan,'rep' => $rep]);
+        return view('devter.zasplan')->with(['part'=>$part, 'locserial' => $locserial, 'startdate' =>$startdate,
+                                             'enddate' => $enddate, 'zasplan' => $zasplan,'rep' => $rep,'addbase' => $addbase,'zasbaig' => $zasbaig]);
     }
     public function store()
     {

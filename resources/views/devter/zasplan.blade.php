@@ -81,11 +81,21 @@
                                                 </div>
                                             </div>
                                         </div>
-  
-            <button class="btn btn-info" id="buttonprint" onclick="printDiv()"><i class="fa fa-print" aria-hidden="true"></i>Хэвлэх</button>
+                                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#hometab" role="tab" aria-controls="home" aria-selected="true">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="hometab" role="tabpanel" aria-labelledby="home-tab">
+  <button class="btn btn-info" id="buttonprint" onclick="printDiv()"><i class="fa fa-print" aria-hidden="true"></i>Хэвлэх</button>
                         <button class="btn btn-info" id="btnExport" onclick="tableToExcel('testTable', 'Export HTML Table to Excel')"><i class="fa fa-table" aria-hidden="true"></i> Excel </button>
-                   <div class="row">
-          <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="printarea">
               <p><center><b> {{$startdate}} -аас {{$enddate}} -ны төлөвлөгөөт засвар</b></center> </p>
               <table class="table table-striped table-bordered table-hover"  id="example">
                   <thead style="background-color: #81b5d5; color: #fff">
@@ -131,7 +141,11 @@
                   @endforeach
                   </tbody>
               </table>
-              <table class="table table-striped table-bordered table-hover" style="width: 50%">
+
+
+</div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+  <table class="table table-striped table-bordered table-hover">
                   <thead style="background-color: #81b5d5; color: #fff">
                   <tr>
 
@@ -147,8 +161,9 @@
                   <tbody>
 
                   </tbody>
-              </table>
-              <table class="table table-striped table-bordered table-hover" style="width: 50%">
+              </table></div>
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+  <table class="table table-striped table-bordered table-hover">
                   <thead style="background-color: #81b5d5; color: #fff">
                   <tr>
 
@@ -162,17 +177,17 @@
                   <tbody>
 
                   </tbody>
-              </table>
-  </div>
-
+              </table></div>
 </div>
+        </div>   
 
+             
                 
                
                 </div>
                 <!-- END CONTENT BODY -->
             </div>
-          <div class="modal fade" id="myModal1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"  data-keyboard="false" data-backdrop="static">
+          <div class="modal fade" id="myModal1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" >
               <div class="modal-dialog modal-lg" role="document">
                   <div class="modal-content">
                       <div class="modal-header">
@@ -322,34 +337,34 @@
                                      <div class="col-md-3">
                                          <div class="form-group">
                                              <label for="name">Төрөл</label>
-                                             <input type="text" class="form-control inputtext" id="addplantype" name="addplantype">
+                                             <select class="form-control select2" id="addtype" name="addtype" >
+                                                   <option value="1">Хос дугуй</option>
+                                                   <option value="2">Хүлээлэг</option>
+                                                   </select>
                                          </div>
                                      </div>
                                      <div class="col-md-3">
                                          <div class="form-group">
                                              <label for="name">Ажлын код</label>
-                                             <input type="text" class="form-control inputtext" id="addplancode" name="addplancode">
+                                             <select class="form-control select2" id="addname" name="addname" >
+                                                   
+                                                  </select>
                                          </div>
                                      </div>
-                                     <div class="col-md-3">
-                                         <div class="form-group">
-                                             <label for="name">Нэмэлт ажлын нэр</label>
-                                             <input type="text" class="form-control inputtext" id="addplanname" name="addplanname">
-                                         </div>
-                                     </div>
-                                     <div class="col-md-3">
+                                
+                                     <div class="col-md-2">
                                          <div class="form-group">
                                              <label for="name">Ажлын цаг</label>
                                              <input type="text" class="form-control inputtext" id="worktime" name="worktime">
                                          </div>
                                      </div>
-                                     <div class="col-md-3">
+                                     <div class="col-md-2">
                                          <div class="form-group">
-                                             <label for="name">Нийт цаг</label>
+                                             <label for="name">Удаа</label>
                                              <input type="text" class="form-control inputtext" id="totaltime" name="totaltime">
                                          </div>
                                      </div>
-                                     <div class="col-md-3">
+                                     <div class="col-md-2">
                                          <div class="form-group">
                                              <label for="name">.</label><br>
                                              <button class="btn btn-success">Хадгалах</button>
@@ -376,16 +391,15 @@
                               </div>
                               <div id="menu2" class="tab-pane fade">
                                   <div class="col-md-12">
-                                      <div class="col-md-3">
-                                          <div class="form-group">
-                                              <label for="name">Код</label>
-                                              <input type="text" class="form-control inputtext" id="plandepcode" name="plandepcode">
-                                          </div>
-                                      </div>
+                                    
                                       <div class="col-md-3">
                                           <div class="form-group">
                                               <label for="name">Байгууллагын нэр</label>
-                                              <input type="text" class="form-control inputtext" id="plandep" name="plandep">
+                                              <select class="form-control select2" id="zasbaig" name="zasbaig" >
+                                                      @foreach($zasbaig as $baigs)
+                                                          <option value= "{{$baigs->baigcode}}" tag="{{$baigs->baigcode}}">{{$baigs->baigcode}} - {{$baigs->baigshname}}</option>
+                                                      @endforeach
+                                                  </select>
                                           </div>
                                       </div>
                                       <div class="col-md-3">
@@ -418,18 +432,27 @@
                               </div>
                               <div id="menu3" class="tab-pane fade">
                                   <div class="col-md-12">
+                                  <div class="col-md-3">
+                                              <div class="form-group">
+                                                  <label for="name"> Илчит тэрэгний эд анги</label>
+                                                  <select class="form-control select2" id="zasmat" name="zasmat" >
+                                                  <option value="0">Бүгд</option>
+                                                                          @foreach($part as $parts) 
+                                                                               <option value= "{{$parts->part_id}}">{{$parts->part_name}}</option>
+                                                                           @endforeach
+                                                  </select>
+                                              </div>
+
+                                          </div>
                                       <div class="col-md-3">
                                 
                                                             <div class="form-group form-md-line-input has-success">
                                                                 <div class="input-icon">
                                                                     <select class="form-control select2" id="achaa_seri" name="achaa_seri" >
-                                                                     <option value="0">Бүгд</option>
-                                                                          @foreach($part as $parts) 
-                                                                               <option value= "{{$parts->part_id}}">{{$parts->part_name}}</option>
-                                                                           @endforeach
+                                                                    
                                                                      </select>
                                                                     <label for="form_control_1" style="font-size:12px;">
-                                                                     Илчит тэрэгний эд анги
+                                                                    
                                                                     </label>
                                                                     <span class="help-block">
                                                                     </span>
@@ -620,7 +643,21 @@ $("#repoutdate").change(function(){
                           });
                       });
                   });
-                  
+                  $('#addtype').change(function(){
+                      var itag=$(this).val();
+                      $.get('getaddname/'+itag,function(data){
+                          $('#addname').empty();
+
+                          $.each(data,function(i,qwe){
+                              console.log(qwe);
+                              $('#addname').append($('<option>', {
+                                  value: qwe.addid,
+                                  id: qwe.addid,
+                                  text: qwe.addname
+                              })).trigger('change');
+                          });
+                      });
+                  });  
               } );
           </script>
 @endsection

@@ -120,6 +120,10 @@ Route::get('/getloc/{id?}',function($id = 0){
     $dt=DB::table('V_ZUTGUUR')->where('depocode','=',$id)->get();
     return $dt;
 });
+Route::get('/getaddname/{id?}',function($id = 0){
+    $dt=DB::table('ZUTGUUR.ZASADDBASE')->where('addtype','=',$id)->get();
+    return $dt;
+});
 Route::get('/getsolilt/{id?}/{id1?}',function($id = 0, $id1 = 0){
     $dt=DB::table('V_ZASZUT_PART')->where('zas_seri','=',$id)->where('zas_zutnumber','=',$id1)->get();
     return $dt;
