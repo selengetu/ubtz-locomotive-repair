@@ -30,7 +30,6 @@ Route::match(['get', 'post'],'/zasto2', 'TailanController@zasto2')->name('zasto2
 Route::match(['get', 'post'],'/guilt', 'TailanController@guilt')->name('guilt');
 Route::match(['get', 'post'],'/zasplan', 'ZasplanController@index')->name('zasplan');
 Route::match(['get', 'post'],'/zasunplan', 'ZasunplanController@index')->name('zasunplan');
-Route::match(['get', 'post'],'/searchzasunplan', 'ZasunplanController@index')->name('zasunplan');
 
 Route::match(['get', 'post'],'/zastype', 'ZastypeController@index')->name('zastype');
 Route::get('/destroyzastype/{id}/delete', ['as' => 'zastype.destroy', 'uses' => 'ZastypeController@destroy']);

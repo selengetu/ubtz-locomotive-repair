@@ -54,7 +54,7 @@
 
                          </li>
                              <li class="nav-item ">
-                                 <a href="" class="nav-link nav-toggle">
+                                 <a href="{{ route('zasunplan') }}" class="nav-link nav-toggle">
                                      <i class="icon-bar-chart"></i>
                                      <span class="title">Төлөвлөгөөт бус засвар</span>
                                  </a>

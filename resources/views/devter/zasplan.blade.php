@@ -83,10 +83,9 @@
                                         </div>
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#ho">Үндсэн</a></li>
-                        <li ><a data-toggle="tab" href="#me1" id="addtab">Нэмэлт ажил</a></li>
+                        <li class="disabled disabledTab" ><a data-toggle="tab" href="#me1" id="addtab">Нэмэлт ажил</a></li>
 
                     </ul>
-
 
                     <div class="tab-content">
                         <div id="ho" class="tab-pane fade in active">
@@ -139,7 +138,9 @@
                             </table>
                         </div>
                         <div id="me1" class="tab-pane fade">
-                            <table class="table table-striped table-bordered table-hover" style="width:50%" id="planadd">
+                        <div class="row">
+                        <div class="col-md-6">
+                        <table class="table table-striped table-bordered table-hover" id="planadd">
                                 <thead style="background-color: #81b5d5; color: #fff">
                                 <tr>
 
@@ -155,8 +156,10 @@
                                 <tbody>
 
                                 </tbody>
-                            </table><br>
-                            <table class="table table-striped table-bordered table-hover" style="width:50%" id="planbaig">
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                        <table class="table table-striped table-bordered table-hover" id="planbaig">
                                 <thead style="background-color: #81b5d5; color: #fff">
                                 <tr>
 
@@ -170,8 +173,10 @@
                                 <tbody>
 
                                 </tbody>
-                            </table><br>
-                            <table class="table table-striped table-bordered table-hover" style="width:50%" id="planmat">
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                        <table class="table table-striped table-bordered table-hover"  id="planmat">
                                 <thead style="background-color: #81b5d5; color: #fff">
                                 <tr>
 
@@ -186,6 +191,10 @@
 
                                 </tbody>
                             </table>
+                        </div>
+                        </div>
+        
+                           
                         </div>
 
                     </div>
