@@ -81,109 +81,117 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#hometab" role="tab" aria-controls="home" aria-selected="true">Home</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-  </li>
-</ul>
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="hometab" role="tabpanel" aria-labelledby="home-tab">
-  <button class="btn btn-info" id="buttonprint" onclick="printDiv()"><i class="fa fa-print" aria-hidden="true"></i>Хэвлэх</button>
-                        <button class="btn btn-info" id="btnExport" onclick="tableToExcel('testTable', 'Export HTML Table to Excel')"><i class="fa fa-table" aria-hidden="true"></i> Excel </button>
-              <p><center><b> {{$startdate}} -аас {{$enddate}} -ны төлөвлөгөөт засвар</b></center> </p>
-              <table class="table table-striped table-bordered table-hover"  id="example">
-                  <thead style="background-color: #81b5d5; color: #fff">
-                  <tr>
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#ho">Үндсэн</a></li>
+                        <li ><a data-toggle="tab" href="#me1" id="addtab">Нэмэлт ажил</a></li>
 
-                      <th> # </th>
-                      <th>Засварын дугаар</th>
-                      <th>И/т сери </th>
-                      <th>И/т №</th>
-                      <th>Засварын код</th>
-                      <th>Засварын томьёолол</th>
-                      <th>Засварт орсон хугацаа</th>
-                      <th>Засвараас гарсан хугацаа</th>
-                      <th>Нийт зогсолт</th>
-                      <th>ТО-4 зогсолт</th>
-                      <th>Нэмэлт зогсолт</th>
-                      <th>Засварын зогсолт</th>
-                      <th>Гүйлт</th>
-                      <th>Хүлээн авагч</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-
-                  <?php $no = 1; ?>
-                  @foreach($zasplan as $zasplans)
-                      <tr>
-                          <td>{{$no}}</td>
-                          <td>{{$zasplans->repairid}}</td>
-                          <td>{{$zasplans->seriname}}</td>
-                          <td>{{$zasplans->zutnumber}}</td>
-                          <td>{{$zasplans->repid}}</td>
-                          <td>{{$zasplans->repshname}}</td>
-                          <td>{{$zasplans->repindate}}</td>
-                          <td>{{$zasplans->repoutdate}}</td>
-                          <td>{{$zasplans->stopsum}}</td>
-                          <td>{{$zasplans->stopto4}}</td>
-                          <td>{{$zasplans->stopadd}}</td>
-                          <td>{{$zasplans->stopclean}}</td>
-                          <td>{{$zasplans->runkm}}</td>
-                          <td>{{$zasplans->recievman}}</td>
-                      </tr>
-                      <?php $no++; ?>
-                  @endforeach
-                  </tbody>
-              </table>
+                    </ul>
 
 
-</div>
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-  <table class="table table-striped table-bordered table-hover">
-                  <thead style="background-color: #81b5d5; color: #fff">
-                  <tr>
+                    <div class="tab-content">
+                        <div id="ho" class="tab-pane fade in active">
+                            <button class="btn btn-info" id="buttonprint" onclick="printDiv()"><i class="fa fa-print" aria-hidden="true"></i>Хэвлэх</button>
+                            <button class="btn btn-info" id="btnExport" onclick="tableToExcel('testTable', 'Export HTML Table to Excel')"><i class="fa fa-table" aria-hidden="true"></i> Excel </button>
+                            <p><center><b> {{$startdate}} -аас {{$enddate}} -ны төлөвлөгөөт засвар</b></center> </p>
+                            <table class="table table-striped table-bordered table-hover"  id="example">
+                                <thead style="background-color: #81b5d5; color: #fff">
+                                <tr>
 
-                      <th> # </th>
-                      <th>Төрөл</th>
-                      <th>Ажлын код </th>
-                      <th>Нэмэлт ажлын нэр</th>
-                      <th>Ажлын цаг</th>
-                      <th>Удаа</th>
-                      <th>Нийт цаг</th>
-                  </tr>
-                  </thead>
-                  <tbody>
+                                    <th> # </th>
+                                    <th>Засварын дугаар</th>
+                                    <th>И/т сери </th>
+                                    <th>И/т №</th>
+                                    <th>Засварын код</th>
+                                    <th>Засварын томьёолол</th>
+                                    <th>Засварт орсон хугацаа</th>
+                                    <th>Засвараас гарсан хугацаа</th>
+                                    <th>Нийт зогсолт</th>
+                                    <th>ТО-4 зогсолт</th>
+                                    <th>Нэмэлт зогсолт</th>
+                                    <th>Засварын зогсолт</th>
+                                    <th>Гүйлт</th>
+                                    <th>Хүлээн авагч</th>
+                                </tr>
+                                </thead>
+                                <tbody>
 
-                  </tbody>
-              </table></div>
-  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-  <table class="table table-striped table-bordered table-hover">
-                  <thead style="background-color: #81b5d5; color: #fff">
-                  <tr>
+                                <?php $no = 1; ?>
+                                @foreach($zasplan as $zasplans)
+                                    <tr class="zasplan" data-id="{{$zasplans->repairid}}" tag="{{$zasplans->repairid}}"  onclick="$('#addtab').trigger('click');">
+                                        <td>{{$no}}</td>
+                                        <td>{{$zasplans->repairid}}</td>
+                                        <td>{{$zasplans->seriname}}</td>
+                                        <td>{{$zasplans->zutnumber}}</td>
+                                        <td>{{$zasplans->repid}}</td>
+                                        <td>{{$zasplans->repshname}}</td>
+                                        <td>{{$zasplans->repindate}}</td>
+                                        <td>{{$zasplans->repoutdate}}</td>
+                                        <td>{{$zasplans->stopsum}}</td>
+                                        <td>{{$zasplans->stopto4}}</td>
+                                        <td>{{$zasplans->stopadd}}</td>
+                                        <td>{{$zasplans->stopclean}}</td>
+                                        <td>{{$zasplans->runkm}}</td>
+                                        <td>{{$zasplans->recievman}}</td>
+                                    </tr>
+                                    <?php $no++; ?>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="me1" class="tab-pane fade">
+                            <table class="table table-striped table-bordered table-hover" style="width:50%" id="planadd">
+                                <thead style="background-color: #81b5d5; color: #fff">
+                                <tr>
 
-                      <th> # </th>
-                      <th>Код</th>
-                      <th>Байгууллагын нэр </th>
-                      <th>Тооцох цаг</th>
+                                    <th> # </th>
+                                    <th>Төрөл</th>
+                                    <th>Ажлын код </th>
+                                    <th>Нэмэлт ажлын нэр</th>
+                                    <th>Ажлын цаг</th>
+                                    <th>Удаа</th>
+                                    <th>Нийт цаг</th>
+                                </tr>
+                                </thead>
+                                <tbody>
 
-                  </tr>
-                  </thead>
-                  <tbody>
+                                </tbody>
+                            </table><br>
+                            <table class="table table-striped table-bordered table-hover" style="width:50%" id="planbaig">
+                                <thead style="background-color: #81b5d5; color: #fff">
+                                <tr>
 
-                  </tbody>
-              </table></div>
-</div>
+                                    <th> # </th>
+                                    <th>Код</th>
+                                    <th>Байгууллагын нэр </th>
+                                    <th>Тооцох цаг</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table><br>
+                            <table class="table table-striped table-bordered table-hover" style="width:50%" id="planmat">
+                                <thead style="background-color: #81b5d5; color: #fff">
+                                <tr>
+
+                                    <th> # </th>
+                                    <th>Код</th>
+                                    <th>Материалын нэр </th>
+                                    <th>Ширхэг</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
         </div>   
 
-             
-                
-               
                 </div>
                 <!-- END CONTENT BODY -->
             </div>
@@ -445,22 +453,6 @@
 
                                           </div>
                                       <div class="col-md-3">
-                                
-                                                            <div class="form-group form-md-line-input has-success">
-                                                                <div class="input-icon">
-                                                                    <select class="form-control select2" id="achaa_seri" name="achaa_seri" >
-                                                                    
-                                                                     </select>
-                                                                    <label for="form_control_1" style="font-size:12px;">
-                                                                    
-                                                                    </label>
-                                                                    <span class="help-block">
-                                                                    </span>
-                                                                   
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                      <div class="col-md-3">
                                           <div class="form-group">
                                               <label for="name">Эд ангийн сери</label>
                                               <input type="text" class="form-control inputtext" id="ed_seri" name="ed_seri">
@@ -657,7 +649,81 @@ $("#repoutdate").change(function(){
                               })).trigger('change');
                           });
                       });
-                  });  
+                  });
+                  $('.zasplan').on('click',function(){
+                      var itag=$(this).attr('tag');
+                      $.get('getplanadd/'+itag,function(data){
+                          $("#planadd tbody").empty();
+                          $.each(data,function(i,qwe1){
+                              var sHtml = "<tr>" +
+                                  "   <td class='m1'>" + qwe1.addtype + "</td>" +
+                                  "   <td class='m2'>" + qwe1.addid + "</td>" +
+                                  "   <td class='m3'>" + qwe1.addhour + "</td>" +
+                                  "   <td class='m3'>" + qwe1.addval + "</td>"+
+                                  "</tr>";
+
+                              $("#planadd tbody").append(sHtml);
+
+                          });
+                      $.get('getplanbaig/'+itag,function(data){
+                          $("#planbaig tbody").empty();
+                          $.each(data,function(i,qwe1){
+                              var sHtml1 = "<tr>" +
+                                  "   <td class='m1'>" + qwe1.baigcode + "</td>" +
+                                  "   <td class='m2'>" + qwe1.baigtime + "</td>" +
+                                  "</tr>";
+
+                              $("#planbaig tbody").append(sHtml1);
+
+                          });
+                      });
+                      $.get('getplanmat/'+itag,function(data){
+                          $("#planmat tbody").empty();
+                          $.each(data,function(i,qwe1){
+                              var sHtml2 = "<tr>" +
+                                  "   <td class='m1'>" + qwe1.matcode + "</td>" +
+                                  "   <td class='m2'>" + qwe1.matname + "</td>" +
+                                  "   <td class='m2'>" + qwe1.matunit + "</td>" +
+                                  "   <td class='m2'>" + qwe1.mattoo + "</td>" +
+
+                                  "</tr>";
+
+                              $("#planmat tbody").append(sHtml2);
+
+                          });
+                      });
+                  } );
+              } );
               } );
           </script>
+          <style type="text/css">
+              .disabledTab {
+                  pointer-events: none;
+              }
+              .table-row{
+                  cursor:pointer;
+              }
+              @page { size: landscape; }
+          </style>
+          <style>
+
+
+              .tooltiptext {
+                  visibility: hidden;
+                  width: 120px;
+                  background-color: black;
+                  color: #fff;
+                  text-align: center;
+                  border-radius: 6px;
+                  padding: 5px 0;
+
+                  /* Position the tooltip */
+                  position: absolute;
+                  z-index: 1;
+              }
+
+              .tooltip:hover .tooltiptext {
+                  visibility: visible;
+              }
+          </style>
 @endsection

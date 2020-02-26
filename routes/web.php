@@ -124,6 +124,18 @@ Route::get('/getaddname/{id?}',function($id = 0){
     $dt=DB::table('ZUTGUUR.ZASADDBASE')->where('addtype','=',$id)->get();
     return $dt;
 });
+Route::get('/getplanadd/{id?}',function($id = 0){
+    $dt=DB::table('ZUTGUUR.ZASPLANADD')->where('repairid','=',$id)->get();
+    return $dt;
+});
+Route::get('/getplanbaig/{id?}',function($id = 0){
+    $dt=DB::table('ZUTGUUR.ZASPLANBAIG')->where('repairid','=',$id)->get();
+    return $dt;
+});
+Route::get('/getplanmat/{id?}',function($id = 0){
+    $dt=DB::table('ZUTGUUR.ZASUNITEM')->where('repairid','=',$id)->get();
+    return $dt;
+});
 Route::get('/getsolilt/{id?}/{id1?}',function($id = 0, $id1 = 0){
     $dt=DB::table('V_ZASZUT_PART')->where('zas_seri','=',$id)->where('zas_zutnumber','=',$id1)->get();
     return $dt;
