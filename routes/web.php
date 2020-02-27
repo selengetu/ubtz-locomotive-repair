@@ -11,22 +11,19 @@
 |
 */
 
-Route::get('/', 'EdangiController@index')->name('home');
-Route::get('/home', 'EdangiController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/users', 'UsersController@index')->name('users');
 Route::get('/zastuuh', 'ZasController@index')->name('zastuuh');
 Route::post('/searchilchittuuh','ZasController@search');
-Route::get('/devedangi', 'EdangiController@index')->name('devedangi');
-
 
 Route::match(['get', 'post'],'/edangi', 'TailanController@index')->name('edangi');
 Route::match(['get', 'post'],'/ilchitedangi', 'TailanController@ilchitedangi')->name('ilchitedangi');
 Route::match(['get', 'post'],'/nasjilt', 'TailanController@nasjilt')->name('nasjilt');
 Route::post('/searchnasjilt','TailanController@searchnasjilt');
-Route::match(['get', 'post'],'/zasto2', 'TailanController@zasto2')->name('zasto2');
 Route::match(['get', 'post'],'/guilt', 'TailanController@guilt')->name('guilt');
 Route::match(['get', 'post'],'/zasplan', 'ZasplanController@index')->name('zasplan');
 Route::match(['get', 'post'],'/zasunplan', 'ZasunplanController@index')->name('zasunplan');
@@ -135,18 +132,7 @@ Route::get('/getplanmat/{id?}',function($id = 0){
     $dt=DB::table('ZUTGUUR.ZASUNITEM')->where('repairid','=',$id)->get();
     return $dt;
 });
-Route::get('/getsolilt/{id?}/{id1?}',function($id = 0, $id1 = 0){
-    $dt=DB::table('V_ZASZUT_PART')->where('zas_seri','=',$id)->where('zas_zutnumber','=',$id1)->get();
-    return $dt;
-});
-Route::post('/addzaspart','EdangiController@store')->name('addzaspart');
-Route::get('/getzaspart/{id?}',function($id = 0){
-    $dt=DB::table('V_ZASZUT')->where('part_id','=',$id)->get();
-    return $dt;
-});
-Route::post('/updatezaspart','EdangiController@update');
-Route::get('/destroyzaspart/{id}/delete', ['as' => 'zaspart.destroy', 'uses' => 'EdangiController@destroy']);
-Route::post('/searchzaspart','EdangiController@search');
+
 Route::get('/filter_loc_seri/{date}', 'EdangiController@filter_loc_seri');
 Route::get('/filter_loc_number/{date}', 'EdangiController@filter_loc_number');
 Route::get('/filter_loc_part/{date}', 'EdangiController@filter_loc_part');
