@@ -16,7 +16,7 @@
                     </div>
                     <div class="actions">
                         <div class="btn-group btn-group-devided" data-toggle="buttons">
-                            <a class="joshview1 " id="add" data-toggle="modal" data-target="#myModal1">
+                            <a class="joshview1 " id="add" data-toggle="modal" data-target="#myModal1" data-backdrop="static" data-keyboard="false">
                                 <label class="btn btn-transparent green btn-circle btn-sm active">
                                     <i class="icon icon-plus">
                                     </i>
@@ -67,6 +67,18 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-md-3">
+                                              <div class="form-group">
+                                                  <label for="name">Зүтгүүрийн сери</label>
+                                                  <select class="form-control select2" id="zas_sericode" name="zas_sericode" required="true">
+                                                      <option value="0">Бүгд</option>
+                                                      @foreach($locserial as $locserials)
+                                                          <option value= "{{$locserials->sericode}}"> {{$locserials->sericode}} - {{$locserials->seriname}}</option>
+                                                      @endforeach
+                                                  </select>
+
+                                              </div>
+                                          </div>
 
                                                          <div class="col-md-2">
                                                             <div class="form-group form-md-line-input has-success">
@@ -97,10 +109,8 @@
                                 <tr>
 
                                     <th> # </th>
-                                    <th>Засварын дугаар</th>
-                                    <th>И/т сери </th>
-                                    <th>И/т №</th>
-                                    <th>Засварын код</th>
+                                    <th>Илчит тэрэг</th>
+                                   
                                     <th>Засварын томьёолол</th>
                                     <th>Засварт орсон хугацаа</th>
                                     <th>Засвараас гарсан хугацаа</th>
@@ -116,12 +126,10 @@
 
                                 <?php $no = 1; ?>
                                 @foreach($zasplan as $zasplans)
-                                    <tr class="zasplan" data-id="{{$zasplans->repairid}}" tag="{{$zasplans->repairid}}"  onclick="$('#addtab').trigger('click');">
+                                    <tr class="zasplan" data-id="{{$zasplans->repairid}}" tag="{{$zasplans->repairid}}">
                                         <td>{{$no}}</td>
-                                        <td>{{$zasplans->repairid}}</td>
-                                        <td>{{$zasplans->seriname}}</td>
-                                        <td>{{$zasplans->zutnumber}}</td>
-                                        <td>{{$zasplans->repid}}</td>
+                                        <td>{{$zasplans->seriname}} -{{$zasplans->zutnumber}}</td> 
+                                       
                                         <td>{{$zasplans->repshname}}</td>
                                         <td>{{$zasplans->repindate}}</td>
                                         <td>{{$zasplans->repoutdate}}</td>
@@ -130,7 +138,7 @@
                                         <td>{{$zasplans->stopadd}}</td>
                                         <td>{{$zasplans->stopclean}}</td>
                                         <td>{{$zasplans->runkm}}</td>
-                                        <td>{{$zasplans->recievman}}</td>
+                                        <td>{{$zasplans->reciever}}</td>
                                     </tr>
                                     <?php $no++; ?>
                                 @endforeach
@@ -144,13 +152,11 @@
                                 <thead style="background-color: #81b5d5; color: #fff">
                                 <tr>
 
-                                    <th> # </th>
-                                    <th>Төрөл</th>
-                                    <th>Ажлын код </th>
-                                    <th>Нэмэлт ажлын нэр</th>
-                                    <th>Ажлын цаг</th>
-                                    <th>Удаа</th>
-                                    <th>Нийт цаг</th>
+                                <th>Төрөл</th>
+                      <th>Нэмэлт ажлын нэр</th>
+                      <th>Ажлын цаг</th>
+                      <th>Удаа</th>
+                      <th>Нийт цаг</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -163,8 +169,6 @@
                                 <thead style="background-color: #81b5d5; color: #fff">
                                 <tr>
 
-                                    <th> # </th>
-                                    <th>Код</th>
                                     <th>Байгууллагын нэр </th>
                                     <th>Тооцох цаг</th>
 
@@ -180,9 +184,8 @@
                                 <thead style="background-color: #81b5d5; color: #fff">
                                 <tr>
 
-                                    <th> # </th>
-                                    <th>Код</th>
                                     <th>Материалын нэр </th>
+                                    <th>Нэгж </th>
                                     <th>Ширхэг</th>
 
                                 </tr>
@@ -216,15 +219,15 @@
                       <div class="modal-body">
                           <ul class="nav nav-tabs">
                               <li class="active"><a data-toggle="tab" href="#home">Үндсэн</a></li>
-                              <li><a data-toggle="tab" href="#menu1">Нэмэлт ажил</a></li>
-                              <li><a data-toggle="tab" href="#menu2">Байгууллага</a></li>
-                              <li><a data-toggle="tab" href="#menu3">Материал</a></li>
+                              <li ><a data-toggle="tab" id="modaltabadd" href="#menu1">Нэмэлт ажил</a></li>
+                              <li  ><a data-toggle="tab" id="modaltabbaig" href="#menu2">Байгууллага</a></li>
+                              <li ><a data-toggle="tab" id="modaltabmat" href="#menu3">Материал</a></li>
                           </ul>
 
 
                           <div class="tab-content">
                               <div id="home" class="tab-pane fade in active">
-                                  <form method="post" action="addzasplan">
+                                  <form method="post" action="addzasplan" id="formzasplan">
                                       <div class="col-md-12">
                                       {{ csrf_field() }}
                                       <div class="col-md-3">
@@ -298,7 +301,7 @@
                                           <div class="col-md-3">
                                               <div class="form-group">
                                                   <label for="name">Нийт цаг</label>
-                                                  <input type="number" class="form-control inputtext" id="stopsum" name="stopsum" >
+                                                  <input type="number" class="form-control inputtext" id="stopsum" name="stopsum" readonly="true">
                                               </div>
 
                                           </div>
@@ -306,7 +309,7 @@
                                           <div class="col-md-3">
                                               <div class="form-group">
                                                   <label for="name">Засварын зогсолт</label>
-                                                  <input type="number" class="form-control inputtext" id="stoprep" name="stoprep" >
+                                                  <input type="number" class="form-control inputtext" id="stoprep" name="stoprep"  readonly="true" value="0" >
                                               </div>
 
                                           </div>
@@ -340,20 +343,24 @@
                                           </div>
                                           <div class="col-md-3">
                                               <div class="form-group">
-                                                  <label for="name">.</label><br>
-                                                  <a class="btn btn-primary back">Go Back</a>
-                                                 <a class="btn btn-primary continue">Place Order</a>
+                                        
+                                                  <button type="submit" class="btn btn-primary" form="formzasplan" value="Submit">Хадгалах</button>
+                                                
                                               </div>
                                           </div>
                                       </div>
                                   </form>
 
                               </div>
+                              
                               <div id="menu1" class="tab-pane fade">
+                              <form method="post"  action="addzasadd" id='formzasadd'>
                                  <div class="col-md-12">
                                      <div class="col-md-3">
+                                     {{ csrf_field() }}
                                          <div class="form-group">
                                              <label for="name">Төрөл</label>
+                                             <input class='repaid form-control' style="display:none" name="repaid" id="repaid">
                                              <select class="form-control select2" id="addtype" name="addtype" >
                                                    <option value="1">Хос дугуй</option>
                                                    <option value="2">Хүлээлэг</option>
@@ -363,7 +370,7 @@
                                      <div class="col-md-3">
                                          <div class="form-group">
                                              <label for="name">Ажлын код</label>
-                                             <select class="form-control select2" id="addname" name="addname" >
+                                             <select class="form-control select2" id="addid" name="addid" >
                                                    
                                                   </select>
                                          </div>
@@ -372,13 +379,13 @@
                                      <div class="col-md-2">
                                          <div class="form-group">
                                              <label for="name">Ажлын цаг</label>
-                                             <input type="text" class="form-control inputtext" id="worktime" name="worktime">
+                                             <input type="text" class="form-control inputtext" id="addhour" name="addhour">
                                          </div>
                                      </div>
                                      <div class="col-md-2">
                                          <div class="form-group">
                                              <label for="name">Удаа</label>
-                                             <input type="text" class="form-control inputtext" id="totaltime" name="totaltime">
+                                             <input type="text" class="form-control inputtext" id="addval" name="addval">
                                          </div>
                                      </div>
                                      <div class="col-md-2">
@@ -388,13 +395,10 @@
                                          </div>
                                      </div>
                                  </div>
-                                   <table class="table table-bordered table-hover">
+                                   <table class="table table-bordered table-hover" id="tableplanadd">
                   <thead>
                   <tr>
-
-                      <th> # </th>
                       <th>Төрөл</th>
-                      <th>Ажлын код </th>
                       <th>Нэмэлт ажлын нэр</th>
                       <th>Ажлын цаг</th>
                       <th>Удаа</th>
@@ -405,24 +409,30 @@
 
                   </tbody>
               </table>
+              </form>
                               </div>
+                        
+                             
                               <div id="menu2" class="tab-pane fade">
+                              <form method="post" id="formzasbaig" action="addzasbaig">
                                   <div class="col-md-12">
                                     
                                       <div class="col-md-3">
                                           <div class="form-group">
+                                          {{ csrf_field() }}
+                                          <input class='repaid form-control' style="display:none" name="repaidbaig" id="repaidbaig">
                                               <label for="name">Байгууллагын нэр</label>
-                                              <select class="form-control select2" id="zasbaig" name="zasbaig" >
+                                              <select class="form-control select2" id="baigcode" name="baigcode" >
                                                       @foreach($zasbaig as $baigs)
-                                                          <option value= "{{$baigs->baigcode}}" tag="{{$baigs->baigcode}}">{{$baigs->baigcode}} - {{$baigs->baigshname}}</option>
+                                                          <option value= "{{$baigs->baigid}}" tag="{{$baigs->baigcode}}">{{$baigs->baigcode}} - {{$baigs->baigshname}}</option>
                                                       @endforeach
                                                   </select>
                                           </div>
                                       </div>
                                       <div class="col-md-3">
                                           <div class="form-group">
-                                              <label for="name">Тооцох газар</label>
-                                              <input type="text" class="form-control inputtext" id="planbaig" name="planbaig">
+                                              <label for="name">Ажилласан цаг</label>
+                                              <input type="text" class="form-control inputtext" id="baigtime" name="baigtime">
                                           </div>
                                       </div>
                                       <div class="col-md-3">
@@ -431,14 +441,13 @@
                                               <button class="btn btn-success">Хадгалах</button>
                                           </div>
                                       </div>
-  <table class="table table-bordered table-hover">
+  <table class="table table-bordered table-hover tableplanbaig" id="tableplanbaig">
                   <thead>
                   <tr>
 
-                      <th> # </th>
-                      <th>Код</th>
+                    
                       <th>Байгууллагын нэр </th>
-                      <th>Тооцох цаг</th>
+                      <th>Ажилласан цаг</th>
 
                   </tr>
                   </thead>
@@ -446,13 +455,19 @@
 
                   </tbody>
               </table>                                  </div>
+              </form>
                               </div>
+                              
+                             
                               <div id="menu3" class="tab-pane fade">
+                              <form method="post"  id="formzasmat" action="addzasmat">
                                   <div class="col-md-12">
                                   <div class="col-md-3">
                                               <div class="form-group">
                                                   <label for="name"> Илчит тэрэгний эд анги</label>
-                                                  <select class="form-control select2" id="zasmat" name="zasmat" >
+                                                  {{ csrf_field() }}
+                                                  <input class='repaid form-control' style="display:none" name="repaidmat" id="repaidmat">
+                                                  <select class="form-control select2" id="matcode" name="matcode" >
                                                   <option value="0">Бүгд</option>
                                                                           @foreach($part as $parts) 
                                                                                <option value= "{{$parts->part_id}}">{{$parts->part_name}}</option>
@@ -463,14 +478,19 @@
                                           </div>
                                       <div class="col-md-3">
                                           <div class="form-group">
-                                              <label for="name">Эд ангийн сери</label>
-                                              <input type="text" class="form-control inputtext" id="ed_seri" name="ed_seri">
+                                              <label for="name">Материалын нэгж</label>
+                                              <select class="form-control select2" id="matunit" name="matunit" >
+                                                
+                                                                          @foreach($unit as $units) 
+                                                                               <option value= "{{$units->unitid}}">{{$units->unitshname}}</option>
+                                                                           @endforeach
+                                                  </select>
                                           </div>
                                       </div>
                                       <div class="col-md-3">
                                           <div class="form-group">
-                                              <label for="name">Эд ангийн дугаар</label>
-                                              <input type="text" class="form-control inputtext" id="ed_dugaar" name="ed_dugaar">
+                                              <label for="name">Материалын тоо</label>
+                                              <input type="text" class="form-control inputtext" id="mattoo" name="mattoo">
                                           </div>
                                       </div>
                                       <div class="col-md-3">
@@ -480,14 +500,13 @@
                                           </div>
                                       </div>
                                   </div>
-                                  <table class="table table-bordered table-hover">
+                                  <table class="table table-bordered table-hover tableplanmat" id="tableplanmat">
                   <thead>
                   <tr>
 
-                      <th> # </th>
-                      <th>Эд ангийн төрөл</th>
-                      <th>Эд ангийн сери </th>
-                      <th>Эд ангийн дугаар</th>
+                      <th>Материалын нэр</th>
+                      <th>Материалын нэгж </th>
+                      <th>Материалын тоо</th>
 
                   </tr>
                   </thead>
@@ -496,6 +515,7 @@
                   </tbody>
               </table>   
                               </div>
+                              </form>
                           </div>
 
                       </div>
@@ -521,14 +541,17 @@ $("#zas_end").datepicker( {
 
 });
 $("#repindate").datetimepicker({format: 'YYYY-MM-DD HH:mm'});
-$("#repoutdate").datetimepicker({format: 'YYYY-MM-DD HH:mm'});
-$("#repoutdate").change(function(){  
-         var date1 = $("#repoutdate").val();
-          console.log(date1);
+$('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', function (event) {
+    var date1 = $("#repoutdate").val();   
         var date2 = $("#repindate").val();
-        diff = Math.abs(date1 - date2) / 36e5;
-        console.log(diff);
-    });  
+        var fromDate = parseInt(new Date($("#repindate").val()).getTime()/1000); 
+    var toDate = parseInt(new Date( $("#repoutdate").val()).getTime()/1000);
+    var timeDiff = parseFloat((toDate - fromDate)/3600).toFixed(2);  // will give difference in hrs
+    $("#stopsum").val(timeDiff);
+    var stopadd = (timeDiff- $("#stoprep").val());
+    $("#stopadd").val(stopadd);
+            });
+
  function printDiv() {
 
      var printContents = document.getElementById('printarea').innerHTML;
@@ -577,6 +600,7 @@ $("#repoutdate").change(function(){
 
           <script type="text/javascript">
               $(document).ready(function() {
+                  getaddname(1);
                   $('#example').DataTable( {
 
                       "language": {
@@ -596,12 +620,22 @@ $("#repoutdate").change(function(){
 
 
                   } );
-                  $('.continue').click(function(){
-                        $('.nav-tabs > .active').next('li').find('a').trigger('click');
-                        });
-                        $('.back').click(function(){
-                        $('.nav-tabs > .active').prev('li').find('a').trigger('click');
-                    });
+                  $('#zas_owndepo').change(function(){
+                      var itag=$(this).val();
+                      $.get('getloc/'+itag,function(data){
+                          $('#zas_seri').empty();
+
+                          $.each(data,function(i,qwe){
+                           
+                              $('#zas_seri').append($('<option>', {
+                                  value: qwe.sericode,
+                                  id: qwe.sericode,
+                                  text: qwe.seriname
+                              })).trigger('change');
+                          });
+                      });
+                  });
+           
                   $('#zas_seri').change(function(){
                       var itag=$(this).val();
                       var itag1=$('#zas_owndepo').val();
@@ -629,56 +663,32 @@ $("#repoutdate").change(function(){
                       });
                   });
 
-                  $('#zas_owndepo').change(function(){
-                      var itag=$(this).val();
-                      $.get('getloc/'+itag,function(data){
-                          $('#zas_seri').empty();
-
-                          $.each(data,function(i,qwe){
-                              console.log(qwe);
-                              $('#zas_seri').append($('<option>', {
-                                  value: qwe.sericode,
-                                  id: qwe.sericode,
-                                  text: qwe.seriname
-                              })).trigger('change');
-                          });
-                      });
-                  });
+              
                   $('#addtype').change(function(){
                       var itag=$(this).val();
-                      $.get('getaddname/'+itag,function(data){
-                          $('#addname').empty();
-
+                    getaddname(itag);
+           
+                  });
+                  $('#repid').change(function(){
+                      var itag=$(this).val();
+                      var itag1=$('#zas_seri').val();
+                      $.get('getzashour/'+itag1+'/'+itag,function(data){
+                      ;
                           $.each(data,function(i,qwe){
-                              console.log(qwe);
-                              $('#addname').append($('<option>', {
-                                  value: qwe.addid,
-                                  id: qwe.addid,
-                                  text: qwe.addname
-                              })).trigger('change');
+                            $('#stoprep').val(qwe.stoptsag);
                           });
                       });
                   });
                   $('.zasplan').on('click',function(){
                       var itag=$(this).attr('tag');
-                      $.get('getplanadd/'+itag,function(data){
-                          $("#planadd tbody").empty();
-                          $.each(data,function(i,qwe1){
-                              var sHtml = "<tr>" +
-                                  "   <td class='m1'>" + qwe1.addtype + "</td>" +
-                                  "   <td class='m2'>" + qwe1.addid + "</td>" +
-                                  "   <td class='m3'>" + qwe1.addhour + "</td>" +
-                                  "   <td class='m3'>" + qwe1.addval + "</td>"+
-                                  "</tr>";
-
-                              $("#planadd tbody").append(sHtml);
-
-                          });
+        
+                    $('#addtab').trigger('click');
                       $.get('getplanbaig/'+itag,function(data){
                           $("#planbaig tbody").empty();
                           $.each(data,function(i,qwe1){
+                              console.log(qwe1);
                               var sHtml1 = "<tr>" +
-                                  "   <td class='m1'>" + qwe1.baigcode + "</td>" +
+                                  "   <td class='m1'>" + qwe1.baigshname + "</td>" +
                                   "   <td class='m2'>" + qwe1.baigtime + "</td>" +
                                   "</tr>";
 
@@ -686,13 +696,32 @@ $("#repoutdate").change(function(){
 
                           });
                       });
-                      $.get('getplanmat/'+itag,function(data){
+                      $.get('getplanadd/'+itag,function(data){
+                          $("#planadd tbody").empty();
+                          $.each(data,function(i,qwe1){
+                              console.log(qwe1);
+                              var sHtml = "<tr>" +
+                                  "   <td class='m1'>" + qwe1.addshname + "</td>" +
+                                  "   <td class='m2'>" + qwe1.addname + "</td>" +
+                                  "   <td class='m3'>" + qwe1.addhour + "</td>" +
+                                  "   <td class='m3'>" + qwe1.addval + "</td>"+
+                                  "   <td class='m3'>" + qwe1.addsum + "</td>"+
+                                  "</tr>";
+
+                              $("#planadd tbody").append(sHtml);
+
+                          });
+               
+       
+         
+                
+                  } );
+                  $.get('getplanmat/'+itag,function(data){
                           $("#planmat tbody").empty();
                           $.each(data,function(i,qwe1){
                               var sHtml2 = "<tr>" +
-                                  "   <td class='m1'>" + qwe1.matcode + "</td>" +
-                                  "   <td class='m2'>" + qwe1.matname + "</td>" +
-                                  "   <td class='m2'>" + qwe1.matunit + "</td>" +
+                                  "   <td class='m1'>" + qwe1.part_name + "</td>" +
+                                  "   <td class='m2'>" + qwe1.unitname + "</td>" +
                                   "   <td class='m2'>" + qwe1.mattoo + "</td>" +
 
                                   "</tr>";
@@ -701,9 +730,165 @@ $("#repoutdate").change(function(){
 
                           });
                       });
+              } );
+              
+        $('#formzasplan').submit(function(event){
+        event.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: 'addzasplan',
+            data: $('form#formzasplan').serialize(),
+         success: function(result){
+            $('.repaid').val(result);
+          alert('Төлөвлөгөөт засвар бүртгэгдлээ');
+          $('#modaltabadd').trigger('click');
+         },
+  error: function (jqXHR, textStatus, errorThrown) {
+                  if (jqXHR.status == 500) {
+                      alert('Internal error: ' + jqXHR.responseText);
+                  } else {
+                      alert('Unexpected error.');
+                  }
+              }
+        })
+
+    });
+    $('#formzasadd').submit(function(event){
+        event.preventDefault();
+        var itag =   $('#repaid').val();
+        $.ajax({
+            type: 'POST',
+            url: 'addzasadd',
+            data: $('form#formzasadd').serialize(),
+         success: function(result){
+          alert('Нэмэлт ажил бүртгэгдлээ');
+          console.log(itag);
+          getplanadd(itag);
+         },
+  error: function (jqXHR, textStatus, errorThrown) {
+                  if (jqXHR.status == 500) {
+                      alert('Internal error: ' + jqXHR.responseText);
+                  } else {
+                      alert('Unexpected error.');
+                  }
+              }
+        })
+
+    });
+    $('#formzasbaig').submit(function(event){
+        event.preventDefault();
+        var itag =   $('#repaidbaig').val();
+        $.ajax({
+            type: 'POST',
+            url: 'addzasbaig',
+            data: $('form#formzasbaig').serialize(),
+         success: function(result){
+            console.log(itag);
+          alert('Байгууллага бүртгэгдлээ');
+          getplanbaig(itag);
+         },
+  error: function (jqXHR, textStatus, errorThrown) {
+                  if (jqXHR.status == 500) {
+                      alert('Internal error: ' + jqXHR.responseText);
+                  } else {
+                      alert('Unexpected error.');
+                  }
+              }
+        })
+
+    });
+    $('#formzasmat').submit(function(event){
+        event.preventDefault();
+        var itag =   $('#repaidmat').val();
+        $.ajax({
+            type: 'POST',
+            url: 'addzasmat',
+            data: $('form#formzasmat').serialize(),
+         success: function(result){
+          alert('Материал бүртгэгдлээ');
+          console.log(itag);
+        getplanmat(itag);
+         },
+  error: function (jqXHR, textStatus, errorThrown) {
+                  if (jqXHR.status == 500) {
+                      alert('Internal error: ' + jqXHR.responseText);
+                  } else {
+                      alert('Unexpected error.');
+                  }
+              }
+        })
+
+    });
+              } );
+          </script>
+          <script>
+              function getplanbaig(itag){
+                        $.get('getplanbaig/'+itag,function(data){
+                          $("#tableplanbaig tbody").empty();
+                          $.each(data,function(i,qwe1){
+                              var sHtml1 = "<tr>" +
+                                  "   <td class='m1'>" + qwe1.baigshname + "</td>" +
+                                  "   <td class='m2'>" + qwe1.baigtime + "</td>" +
+                                  "</tr>";
+
+                              $("#tableplanbaig tbody").append(sHtml1);
+
+                          });
+                      });
+                    }
+                    function getplanadd(itag){
+                        $.get('getplanadd/'+itag,function(data){
+                          $("#tableplanadd tbody").empty();
+                          $.each(data,function(i,qwe1){
+                              console.log(qwe1);
+                              var sHtml = "<tr>" +
+                                  "   <td class='m1'>" + qwe1.addshname + "</td>" +
+                                  "   <td class='m2'>" + qwe1.addname + "</td>" +
+                                  "   <td class='m3'>" + qwe1.addhour + "</td>" +
+                                  "   <td class='m3'>" + qwe1.addval + "</td>"+
+                                  "   <td class='m3'>" + qwe1.addsum + "</td>"+
+                                  "</tr>";
+
+                              $("#tableplanadd tbody").append(sHtml);
+
+                          });
+               
+       
+         
+                
                   } );
-              } );
-              } );
+                    }
+                       function getplanmat(itag){
+                              $.get('getplanmat/'+itag,function(data){
+                          $("#tableplanmat tbody").empty();
+                          $.each(data,function(i,qwe1){
+                              var sHtml2 = "<tr>" +
+                                  "   <td class='m1'>" + qwe1.part_name + "</td>" +
+                                  "   <td class='m2'>" + qwe1.unitname + "</td>" +
+                                  "   <td class='m2'>" + qwe1.mattoo + "</td>" +
+
+                                  "</tr>";
+
+                              $("#tableplanmat tbody").append(sHtml2);
+
+                          });
+                      });
+                    }
+                    function getaddname(itag){
+                        $.get('getaddname/'+itag,function(data){
+                          $('#addid').empty();
+
+                          $.each(data,function(i,qwe){
+                            
+                              $('#addid').append($('<option>', {
+                                  value: qwe.addid,
+                                  id: qwe.addid,
+                                  text: qwe.addname
+                              })).trigger('change');
+                          });
+                      });
+                      }
           </script>
           <style type="text/css">
               .disabledTab {

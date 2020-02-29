@@ -1,4 +1,3 @@
-         
 <?php $__env->startSection('content'); ?>
 
           <div class="page-content-wrapper">
@@ -11,16 +10,16 @@
                         <i class="icon-settings font-green">
                         </i>
                         <span class="caption-subject font-green sbold uppercase">
-                            Төлөвлөгөөт засвар
+                            Төлөвлөгөөт бус засвар
                         </span>
                     </div>
                     <div class="actions">
                         <div class="btn-group btn-group-devided" data-toggle="buttons">
-                            <a class="joshview1 " id="add" data-toggle="modal" data-target="#myModal1" data-backdrop="static" data-keyboard="false">
+                            <a class="joshview1 " id="add" data-toggle="modal" data-target="#myModal1">
                                 <label class="btn btn-transparent green btn-circle btn-sm active">
                                     <i class="icon icon-plus">
                                     </i>
-                                    Төлөвлөгөөт засвар бүртгэх
+                                    Төлөвлөгөөт бус засвар бүртгэх
                                 </label>
                             </a>
                         </div>
@@ -37,7 +36,7 @@
                                             <div id="sear" class="panel-collapse collapse in">
                                                 <div class="panel-body">
                                                     <fieldset class="scheduler-border">
-                                                     <form method="post" action="zasplan">
+                                                     <form method="post" action="zasunplan">
                                         <div class="col-md-12">
                                             <div class="col-md-3">
                                                 <div class="form-group form-md-line-input has-success">
@@ -91,42 +90,43 @@
                         <div id="ho" class="tab-pane fade in active">
                             <button class="btn btn-info" id="buttonprint" onclick="printDiv()"><i class="fa fa-print" aria-hidden="true"></i>Хэвлэх</button>
                             <button class="btn btn-info" id="btnExport" onclick="tableToExcel('testTable', 'Export HTML Table to Excel')"><i class="fa fa-table" aria-hidden="true"></i> Excel </button>
-                            <p><center><b> <?php echo e($startdate); ?> -аас <?php echo e($enddate); ?> -ны төлөвлөгөөт засвар</b></center> </p>
+                            <p><center><b> <?php echo e($startdate); ?> -аас <?php echo e($enddate); ?> -ны төлөвлөгөөт бус засвар</b></center> </p>
                             <table class="table table-striped table-bordered table-hover"  id="example">
                                 <thead style="background-color: #81b5d5; color: #fff">
                                 <tr>
 
                                     <th> # </th>
-                                    <th>Илчит тэрэг</th>
-                                   
+                                    <th>Данстай депо</th>
+                                    <th>И/т сери, №</th>
+                                    <th>Секц</th>
+                                    <th>То-2 орсон огноо</th>
+                                    <th>Засварын код</th>
                                     <th>Засварын томьёолол</th>
                                     <th>Засварт орсон хугацаа</th>
                                     <th>Засвараас гарсан хугацаа</th>
                                     <th>Нийт зогсолт</th>
-                                    <th>ТО-4 зогсолт</th>
-                                    <th>Нэмэлт зогсолт</th>
-                                    <th>Засварын зогсолт</th>
-                                    <th>Гүйлт</th>
-                                    <th>Хүлээн авагч</th>
+                                    <th>Гэмтэл</th>
+                                    <th>Гэмтлийн шалтгаан</th>
+                                   
                                 </tr>
                                 </thead>
                                 <tbody>
 
                                 <?php $no = 1; ?>
-                                <?php $__currentLoopData = $zasplan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $zasplans): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <tr class="zasplan" data-id="<?php echo e($zasplans->repairid); ?>" tag="<?php echo e($zasplans->repairid); ?>">
+                                <?php $__currentLoopData = $zasunplan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $zasunplans): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <tr class="zasunplan" data-id="<?php echo e($zasunplans->repairid); ?>" tag="<?php echo e($zasunplans->repairid); ?>"  onclick="$('#addtab').trigger('click');">
                                         <td><?php echo e($no); ?></td>
-                                        <td><?php echo e($zasplans->seriname); ?> -<?php echo e($zasplans->zutnumber); ?></td> 
-                                       
-                                        <td><?php echo e($zasplans->repshname); ?></td>
-                                        <td><?php echo e($zasplans->repindate); ?></td>
-                                        <td><?php echo e($zasplans->repoutdate); ?></td>
-                                        <td><?php echo e($zasplans->stopsum); ?></td>
-                                        <td><?php echo e($zasplans->stopto4); ?></td>
-                                        <td><?php echo e($zasplans->stopadd); ?></td>
-                                        <td><?php echo e($zasplans->stopclean); ?></td>
-                                        <td><?php echo e($zasplans->runkm); ?></td>
-                                        <td><?php echo e($zasplans->reciever); ?></td>
+                                        <td><?php echo e($zasunplans->dansdepo); ?></td>
+                                        <td><?php echo e($zasunplans->seriname); ?>-<?php echo e($zasunplans->zutnumber); ?></td>
+                                        <td><?php echo e($zasunplans->repshname); ?></td>
+                                        <td><?php echo e($zasunplans->repindate); ?></td>
+                                        <td><?php echo e($zasunplans->repoutdate); ?></td>
+                                        <td><?php echo e($zasunplans->stopsum); ?></td>
+                                        <td><?php echo e($zasunplans->damage); ?></td>
+                                        <td><?php echo e($zasunplans->damcause); ?></td>
+                                        <td><?php echo e($zasunplans->calcdepo); ?></td>
+                                        <td><?php echo e($zasunplans->decision); ?></td>
+                                        <td><?php echo e($zasunplans->workdo); ?></td>
                                     </tr>
                                     <?php $no++; ?>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -140,23 +140,47 @@
                                 <thead style="background-color: #81b5d5; color: #fff">
                                 <tr>
 
-                                <th>Төрөл</th>
-                      <th>Нэмэлт ажлын нэр</th>
-                      <th>Ажлын цаг</th>
-                      <th>Удаа</th>
-                      <th>Нийт цаг</th>
+                                    <th> # </th>
+                                    <th>Төрөл</th>
+                                    <th>Ажлын код </th>
+                                    <th>Нэмэлт ажлын нэр</th>
+                                    <th>Ажлын цаг</th>
+                                    <th>Удаа</th>
+                                    <th>Нийт цаг</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
                                 </tbody>
                             </table>
+                           
+                        </div>
+                        <div class="col-md-6">
+                        <table class="table table-striped table-bordered table-hover" id="planadd">
+                                <thead style="background-color: #81b5d5; color: #fff">
+                                <tr>
+
+                                <th>Тооцох депо</th>
+                                    <th>Групп</th>
+                                    <th>Шийдвэр</th>
+                                    <th>Хийгдэх ажил</th>
+                                    <th>Материал</th>
+                                    <th>Хүлээн авагч</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                           
                         </div>
                         <div class="col-md-6">
                         <table class="table table-striped table-bordered table-hover" id="planbaig">
                                 <thead style="background-color: #81b5d5; color: #fff">
                                 <tr>
 
+                                    <th> # </th>
+                                    <th>Код</th>
                                     <th>Байгууллагын нэр </th>
                                     <th>Тооцох цаг</th>
 
@@ -172,8 +196,9 @@
                                 <thead style="background-color: #81b5d5; color: #fff">
                                 <tr>
 
+                                    <th> # </th>
+                                    <th>Код</th>
                                     <th>Материалын нэр </th>
-                                    <th>Нэгж </th>
                                     <th>Ширхэг</th>
 
                                 </tr>
@@ -199,7 +224,7 @@
               <div class="modal-dialog modal-lg" role="document">
                   <div class="modal-content">
                       <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLongTitle">Төлөвлөгөөт засвар бүртгэх</h5>
+                          <h5 class="modal-title" id="exampleModalLongTitle">Төлөвлөгөөт бус засвар бүртгэх</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                           </button>
@@ -207,15 +232,15 @@
                       <div class="modal-body">
                           <ul class="nav nav-tabs">
                               <li class="active"><a data-toggle="tab" href="#home">Үндсэн</a></li>
-                              <li ><a data-toggle="tab" id="modaltabadd" href="#menu1">Нэмэлт ажил</a></li>
-                              <li  ><a data-toggle="tab" id="modaltabbaig" href="#menu2">Байгууллага</a></li>
-                              <li ><a data-toggle="tab" id="modaltabmat" href="#menu3">Материал</a></li>
+                              <li><a data-toggle="tab" href="#menu1">Нэмэлт ажил</a></li>
+                              <li><a data-toggle="tab" href="#menu2">Байгууллага</a></li>
+                              <li><a data-toggle="tab" href="#menu3">Материал</a></li>
                           </ul>
 
 
                           <div class="tab-content">
                               <div id="home" class="tab-pane fade in active">
-                                  <form method="post" action="addzasplan" id="formzasplan">
+                                  <form method="post" action="addzasplan">
                                       <div class="col-md-12">
                                       <?php echo e(csrf_field()); ?>
 
@@ -290,67 +315,82 @@
                                           <div class="col-md-3">
                                               <div class="form-group">
                                                   <label for="name">Нийт цаг</label>
-                                                  <input type="number" class="form-control inputtext" id="stopsum" name="stopsum" readonly="true">
+                                                  <input type="number" class="form-control inputtext" id="stopsum" name="stopsum" >
                                               </div>
 
                                           </div>
 
                                           <div class="col-md-3">
                                               <div class="form-group">
-                                                  <label for="name">Засварын зогсолт</label>
-                                                  <input type="number" class="form-control inputtext" id="stoprep" name="stoprep"  readonly="true" value="0" >
+                                                  <label for="name">ТО-2 хийсэн депо</label>
+                                                  <select class="form-control select2" id="to2depo" name="to2depo" >
+                                                      <option value="5">ТЧ-1</option>
+                                                      <option value="2">ТЧ-2</option>
+                                                      <option value="3">ТЧ-3</option>
+                                                      <option value="1">Сүхбаатар</option>
+                                                      <option value="13">Замын-Үүд</option>
+                                                  </select>
+
                                               </div>
 
                                           </div>
                                           <div class="col-md-3">
                                               <div class="form-group">
-                                                  <label for="name">Гүйлт</label>
+                                                  <label for="name">Гэмтэл</label>
                                                   <input type="number" class="form-control inputtext" id="zasrun" name="zasrun">
                                               </div>
 
                                           </div>
                                           <div class="col-md-3">
                                               <div class="form-group">
-                                                  <label for="name">ТО-4</label>
+                                                  <label for="name">Гэмтлийн шалтгаан</label>
                                                   <input type="number" class="form-control inputtext" id="stopto4" name="stopto4">
                                               </div>
 
                                           </div>
                                           <div class="col-md-3">
                                               <div class="form-group">
-                                                  <label for="name">Нэмэлт зогсолт</label>
-                                                  <input type="number" class="form-control inputtext" id="stopadd" name="stopadd">
+                                                  <label for="name">Тооцох депо</label>
+                                                  <select class="form-control select2" id="calcdepo" name="calcdepo" >
+                                                      <option value="5">ТЧ-1</option>
+                                                      <option value="2">ТЧ-2</option>
+                                                      <option value="3">ТЧ-3</option>
+                                                      <option value="1">Сүхбаатар</option>
+                                                      <option value="13">Замын-Үүд</option>
+                                                  </select>
                                               </div>
 
                                           </div>
                                           <div class="col-md-3">
                                               <div class="form-group">
-                                                  <label for="name">Хүлээн авагч</label>
+                                                  <label for="name">Групп</label>
                                                   <input type="text" class="form-control inputtext" id="reciever" name="reciever">
                                               </div>
 
                                           </div>
                                           <div class="col-md-3">
                                               <div class="form-group">
-                                        
-                                                  <button type="submit" class="btn btn-primary" form="formzasplan" value="Submit">Хадгалах</button>
-                                                
+                                                  <label for="name">Шийдвэр</label>
+                                                  <input type="text" class="form-control inputtext" id="reciever" name="reciever">
+                                              </div>
+
+                                          </div>
+                                          <div class="col-md-3">
+                                              <div class="form-group">
+                                                  <label for="name">.</label><br>
+                                                  <a class="btn btn-primary back">Go Back</a>
+                                                 <a class="btn btn-primary continue">Place Order</a>
                                               </div>
                                           </div>
                                       </div>
                                   </form>
 
                               </div>
-                              
                               <div id="menu1" class="tab-pane fade">
-                              <form method="post"  action="addzasadd" id='formzasadd'>
                                  <div class="col-md-12">
                                      <div class="col-md-3">
-                                     <?php echo e(csrf_field()); ?>
-
                                          <div class="form-group">
                                              <label for="name">Төрөл</label>
-                                             <input class='repaid form-control' style="display:none" name="repaid" id="repaid">
                                              <select class="form-control select2" id="addtype" name="addtype" >
                                                    <option value="1">Хос дугуй</option>
                                                    <option value="2">Хүлээлэг</option>
@@ -360,7 +400,7 @@
                                      <div class="col-md-3">
                                          <div class="form-group">
                                              <label for="name">Ажлын код</label>
-                                             <select class="form-control select2" id="addid" name="addid" >
+                                             <select class="form-control select2" id="addname" name="addname" >
                                                    
                                                   </select>
                                          </div>
@@ -369,13 +409,13 @@
                                      <div class="col-md-2">
                                          <div class="form-group">
                                              <label for="name">Ажлын цаг</label>
-                                             <input type="text" class="form-control inputtext" id="addhour" name="addhour">
+                                             <input type="text" class="form-control inputtext" id="worktime" name="worktime">
                                          </div>
                                      </div>
                                      <div class="col-md-2">
                                          <div class="form-group">
                                              <label for="name">Удаа</label>
-                                             <input type="text" class="form-control inputtext" id="addval" name="addval">
+                                             <input type="text" class="form-control inputtext" id="totaltime" name="totaltime">
                                          </div>
                                      </div>
                                      <div class="col-md-2">
@@ -385,10 +425,13 @@
                                          </div>
                                      </div>
                                  </div>
-                                   <table class="table table-bordered table-hover" id="tableplanadd">
+                                   <table class="table table-bordered table-hover">
                   <thead>
                   <tr>
+
+                      <th> # </th>
                       <th>Төрөл</th>
+                      <th>Ажлын код </th>
                       <th>Нэмэлт ажлын нэр</th>
                       <th>Ажлын цаг</th>
                       <th>Удаа</th>
@@ -399,31 +442,24 @@
 
                   </tbody>
               </table>
-              </form>
                               </div>
-                        
-                             
                               <div id="menu2" class="tab-pane fade">
-                              <form method="post" id="formzasbaig" action="addzasbaig">
                                   <div class="col-md-12">
                                     
                                       <div class="col-md-3">
                                           <div class="form-group">
-                                          <?php echo e(csrf_field()); ?>
-
-                                          <input class='repaid form-control' style="display:none" name="repaidbaig" id="repaidbaig">
                                               <label for="name">Байгууллагын нэр</label>
-                                              <select class="form-control select2" id="baigcode" name="baigcode" >
+                                              <select class="form-control select2" id="zasbaig" name="zasbaig" >
                                                       <?php $__currentLoopData = $zasbaig; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $baigs): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                          <option value= "<?php echo e($baigs->baigid); ?>" tag="<?php echo e($baigs->baigcode); ?>"><?php echo e($baigs->baigcode); ?> - <?php echo e($baigs->baigshname); ?></option>
+                                                          <option value= "<?php echo e($baigs->baigcode); ?>" tag="<?php echo e($baigs->baigcode); ?>"><?php echo e($baigs->baigcode); ?> - <?php echo e($baigs->baigshname); ?></option>
                                                       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                   </select>
                                           </div>
                                       </div>
                                       <div class="col-md-3">
                                           <div class="form-group">
-                                              <label for="name">Ажилласан цаг</label>
-                                              <input type="text" class="form-control inputtext" id="baigtime" name="baigtime">
+                                              <label for="name">Тооцох газар</label>
+                                              <input type="text" class="form-control inputtext" id="planbaig" name="planbaig">
                                           </div>
                                       </div>
                                       <div class="col-md-3">
@@ -432,13 +468,14 @@
                                               <button class="btn btn-success">Хадгалах</button>
                                           </div>
                                       </div>
-  <table class="table table-bordered table-hover tableplanbaig" id="tableplanbaig">
+  <table class="table table-bordered table-hover">
                   <thead>
                   <tr>
 
-                    
+                      <th> # </th>
+                      <th>Код</th>
                       <th>Байгууллагын нэр </th>
-                      <th>Ажилласан цаг</th>
+                      <th>Тооцох цаг</th>
 
                   </tr>
                   </thead>
@@ -446,20 +483,13 @@
 
                   </tbody>
               </table>                                  </div>
-              </form>
                               </div>
-                              
-                             
                               <div id="menu3" class="tab-pane fade">
-                              <form method="post"  id="formzasmat" action="addzasmat">
                                   <div class="col-md-12">
                                   <div class="col-md-3">
                                               <div class="form-group">
                                                   <label for="name"> Илчит тэрэгний эд анги</label>
-                                                  <?php echo e(csrf_field()); ?>
-
-                                                  <input class='repaid form-control' style="display:none" name="repaidmat" id="repaidmat">
-                                                  <select class="form-control select2" id="matcode" name="matcode" >
+                                                  <select class="form-control select2" id="zasmat" name="zasmat" >
                                                   <option value="0">Бүгд</option>
                                                                           <?php $__currentLoopData = $part; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $parts): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
                                                                                <option value= "<?php echo e($parts->part_id); ?>"><?php echo e($parts->part_name); ?></option>
@@ -470,19 +500,14 @@
                                           </div>
                                       <div class="col-md-3">
                                           <div class="form-group">
-                                              <label for="name">Материалын нэгж</label>
-                                              <select class="form-control select2" id="matunit" name="matunit" >
-                                                
-                                                                          <?php $__currentLoopData = $unit; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $units): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
-                                                                               <option value= "<?php echo e($units->unitid); ?>"><?php echo e($units->unitshname); ?></option>
-                                                                           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                  </select>
+                                              <label for="name">Эд ангийн сери</label>
+                                              <input type="text" class="form-control inputtext" id="ed_seri" name="ed_seri">
                                           </div>
                                       </div>
                                       <div class="col-md-3">
                                           <div class="form-group">
-                                              <label for="name">Материалын тоо</label>
-                                              <input type="text" class="form-control inputtext" id="mattoo" name="mattoo">
+                                              <label for="name">Эд ангийн дугаар</label>
+                                              <input type="text" class="form-control inputtext" id="ed_dugaar" name="ed_dugaar">
                                           </div>
                                       </div>
                                       <div class="col-md-3">
@@ -492,13 +517,14 @@
                                           </div>
                                       </div>
                                   </div>
-                                  <table class="table table-bordered table-hover tableplanmat" id="tableplanmat">
+                                  <table class="table table-bordered table-hover">
                   <thead>
                   <tr>
 
-                      <th>Материалын нэр</th>
-                      <th>Материалын нэгж </th>
-                      <th>Материалын тоо</th>
+                      <th> # </th>
+                      <th>Эд ангийн төрөл</th>
+                      <th>Эд ангийн сери </th>
+                      <th>Эд ангийн дугаар</th>
 
                   </tr>
                   </thead>
@@ -507,7 +533,6 @@
                   </tbody>
               </table>   
                               </div>
-                              </form>
                           </div>
 
                       </div>
@@ -533,17 +558,14 @@ $("#zas_end").datepicker( {
 
 });
 $("#repindate").datetimepicker({format: 'YYYY-MM-DD HH:mm'});
-$('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', function (event) {
-    var date1 = $("#repoutdate").val();   
+$("#repoutdate").datetimepicker({format: 'YYYY-MM-DD HH:mm'});
+$("#repoutdate").change(function(){  
+         var date1 = $("#repoutdate").val();
+          console.log(date1);
         var date2 = $("#repindate").val();
-        var fromDate = parseInt(new Date($("#repindate").val()).getTime()/1000); 
-    var toDate = parseInt(new Date( $("#repoutdate").val()).getTime()/1000);
-    var timeDiff = parseFloat((toDate - fromDate)/3600).toFixed(2);  // will give difference in hrs
-    $("#stopsum").val(timeDiff);
-    var stopadd = (timeDiff- $("#stoprep").val());
-    $("#stopadd").val(stopadd);
-            });
-
+        diff = Math.abs(date1 - date2) / 36e5;
+        console.log(diff);
+    });  
  function printDiv() {
 
      var printContents = document.getElementById('printarea').innerHTML;
@@ -592,7 +614,6 @@ $('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', fu
 
           <script type="text/javascript">
               $(document).ready(function() {
-                  getaddname(1);
                   $('#example').DataTable( {
 
                       "language": {
@@ -612,22 +633,12 @@ $('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', fu
 
 
                   } );
-                  $('#zas_owndepo').change(function(){
-                      var itag=$(this).val();
-                      $.get('getloc/'+itag,function(data){
-                          $('#zas_seri').empty();
-
-                          $.each(data,function(i,qwe){
-                           
-                              $('#zas_seri').append($('<option>', {
-                                  value: qwe.sericode,
-                                  id: qwe.sericode,
-                                  text: qwe.seriname
-                              })).trigger('change');
-                          });
-                      });
-                  });
-           
+                  $('.continue').click(function(){
+                        $('.nav-tabs > .active').next('li').find('a').trigger('click');
+                        });
+                        $('.back').click(function(){
+                        $('.nav-tabs > .active').prev('li').find('a').trigger('click');
+                    });
                   $('#zas_seri').change(function(){
                       var itag=$(this).val();
                       var itag1=$('#zas_owndepo').val();
@@ -655,32 +666,56 @@ $('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', fu
                       });
                   });
 
-              
+                  $('#zas_owndepo').change(function(){
+                      var itag=$(this).val();
+                      $.get('getloc/'+itag,function(data){
+                          $('#zas_seri').empty();
+
+                          $.each(data,function(i,qwe){
+                              console.log(qwe);
+                              $('#zas_seri').append($('<option>', {
+                                  value: qwe.sericode,
+                                  id: qwe.sericode,
+                                  text: qwe.seriname
+                              })).trigger('change');
+                          });
+                      });
+                  });
                   $('#addtype').change(function(){
                       var itag=$(this).val();
-                    getaddname(itag);
-           
-                  });
-                  $('#repid').change(function(){
-                      var itag=$(this).val();
-                      var itag1=$('#zas_seri').val();
-                      $.get('getzashour/'+itag1+'/'+itag,function(data){
-                      ;
+                      $.get('getaddname/'+itag,function(data){
+                          $('#addname').empty();
+
                           $.each(data,function(i,qwe){
-                            $('#stoprep').val(qwe.stoptsag);
+                              console.log(qwe);
+                              $('#addname').append($('<option>', {
+                                  value: qwe.addid,
+                                  id: qwe.addid,
+                                  text: qwe.addname
+                              })).trigger('change');
                           });
                       });
                   });
                   $('.zasplan').on('click',function(){
                       var itag=$(this).attr('tag');
-        
-                    $('#addtab').trigger('click');
+                      $.get('getplanadd/'+itag,function(data){
+                          $("#planadd tbody").empty();
+                          $.each(data,function(i,qwe1){
+                              var sHtml = "<tr>" +
+                                  "   <td class='m1'>" + qwe1.addtype + "</td>" +
+                                  "   <td class='m2'>" + qwe1.addid + "</td>" +
+                                  "   <td class='m3'>" + qwe1.addhour + "</td>" +
+                                  "   <td class='m3'>" + qwe1.addval + "</td>"+
+                                  "</tr>";
+
+                              $("#planadd tbody").append(sHtml);
+
+                          });
                       $.get('getplanbaig/'+itag,function(data){
                           $("#planbaig tbody").empty();
                           $.each(data,function(i,qwe1){
-                              console.log(qwe1);
                               var sHtml1 = "<tr>" +
-                                  "   <td class='m1'>" + qwe1.baigshname + "</td>" +
+                                  "   <td class='m1'>" + qwe1.baigcode + "</td>" +
                                   "   <td class='m2'>" + qwe1.baigtime + "</td>" +
                                   "</tr>";
 
@@ -688,32 +723,13 @@ $('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', fu
 
                           });
                       });
-                      $.get('getplanadd/'+itag,function(data){
-                          $("#planadd tbody").empty();
-                          $.each(data,function(i,qwe1){
-                              console.log(qwe1);
-                              var sHtml = "<tr>" +
-                                  "   <td class='m1'>" + qwe1.addshname + "</td>" +
-                                  "   <td class='m2'>" + qwe1.addname + "</td>" +
-                                  "   <td class='m3'>" + qwe1.addhour + "</td>" +
-                                  "   <td class='m3'>" + qwe1.addval + "</td>"+
-                                  "   <td class='m3'>" + qwe1.addsum + "</td>"+
-                                  "</tr>";
-
-                              $("#planadd tbody").append(sHtml);
-
-                          });
-               
-       
-         
-                
-                  } );
-                  $.get('getplanmat/'+itag,function(data){
+                      $.get('getplanmat/'+itag,function(data){
                           $("#planmat tbody").empty();
                           $.each(data,function(i,qwe1){
                               var sHtml2 = "<tr>" +
-                                  "   <td class='m1'>" + qwe1.part_name + "</td>" +
-                                  "   <td class='m2'>" + qwe1.unitname + "</td>" +
+                                  "   <td class='m1'>" + qwe1.matcode + "</td>" +
+                                  "   <td class='m2'>" + qwe1.matname + "</td>" +
+                                  "   <td class='m2'>" + qwe1.matunit + "</td>" +
                                   "   <td class='m2'>" + qwe1.mattoo + "</td>" +
 
                                   "</tr>";
@@ -722,165 +738,9 @@ $('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', fu
 
                           });
                       });
-              } );
-              
-        $('#formzasplan').submit(function(event){
-        event.preventDefault();
-
-        $.ajax({
-            type: 'POST',
-            url: 'addzasplan',
-            data: $('form#formzasplan').serialize(),
-         success: function(result){
-            $('.repaid').val(result);
-          alert('Төлөвлөгөөт засвар бүртгэгдлээ');
-          $('#modaltabadd').trigger('click');
-         },
-  error: function (jqXHR, textStatus, errorThrown) {
-                  if (jqXHR.status == 500) {
-                      alert('Internal error: ' + jqXHR.responseText);
-                  } else {
-                      alert('Unexpected error.');
-                  }
-              }
-        })
-
-    });
-    $('#formzasadd').submit(function(event){
-        event.preventDefault();
-        var itag =   $('#repaid').val();
-        $.ajax({
-            type: 'POST',
-            url: 'addzasadd',
-            data: $('form#formzasadd').serialize(),
-         success: function(result){
-          alert('Нэмэлт ажил бүртгэгдлээ');
-          console.log(itag);
-          getplanadd(itag);
-         },
-  error: function (jqXHR, textStatus, errorThrown) {
-                  if (jqXHR.status == 500) {
-                      alert('Internal error: ' + jqXHR.responseText);
-                  } else {
-                      alert('Unexpected error.');
-                  }
-              }
-        })
-
-    });
-    $('#formzasbaig').submit(function(event){
-        event.preventDefault();
-        var itag =   $('#repaidbaig').val();
-        $.ajax({
-            type: 'POST',
-            url: 'addzasbaig',
-            data: $('form#formzasbaig').serialize(),
-         success: function(result){
-            console.log(itag);
-          alert('Байгууллага бүртгэгдлээ');
-          getplanbaig(itag);
-         },
-  error: function (jqXHR, textStatus, errorThrown) {
-                  if (jqXHR.status == 500) {
-                      alert('Internal error: ' + jqXHR.responseText);
-                  } else {
-                      alert('Unexpected error.');
-                  }
-              }
-        })
-
-    });
-    $('#formzasmat').submit(function(event){
-        event.preventDefault();
-        var itag =   $('#repaidmat').val();
-        $.ajax({
-            type: 'POST',
-            url: 'addzasmat',
-            data: $('form#formzasmat').serialize(),
-         success: function(result){
-          alert('Материал бүртгэгдлээ');
-          console.log(itag);
-        getplanmat(itag);
-         },
-  error: function (jqXHR, textStatus, errorThrown) {
-                  if (jqXHR.status == 500) {
-                      alert('Internal error: ' + jqXHR.responseText);
-                  } else {
-                      alert('Unexpected error.');
-                  }
-              }
-        })
-
-    });
-              } );
-          </script>
-          <script>
-              function getplanbaig(itag){
-                        $.get('getplanbaig/'+itag,function(data){
-                          $("#tableplanbaig tbody").empty();
-                          $.each(data,function(i,qwe1){
-                              var sHtml1 = "<tr>" +
-                                  "   <td class='m1'>" + qwe1.baigshname + "</td>" +
-                                  "   <td class='m2'>" + qwe1.baigtime + "</td>" +
-                                  "</tr>";
-
-                              $("#tableplanbaig tbody").append(sHtml1);
-
-                          });
-                      });
-                    }
-                    function getplanadd(itag){
-                        $.get('getplanadd/'+itag,function(data){
-                          $("#tableplanadd tbody").empty();
-                          $.each(data,function(i,qwe1){
-                              console.log(qwe1);
-                              var sHtml = "<tr>" +
-                                  "   <td class='m1'>" + qwe1.addshname + "</td>" +
-                                  "   <td class='m2'>" + qwe1.addname + "</td>" +
-                                  "   <td class='m3'>" + qwe1.addhour + "</td>" +
-                                  "   <td class='m3'>" + qwe1.addval + "</td>"+
-                                  "   <td class='m3'>" + qwe1.addsum + "</td>"+
-                                  "</tr>";
-
-                              $("#tableplanadd tbody").append(sHtml);
-
-                          });
-               
-       
-         
-                
                   } );
-                    }
-                       function getplanmat(itag){
-                              $.get('getplanmat/'+itag,function(data){
-                          $("#tableplanmat tbody").empty();
-                          $.each(data,function(i,qwe1){
-                              var sHtml2 = "<tr>" +
-                                  "   <td class='m1'>" + qwe1.part_name + "</td>" +
-                                  "   <td class='m2'>" + qwe1.unitname + "</td>" +
-                                  "   <td class='m2'>" + qwe1.mattoo + "</td>" +
-
-                                  "</tr>";
-
-                              $("#tableplanmat tbody").append(sHtml2);
-
-                          });
-                      });
-                    }
-                    function getaddname(itag){
-                        $.get('getaddname/'+itag,function(data){
-                          $('#addid').empty();
-
-                          $.each(data,function(i,qwe){
-                            
-                              $('#addid').append($('<option>', {
-                                  value: qwe.addid,
-                                  id: qwe.addid,
-                                  text: qwe.addname
-                              })).trigger('change');
-                          });
-                      });
-                      }
+              } );
+              } );
           </script>
           <style type="text/css">
               .disabledTab {

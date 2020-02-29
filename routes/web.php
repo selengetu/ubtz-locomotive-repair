@@ -27,7 +27,9 @@ Route::post('/searchnasjilt','TailanController@searchnasjilt');
 Route::match(['get', 'post'],'/guilt', 'TailanController@guilt')->name('guilt');
 Route::match(['get', 'post'],'/zasplan', 'ZasplanController@index')->name('zasplan');
 Route::match(['get', 'post'],'/zasunplan', 'ZasunplanController@index')->name('zasunplan');
-
+Route::post('/addzasadd','ZasplanController@storeadd');
+Route::post('/addzasbaig','ZasplanController@storebaig');
+Route::post('/addzasmat','ZasplanController@storemat');
 Route::match(['get', 'post'],'/zastype', 'ZastypeController@index')->name('zastype');
 Route::get('/destroyzastype/{id}/delete', ['as' => 'zastype.destroy', 'uses' => 'ZastypeController@destroy']);
 Route::post('/addzastype','ZastypeController@store');
@@ -35,6 +37,10 @@ Route::post('/searchzastype','ZastypeController@search');
 Route::post('/updatezastype','ZastypeController@update');
 Route::get('/zastypefill/{id?}',function($id = 0){
     $dt=App\Zastype::where('seri_code','=',$id)->get();
+    return $dt;
+});
+Route::get('/getzashour/{id?}/{id1?}',function($id = 0,$id1 = 0){
+    $dt=DB::select('select case when stopday >0 then stopday*24 else stoptsag end as stoptsag from ZUTGUUR.ZASPLANBASE t where t.sericode= '.$id.'and t.repid='.$id1.'');
     return $dt;
 });
 Route::match(['get', 'post'],'/gemteltype', 'GemteltypeController@index')->name('gemteltype');
@@ -121,15 +127,15 @@ Route::get('/getaddname/{id?}',function($id = 0){
     return $dt;
 });
 Route::get('/getplanadd/{id?}',function($id = 0){
-    $dt=DB::table('ZUTGUUR.ZASPLANADD')->where('repairid','=',$id)->get();
+    $dt=DB::table('V_ZASADD')->where('repairid','=',$id)->get();
     return $dt;
 });
 Route::get('/getplanbaig/{id?}',function($id = 0){
-    $dt=DB::table('ZUTGUUR.ZASPLANBAIG')->where('repairid','=',$id)->get();
+    $dt=DB::table('V_ZASBAIG')->where('repairid','=',$id)->get();
     return $dt;
 });
 Route::get('/getplanmat/{id?}',function($id = 0){
-    $dt=DB::table('ZUTGUUR.ZASUNITEM')->where('repairid','=',$id)->get();
+    $dt=DB::table('V_ZASMAT')->where('repairid','=',$id)->get();
     return $dt;
 });
 
