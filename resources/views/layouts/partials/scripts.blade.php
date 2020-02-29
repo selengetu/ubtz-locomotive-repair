@@ -50,8 +50,7 @@
         <script src="{{ asset('assets/layouts/global/scripts/quick-sidebar.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('assets/layouts/global/scripts/quick-nav.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('assets/global/plugins/js.cookie.min.js')}}" type="text/javascript"></script>
-        <script src="{{ asset('assets/global/scripts/datatable.js')}}" type="text/javascript"></script>
-        <script src="{{ asset('assets/global/plugins/datatables/datatables.min.js')}}" type="text/javascript"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" type="text/javascript"></script>
         <script src="{{ asset('assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js')}}" type="text/javascript"></script>
         <script src="{{ asset('assets/pages/scripts/table-datatables-responsive.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('assets/global/plugins/js.cookie.min.js')}}" type="text/javascript"></script>

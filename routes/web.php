@@ -26,7 +26,7 @@ Route::match(['get', 'post'],'/nasjilt', 'TailanController@nasjilt')->name('nasj
 Route::post('/searchnasjilt','TailanController@searchnasjilt');
 Route::match(['get', 'post'],'/guilt', 'TailanController@guilt')->name('guilt');
 Route::match(['get', 'post'],'/zasplan', 'ZasplanController@index')->name('zasplan');
-Route::match(['get', 'post'],'/zasunplan', 'ZasunplanController@index')->name('zasunplan');
+Route::match(['get', 'post'],'/zasunplan', 'ZasplanController@index')->name('zasunplan');
 Route::post('/addzasadd','ZasplanController@storeadd');
 Route::post('/addzasbaig','ZasplanController@storebaig');
 Route::post('/addzasmat','ZasplanController@storemat');
@@ -61,7 +61,6 @@ Route::get('/zasplanfill/{id?}',function($id = 0){
     return $dt;
 });
 
-Route::match(['get', 'post'],'/zasunplan', 'ZasunplanController@index')->name('zasunplan');
 Route::get('/destroyzasunplan/{id}/delete', ['as' => 'zasunplan.destroy', 'uses' => 'ZasunplanController@destroy']);
 Route::post('/addzasunplan','ZasunplanController@store');
 Route::post('/addzasdetail','ZasunplanController@storedetail');
@@ -115,7 +114,7 @@ Route::get('/getnumber/{id?}/{id1?}/{id2?}/{id3?}',function($id = 0,$id1=0,$id2=
     return $dt;
 });
 Route::get('/getzut/{id?}/{id1?}',function($id = 0,$id1=0){
-    $dt=DB::table('ZUTGUUR.ZUTGUUR')->where('sericode','=',$id)->where('depocode','=',$id1)->orderby('zutnumber')->get();
+    $dt=DB::table('ZUTGUUR.ZUTGUUR')->where('sericode','=',$id)->orderby('zutnumber')->get();
     return $dt;
 });
 Route::get('/getloc/{id?}',function($id = 0){
@@ -123,11 +122,15 @@ Route::get('/getloc/{id?}',function($id = 0){
     return $dt;
 });
 Route::get('/getaddname/{id?}',function($id = 0){
-    $dt=DB::table('ZUTGUUR.ZASADDBASE')->where('addtype','=',$id)->get();
+    $dt=DB::table('V_ZASADDBASE')->where('addtype','=',$id)->get();
     return $dt;
 });
 Route::get('/getplanadd/{id?}',function($id = 0){
     $dt=DB::table('V_ZASADD')->where('repairid','=',$id)->get();
+    return $dt;
+});
+Route::get('/getplan/{id?}',function($id = 0){
+    $dt=DB::table('V_ZASPLAN')->where('repairid','=',$id)->get();
     return $dt;
 });
 Route::get('/getplanbaig/{id?}',function($id = 0){
