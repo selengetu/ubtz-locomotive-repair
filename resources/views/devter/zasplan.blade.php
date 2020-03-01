@@ -47,11 +47,10 @@
                                             <div id="sear" class="panel-collapse collapse in">
                                                 <div class="panel-body">
                                                     <fieldset class="scheduler-border">
-                                                     <form method="post"     @if($zastype ==1 ) 
+                                                     <form method="post"    
                                                      action="zasplan"
-                        @elseif($zastype ==2 ) 
-                        action="zasunplan"
-                        @endif >
+                        
+                         >
                                         <div class="col-md-12">
                                             <div class="col-md-3">
                                                 <div class="form-group form-md-line-input has-success">
@@ -270,7 +269,11 @@
               <div class="modal-dialog modal-lg" role="document">
                   <div class="modal-content">
                       <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLongTitle">Төлөвлөгөөт засвар бүртгэх</h5>
+                          <h5 class="modal-title" id="exampleModalLongTitle">  @if($zastype ==1 ) 
+                        Төлөвлөгөөт засвар
+                        @elseif($zastype ==2 ) 
+                        Төлөвлөгөөт бус засвар 
+                        @endifбүртгэх</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                           </button>
@@ -293,6 +296,7 @@
                                           <div class="col-md-3">
                                               <div class="form-group">
                                                   <label for="name">Зүтгүүрийн сери</label>
+                                                  <input class="form-control hidden" id="zastype" name="zastype" type="text" value="{{$zastype}}">
                                                   <select class="form-control select2" id="zas_seri" name="zas_seri" required="true">
                                                       <option value="0">Бүгд</option>
                                                       @foreach($locserial as $locserials)
@@ -852,7 +856,7 @@ $('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', fu
             data: $('form#formzasplan').serialize(),
          success: function(result){
             $('.repaid').val(result);
-          alert('Төлөвлөгөөт засвар бүртгэгдлээ');
+          alert('Засвар бүртгэгдлээ');
           $('#modaltabadd').trigger('click');
          },
   error: function (jqXHR, textStatus, errorThrown) {
@@ -934,6 +938,9 @@ $('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', fu
               } );
           </script>
           <script>
+          $('#myModal1').on('hidden.bs.modal', function () {
+ location.reload();
+})
               function getplanbaig(itag){
                         $.get('getplanbaig/'+itag,function(data){
                           $("#tableplanbaig tbody").empty();

@@ -20,11 +20,8 @@ Route::get('/users', 'UsersController@index')->name('users');
 Route::get('/zastuuh', 'ZasController@index')->name('zastuuh');
 Route::post('/searchilchittuuh','ZasController@search');
 
-Route::match(['get', 'post'],'/edangi', 'TailanController@index')->name('edangi');
-Route::match(['get', 'post'],'/ilchitedangi', 'TailanController@ilchitedangi')->name('ilchitedangi');
-Route::match(['get', 'post'],'/nasjilt', 'TailanController@nasjilt')->name('nasjilt');
-Route::post('/searchnasjilt','TailanController@searchnasjilt');
-Route::match(['get', 'post'],'/guilt', 'TailanController@guilt')->name('guilt');
+Route::match(['get', 'post'],'/reportplan', 'TailanController@index')->name('reportplan');
+Route::match(['get', 'post'],'/reportunplan', 'TailanController@index')->name('reportunplan');
 Route::match(['get', 'post'],'/zasplan', 'ZasplanController@index')->name('zasplan');
 Route::match(['get', 'post'],'/zasunplan', 'ZasplanController@index')->name('zasunplan');
 Route::post('/addzasadd','ZasplanController@storeadd');
@@ -60,17 +57,6 @@ Route::get('/zasplanfill/{id?}',function($id = 0){
     $dt=App\Zasplan::where('repairid','=',$id)->get();
     return $dt;
 });
-
-Route::get('/destroyzasunplan/{id}/delete', ['as' => 'zasunplan.destroy', 'uses' => 'ZasunplanController@destroy']);
-Route::post('/addzasunplan','ZasunplanController@store');
-Route::post('/addzasdetail','ZasunplanController@storedetail');
-Route::post('/updatezasdetail','ZasunplanController@updatestoredetail');
-Route::post('/updatezasunplan','ZasunplanController@update');
-Route::get('/zasunplanfill/{id?}',function($id = 0){
-    $dt=DB::table('ZAS_SOLILT')->where('solilt_id','=',$id)->get();
-    return $dt;
-});
-Route::get('/zasdetail/delete/{id}', 'ZasunplanController@destroydetail');
 Route::get('/getzasdetail/{id?}',function($id = 0){
     $dt=DB::table('V_ZAS_SOLILT_DETAIL')->where('solilt_id','=',$id)->get();
     return $dt;
