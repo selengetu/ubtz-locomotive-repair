@@ -27,8 +27,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $niit=DB::select('select t.zastype, count(repairid)  from V_ZASPLAN t
-        group by t.zastype');
+        $niit=DB::select('select t.zastype_name, count(repairid) as niit from V_ZASPLAN t
+        group by t.zastype_name');
             
         $seri=DB::select('select t.seriname, sum(stopsum) as stopclean, count(repairid)  as niit from V_ZASPLAN t
         group by t.seriname');
