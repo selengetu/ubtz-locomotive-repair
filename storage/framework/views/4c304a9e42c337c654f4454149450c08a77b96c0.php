@@ -65,7 +65,7 @@
                                      <h3 class="uppercase">Төлөвлөгөөт засварын тайлан</h3>
                                  </li>
      <li class="nav-item ">
-         <a href="" class="nav-link nav-toggle">
+         <a href="<?php echo e(route('reportplan')); ?>" class="nav-link nav-toggle">
              <i class="icon-settings"></i>
              <span class="title">Засварын түүх</span>
          </a>
@@ -76,7 +76,7 @@
          <h3 class="uppercase">Төлөвлөгөөт бус засварын тайлан</h3>
      </li>
      <li class="nav-item  ">
-         <a href="" class="nav-link nav-toggle">
+         <a href="<?php echo e(route('reportunplan')); ?>" class="nav-link nav-toggle">
              <i class="icon-puzzle"></i>
              <span class="title">Засварын түүх</span>
 
@@ -84,28 +84,28 @@
 
      </li>
      <li class="nav-item  ">
-         <a href="" class="nav-link nav-toggle">
+         <a href="<?php echo e(route('group')); ?>" class="nav-link nav-toggle">
              <i class="icon-bar-chart"></i>
              <span class="title">Группийн судалгаа</span>
 
          </a>
      </li>
      <li class="nav-item  ">
-         <a href="" class="nav-link nav-toggle">
+         <a href="<?php echo e(route('group')); ?>" class="nav-link nav-toggle">
              <i class="icon-bar-chart"></i>
              <span class="title">Салсан тохиолдлын судалгаа</span>
 
          </a>
      </li>
      <li class="nav-item  ">
-         <a href="" class="nav-link nav-toggle">
+         <a href="<?php echo e(route('tsahilgaan')); ?>" class="nav-link nav-toggle">
              <i class="icon-bar-chart"></i>
              <span class="title">ТЦХ гэмтлийн судалгаа</span>
 
          </a>
      </li>
      <li class="nav-item  ">
-         <a href="" class="nav-link nav-toggle">
+         <a href="<?php echo e(route('repseri')); ?>" class="nav-link nav-toggle">
              <i class="icon-bar-chart"></i>
              <span class="title">Илчит тэрэгний серийн судалгаа</span>
 

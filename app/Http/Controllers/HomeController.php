@@ -27,6 +27,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('devter.home');
+        $niit=DB::select('select t.zastype, count(repairid)  from V_ZASPLAN t
+        group by t.zastype');
+            
+        $seri=DB::select('select t.seriname, sum(stopsum) as stopclean, count(repairid)  as niit from V_ZASPLAN t
+        group by t.seriname');
+
+        $tsahilgaan=DB::select('select t.gemtel_name, sum(stopsum) as stopclean, count(repairid)  as niit from V_ZASPLAN t
+        where t.gemtel_type=29 
+        group by t.gemtel_name');
+
+        $group=DB::select('select t.locgroupname, sum(stopsum) as stopclean, count(repairid)  as niit from V_ZASPLAN t
+        where t.locgroup is not null
+        group by t.locgroupname');
+
+        return view('devter.home')->with(['niit'=>$niit,'seri'=>$seri,'tsahilgaan'=>$tsahilgaan,'group'=>$group]);
     }
 }

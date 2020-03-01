@@ -93,5 +93,100 @@ class TailanController extends Controller
                                              'enddate' => $enddate, 'zasplan' => $zasplan,'rep' => $rep,'addbase' => $addbase,
                                              'zasbaig' => $zasbaig,'zastype' => $zastype,'damage' => $damage,'depo' => $depo]);
     }
-   
+    public function group(){
+
+        $query = "";
+        $locserial=LocSerial::orderBy('sericode', 'ASC')->get();
+        $startdate=Input::get('zas_start'); 
+        $enddate= Input::get('zas_end'); 
+
+        if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
+            $query.=" and repindate between TO_DATE( '".$startdate."' , 'yyyy/mm/dd') and TO_DATE( '".$enddate."', 'yyyy/mm/dd')";
+        }
+        else 
+        {
+           
+               $startdate= Carbon::today()->subDays(2)->toDateString();
+               $enddate=  Carbon::today()->toDateString();
+               $query.=" and repindate between TO_DATE( '".$startdate."' , 'yyyy/mm/dd') and TO_DATE( '".$enddate."', 'yyyy/mm/dd')";
+ 
+        }
+    
+        $group=DB::select('select t.gpart_name as locgroupname, sum(stopsum) as stopclean, count(repairid)  as niit from V_ZASPLAN t
+        where t.locgroup is not null '.$query.'
+        group by t.gpart_name');
+        return view('tailan.group')->with(['group'=>$group, 'startdate' =>$startdate,'enddate' => $enddate, 'locserial' => $locserial]);
+    }
+    public function seri(){
+
+        $query = "";
+        $locserial=LocSerial::orderBy('sericode', 'ASC')->get();
+        $startdate=Input::get('zas_start'); 
+        $enddate= Input::get('zas_end'); 
+
+        if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
+            $query.=" and repindate between TO_DATE( '".$startdate."' , 'yyyy/mm/dd') and TO_DATE( '".$enddate."', 'yyyy/mm/dd')";
+        }
+        else 
+        {
+           
+               $startdate= Carbon::today()->subDays(2)->toDateString();
+               $enddate=  Carbon::today()->toDateString();
+               $query.=" and repindate between TO_DATE( '".$startdate."' , 'yyyy/mm/dd') and TO_DATE( '".$enddate."', 'yyyy/mm/dd')";
+ 
+        }
+    
+        $group=DB::select('select t.seriname, sum(stopsum) as stopclean, count(repairid)  as niit from V_ZASPLAN t
+        where t.locgroup is not null   '.$query.'
+        group by t.seriname');
+        return view('tailan.seri')->with(['group'=>$group, 'startdate' =>$startdate,'enddate' => $enddate, 'locserial' => $locserial]);
+    }
+    public function salsan(){
+
+        $query = "";
+        $locserial=LocSerial::orderBy('sericode', 'ASC')->get();
+        $startdate=Input::get('zas_start'); 
+        $enddate= Input::get('zas_end'); 
+
+        if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
+            $query.=" and repindate between TO_DATE( '".$startdate."' , 'yyyy/mm/dd') and TO_DATE( '".$enddate."', 'yyyy/mm/dd')";
+        }
+        else 
+        {
+           
+               $startdate= Carbon::today()->subDays(2)->toDateString();
+               $enddate=  Carbon::today()->toDateString();
+               $query.=" and repindate between TO_DATE( '".$startdate."' , 'yyyy/mm/dd') and TO_DATE( '".$enddate."', 'yyyy/mm/dd')";
+ 
+        }
+    
+        $group=DB::select('select t.locgroupname, sum(stopsum) as stopclean, count(repairid)  as niit from V_ZASPLAN t
+        where t.locgroup is not null '.$query.'
+        group by t.locgroupname');
+        return view('tailan.salsan')->with(['group'=>$group, 'startdate' =>$startdate,'enddate' => $enddate, 'locserial' => $locserial]);
+    }
+    public function tsahilgaan(){
+
+        $query = "";
+        $locserial=LocSerial::orderBy('sericode', 'ASC')->get();
+        $startdate=Input::get('zas_start'); 
+        $enddate= Input::get('zas_end'); 
+
+        if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
+            $query.=" and repindate between TO_DATE( '".$startdate."' , 'yyyy/mm/dd') and TO_DATE( '".$enddate."', 'yyyy/mm/dd')";
+        }
+        else 
+        {
+           
+               $startdate= Carbon::today()->subDays(2)->toDateString();
+               $enddate=  Carbon::today()->toDateString();
+               $query.=" and repindate between TO_DATE( '".$startdate."' , 'yyyy/mm/dd') and TO_DATE( '".$enddate."', 'yyyy/mm/dd')";
+ 
+        }
+    
+        $group=DB::select('select t.gemtel_name as locgroupname, sum(stopsum) as stopclean, count(repairid)  as niit from V_ZASPLAN t
+        where t.gemtel_type=29 '.$query.'
+        group by t.gemtel_name');
+        return view('tailan.tsahilgaan')->with(['group'=>$group, 'startdate' =>$startdate,'enddate' => $enddate, 'locserial' => $locserial]);
+    }
 }

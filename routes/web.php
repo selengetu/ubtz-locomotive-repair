@@ -22,6 +22,10 @@ Route::post('/searchilchittuuh','ZasController@search');
 
 Route::match(['get', 'post'],'/reportplan', 'TailanController@index')->name('reportplan');
 Route::match(['get', 'post'],'/reportunplan', 'TailanController@index')->name('reportunplan');
+Route::match(['get', 'post'],'/group', 'TailanController@group')->name('group');
+Route::match(['get', 'post'],'/repseri', 'TailanController@seri')->name('repseri');
+Route::match(['get', 'post'],'/salsan', 'TailanController@salsan')->name('salsan');
+Route::match(['get', 'post'],'/tsahilgaan', 'TailanController@tsahilgaan')->name('tsahilgaan');
 Route::match(['get', 'post'],'/zasplan', 'ZasplanController@index')->name('zasplan');
 Route::match(['get', 'post'],'/zasunplan', 'ZasplanController@index')->name('zasunplan');
 Route::post('/addzasadd','ZasplanController@storeadd');

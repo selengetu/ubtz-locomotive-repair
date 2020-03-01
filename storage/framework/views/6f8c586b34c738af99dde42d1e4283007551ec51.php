@@ -48,7 +48,12 @@
                                                 <div class="panel-body">
                                                     <fieldset class="scheduler-border">
                                                      <form method="post"    
+                                                     <?php if($zastype ==1 ): ?> 
                                                      action="zasplan"
+                        <?php elseif($zastype ==2 ): ?> 
+                        action="zasunplan"
+                        <?php endif; ?>
+                                                   
                         
                          >
                                         <div class="col-md-12">
@@ -170,8 +175,8 @@
                                         <?php if($zastype ==2 ): ?> 
                                         <td><?php echo e($zasplans->to2depo); ?></td>
                                         <td><?php echo e($zasplans->replastdate); ?></td>
-                                        <td><?php echo e($zasplans->damage); ?></td>
-                                        <td><?php echo e($zasplans->locgroup); ?></td>
+                                        <td><?php echo e($zasplans->gpart_name); ?></td>
+                                        <td><?php echo e($zasplans->locgroupname); ?></td>
                                         <td><?php echo e($zasplans->decision); ?></td>
                                         <?php endif; ?>
                                     </tr>

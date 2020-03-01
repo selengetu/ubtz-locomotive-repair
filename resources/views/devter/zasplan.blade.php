@@ -48,7 +48,12 @@
                                                 <div class="panel-body">
                                                     <fieldset class="scheduler-border">
                                                      <form method="post"    
+                                                     @if($zastype ==1 ) 
                                                      action="zasplan"
+                        @elseif($zastype ==2 ) 
+                        action="zasunplan"
+                        @endif
+                                                   
                         
                          >
                                         <div class="col-md-12">
@@ -170,8 +175,8 @@
                                         @if($zastype ==2 ) 
                                         <td>{{$zasplans->to2depo}}</td>
                                         <td>{{$zasplans->replastdate}}</td>
-                                        <td>{{$zasplans->damage}}</td>
-                                        <td>{{$zasplans->locgroup}}</td>
+                                        <td>{{$zasplans->gpart_name}}</td>
+                                        <td>{{$zasplans->locgroupname}}</td>
                                         <td>{{$zasplans->decision}}</td>
                                         @endif
                                     </tr>
