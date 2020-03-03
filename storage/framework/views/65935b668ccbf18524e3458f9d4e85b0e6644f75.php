@@ -10,18 +10,17 @@
                         <?php echo e(csrf_field()); ?>
 
 
-                        <div class="form-group<?php echo e($errors->has('email') ? ' has-error' : ''); ?>">
-  
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="<?php echo e(old('email')); ?>" required autofocus placeholder="И-мейл">
+                    <div class="col-md-6">
+                        <input id="login" type="text"
+                               class="form-control<?php echo e($errors->has('username') || $errors->has('email') ? ' is-invalid' : ''); ?>"
+                               name="login" value="<?php echo e(old('username') ?: old('email')); ?>" required autofocus>
 
-                                <?php if($errors->has('email')): ?>
-                                    <span class="help-block">
-                                        <strong><?php echo e($errors->first('email')); ?></strong>
-                                    </span>
-                                <?php endif; ?>
-                            </div>
-                        </div>
+                        <?php if($errors->has('username') || $errors->has('email')): ?>
+                            <span class="invalid-feedback">
+                <strong><?php echo e($errors->first('username') ?: $errors->first('email')); ?></strong>
+            </span>
+                        <?php endif; ?>
+                    </div>
 
                         <div class="form-group<?php echo e($errors->has('password') ? ' has-error' : ''); ?>">
                            
@@ -110,7 +109,7 @@
                 z-index: 2;
             }
 
-            .login input[type=email]{
+            .login input[type=text]{
                 width: 250px;
                 height: 30px;
                 background: #fff;
