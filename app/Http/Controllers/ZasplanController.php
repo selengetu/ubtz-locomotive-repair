@@ -50,6 +50,7 @@ class ZasplanController extends Controller
         $part=Part::orderby('part_name')->get();
         $rep=Rep::all();
         $depo=DB::select("select * from set_depo order by depocode");
+        $receiver=DB::select("select * from set_receiver t where t.depocode=".Auth::user()->depo_id." order by receiver_name");
         $addbase=DB::select("select * from zutguur.zasaddbase");
         $zasbaig=DB::select("select * from zutguur.zasbaig");
         $damage=DB::select("select * from V_SET_GEMTEL");
@@ -90,7 +91,7 @@ class ZasplanController extends Controller
          $zasplan=DB::select('select * from V_ZASPLAN where 1=1 '.$query.'');
         return view('devter.zasplan')->with(['unit'=>$unit,'part'=>$part, 'locserial' => $locserial, 'startdate' =>$startdate,
                                              'enddate' => $enddate, 'zasplan' => $zasplan,'rep' => $rep,'addbase' => $addbase,
-                                             'zasbaig' => $zasbaig,'zastype' => $zastype,'damage' => $damage,'depo' => $depo]);
+                                             'zasbaig' => $zasbaig,'zastype' => $zastype,'damage' => $damage,'depo' => $depo,'receiver' => $receiver]);
     }
     public function store()
     {
@@ -101,6 +102,7 @@ class ZasplanController extends Controller
         $zasplan->zasmonth = Carbon::now()->month;
         $zasplan->sericode = Request::input('zas_seri');
         $zasplan->zutnumber = Request::input('zas_zutnumber');
+        $zasplan->sec = Request::input('sec');
         $zasplan->repid = Request::input('repid');
         $zasplan->repindate = Request::input('repindate');
         $zasplan->repoutdate = Request::input('repoutdate');
@@ -109,7 +111,7 @@ class ZasplanController extends Controller
         $zasplan->stopadd = Request::input('stopadd');
         $zasplan->stopclean = Request::input('stoprep');
         $zasplan->runkm = Request::input('zasrun');
-        $zasplan->reciever =Request::input('reciever');
+        $zasplan->receiver =Request::input('receiver');
         if(Request::input('zastype')== 1){
         $zasplan->zastype = 1;
         }

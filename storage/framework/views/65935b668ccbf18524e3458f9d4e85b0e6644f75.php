@@ -13,7 +13,7 @@
                     <div class="col-md-6">
                         <input id="login" type="text"
                                class="form-control<?php echo e($errors->has('username') || $errors->has('email') ? ' is-invalid' : ''); ?>"
-                               name="login" value="<?php echo e(old('username') ?: old('email')); ?>" required autofocus>
+                               name="login" required placeholder="Нэвтрэх нэр" value="<?php echo e(old('username') ?: old('email')); ?>" required autofocus>
 
                         <?php if($errors->has('username') || $errors->has('email')): ?>
                             <span class="invalid-feedback">

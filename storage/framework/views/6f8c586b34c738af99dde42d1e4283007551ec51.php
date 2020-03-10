@@ -171,7 +171,7 @@
                                         <td><?php echo e($zasplans->stopadd); ?></td>
                                         <td><?php echo e($zasplans->stopclean); ?></td>
                                         <td><?php echo e($zasplans->runkm); ?></td>
-                                        <td><?php echo e($zasplans->reciever); ?></td>
+                                        <td><?php echo e($zasplans->receiver_name); ?></td>
                                         <?php if($zastype ==2 ): ?> 
                                         <td><?php echo e($zasplans->to2depo); ?></td>
                                         <td><?php echo e($zasplans->replastdate); ?></td>
@@ -286,9 +286,9 @@
                       <div class="modal-body">
                           <ul class="nav nav-tabs">
                               <li class="active"><a data-toggle="tab" href="#home">Үндсэн</a></li>
-                              <li ><a data-toggle="tab" id="modaltabadd" href="#menu1">Нэмэлт ажил</a></li>
-                              <li  ><a data-toggle="tab" id="modaltabbaig" href="#menu2">Байгууллага</a></li>
-                              <li ><a data-toggle="tab" id="modaltabmat" href="#menu3">Материал</a></li>
+                              <li class="disabled disabledTab"><a data-toggle="tab" id="modaltabadd" href="#menu1">Нэмэлт ажил</a></li>
+                              <li   class="disabled disabledTab"><a data-toggle="tab" id="modaltabbaig" href="#menu2">Байгууллага</a></li>
+                              <li  class="disabled disabledTab"><a data-toggle="tab" id="modaltabmat" href="#menu3">Материал</a></li>
                           </ul>
 
 
@@ -324,6 +324,16 @@
                                           </div>
                                           <div class="col-md-3">
                                               <div class="form-group">
+                                                  <label for="name">Секц</label>
+                                                  <select class="form-control select2" id="sec" name="sec" >
+                                                          <option value= "1" tag="1"> А </option>
+                                                          <option value= "2" tag="2"> Б </option>
+                                                  </select>
+                                              </div>
+
+                                          </div>
+                                          <div class="col-md-3">
+                                              <div class="form-group">
                                                   <label for="name">Урсгал засварын томьёолол</label>
                                                   <select class="form-control select2" id="repid" name="repid" >
                                                       <?php $__currentLoopData = $rep; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $reps): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -333,6 +343,7 @@
                                               </div>
 
                                           </div>
+
                                           <div class="col-md-3">
                                                 <div class="form-group">
                                                     <div class="input-icon">
@@ -394,12 +405,17 @@
                                           <div class="col-md-3">
                                               <div class="form-group">
                                                   <label for="name">Хүлээн авагч</label>
-                                                  <input type="text" class="form-control inputtext" id="reciever" name="reciever">
+                                                  <select class="form-control select2" id="receiver" name="receiver">
+                                                      <?php $__currentLoopData = $receiver; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $receivers): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                          <option value= "<?php echo e($receivers->receiver_id); ?>"><?php echo e($receivers->receiver_name); ?></option>
+                                                      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                  </select>
                                               </div>
 
                                           </div>
                                         
                                       </div>
+                                      <?php if($zastype ==2 ): ?>
                                       <div class="col-md-12">
                                       <div class="col-md-3">
                                               <div class="form-group">
@@ -436,10 +452,7 @@
                                               <div class="form-group">
                                                   <label for="name">Гэмтэл</label>
                                                   <select class="form-control select2" id="damage" name="damage" >
-                                  
-                                                                          <?php $__currentLoopData = $damage; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $damages): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
-                                                                               <option value= "<?php echo e($damages->gemtel_id); ?>"><?php echo e($damages->part_name); ?> - <?php echo e($damages->gemtel_name); ?></option>
-                                                                           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
                                                   </select>
                                               </div>
 
@@ -451,14 +464,19 @@
                                               </div>
 
                                           </div>
-                                          <div class="col-md-3">
-                                              <div class="form-group">
-                                             
-                                                  <button type="submit" class="btn btn-primary" form="formzasplan" value="Submit">Хадгалах</button>
-                                                
+
+                                      </div>
+                                      <?php endif; ?>
+                                          <div class="col-md-12">
+                                              <div class="col-md-3">
+                                                  <div class="form-group">
+
+                                                      <button type="submit" class="btn btn-primary" form="formzasplan" value="Submit">Хадгалах</button>
+
+                                                  </div>
                                               </div>
                                           </div>
-                                      </div>
+
                                   </form>
 
                               </div>
@@ -715,6 +733,7 @@ $('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', fu
           <script type="text/javascript">
               $(document).ready(function() {
                   getaddname(1);
+                  getgemtel(101);
                   $('#example').DataTable( {
 
                       "language": {
@@ -837,7 +856,10 @@ $('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', fu
                           });
                       });
                   });
-
+                  $('#locgroup').change(function(){
+                      var itag=$(this).val();
+                        getgemtel(itag);
+                  });
               
                   $('#addtype').change(function(){
                       var itag=$(this).val();
@@ -847,15 +869,39 @@ $('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', fu
                   $('#repid').change(function(){
                       var itag=$(this).val();
                       var itag1=$('#zas_seri').val();
+                      var itag2=$('#zas_zutnumber').val();
                       $.get('getzashour/'+itag1+'/'+itag,function(data){
-                      ;
+
                           $.each(data,function(i,qwe){
                             $('#stoprep').val(qwe.stoptsag);
                           });
                       });
+                      $.get('getzasguilt/'+itag1+'/'+itag2+'/'+itag,function(data){
+                                console.log(data);
+                               if(data.length>0) {
+                                   $.each(data,function(i,qwe){
+                                           $('#zasrun').val(qwe.runkm);
+                                   });
+                               }
+                               else{
+                                   $('#zasrun').val(0);
+                               }
+                      });
                   });
-          
-              
+
+                  function getgemtel($id){
+                      $.get('getgemtel/'+$id,function(data){
+                          $('#damage').empty();
+
+                          $.each(data,function(i,qwe){
+                              $('#damage').append($('<option>', {
+                                  value: qwe.gemtel_id,
+                                  id: qwe.gemtel_id,
+                                  text: qwe.gemtel_name,
+                              })).trigger('change');
+                          });
+                      });
+                  }
         $('#formzasplan').submit(function(event){
         event.preventDefault();
 

@@ -103,6 +103,10 @@ Route::get('/getnumber/{id?}/{id1?}/{id2?}/{id3?}',function($id = 0,$id1=0,$id2=
     $dt=DB::table('V_ZASZUT_NUM')->where('zas_seri','=',$id)->where('zas_zutnumber','=',$id1)->where('part_det_id','=',$id2)->where('part_seri_id','=',$id3)->where('zas_isavailable','=',1)->get();
     return $dt;
 });
+Route::get('/getgemtel/{id?}',function($id = 0){
+    $dt=DB::table('SET_GEMTEL')->where('gemtel_type','=',$id)->get();
+    return $dt;
+});
 Route::get('/getzut/{id?}/{id1?}',function($id = 0,$id1=0){
     $dt=DB::table('ZUTGUUR.ZUTGUUR')->where('sericode','=',$id)->orderby('zutnumber')->get();
     return $dt;
@@ -131,7 +135,10 @@ Route::get('/getplanmat/{id?}',function($id = 0){
     $dt=DB::table('V_ZASMAT')->where('repairid','=',$id)->get();
     return $dt;
 });
-
+Route::get('/getzasguilt/{id?}/{id1?}/{id2?}',function($id = 0,$id1=0,$id2=0){
+    $dt=DB::table('ZUTGUUR.ZASRUN')->where('repid','=',$id2)->where('zutnumber','=',$id1)->where('sericode','=',$id)->get();
+    return $dt;
+});
 Route::get('/filter_loc_seri/{date}', 'EdangiController@filter_loc_seri');
 Route::get('/filter_loc_number/{date}', 'EdangiController@filter_loc_number');
 Route::get('/filter_loc_part/{date}', 'EdangiController@filter_loc_part');
