@@ -139,7 +139,7 @@
                                         <td><?php echo e($zasplans->stopadd); ?></td>
                                         <td><?php echo e($zasplans->stopclean); ?></td>
                                         <td><?php echo e($zasplans->runkm); ?></td>
-                                        <td><?php echo e($zasplans->reciever); ?></td>
+                                        <td><?php echo e($zasplans->receiver); ?></td>
                                         <?php if($zastype ==2 ): ?> 
                                         <td><?php echo e($zasplans->to2depo); ?></td>
                                         <td><?php echo e($zasplans->replastdate); ?></td>

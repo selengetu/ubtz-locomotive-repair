@@ -140,7 +140,7 @@
                                         <td>{{$zasplans->stopadd}}</td>
                                         <td>{{$zasplans->stopclean}}</td>
                                         <td>{{$zasplans->runkm}}</td>
-                                        <td>{{$zasplans->reciever}}</td>
+                                        <td>{{$zasplans->receiver}}</td>
                                         @if($zastype ==2 ) 
                                         <td>{{$zasplans->to2depo}}</td>
                                         <td>{{$zasplans->replastdate}}</td>
