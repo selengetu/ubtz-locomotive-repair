@@ -3,28 +3,71 @@
 <div class="page-content-wrapper">
                 <!-- BEGIN CONTENT BODY -->
                 <div class="page-content">
-                <div class="row">
-                <div class="col-md-5">
-                        <canvas id="myChart" width="400" height="250"></canvas>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card" style="border-left: .25rem solid green ">
+                                <div class="container">
+                                    <h4 style="color: green"><b>Төлөвлөгөөт засвар</b></h4>
+                                    <h2>17</h2>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                        <canvas id="myChart2" width="400" height="250"></canvas>
+                        <div class="col-md-3">
+                            <div class="card" style="border-left: .25rem solid #2A00FF ">
+                                <div class="container">
+                                    <h4 style="color: #2A00FF"><b>Төлөвлөгөөт бус засвар</b></h4>
+                                    <h2>32</h2>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-5">
-                        <canvas id="myChart3" width="400" height="250"></canvas>
+                        <div class="col-md-3">
+                            <div class="card" style="border-left: .25rem solid #8F0000 ">
+                                <div class="container">
+                                    <h4 style="color: #8F0000"><b>Гүйцэтгэл</b></h4>
+                                    <h2>14,5%</h2>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                        <canvas id="myChart1" width="400" height="250"></canvas>
-                        </div>
-                    <div class="col-md-5">
-                        <div class="card">
-                            <img src="img_avatar.png" alt="Avatar" style="width:100%">
-                            <div class="container">
-                                <h4><b>John Doe</b></h4>
-                                <p>Architect & Engineer</p>
+                        <div class="col-md-3">
+                            <div class="card" style="border-left: .25rem solid #3e6e99 ">
+                                <div class="container">
+                                    <h4 style="color: #3e6e99"><b>Нийт засварын цаг</b></h4>
+                                    <h2>1040,0</h2>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel">
+                            <div class="panel-heading" style="background-color: #5432ff; color: #fff">
+
+                            </div>
+                            <div id="sear" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <fieldset class="scheduler-border">
+                                        <form method="post" action="group">
+                                            <div class="col-md-12">
+
+                                                <div class="col-md-4">
+                                                    <canvas id="myChart" width="666" height="416" style="display: block; height: 463px; width: 741px;" class="chartjs-render-monitor"></canvas>
+                                                    <canvas id="myChart2" width="666" height="416" style="display: block; height: 463px; width: 741px;" class="chartjs-render-monitor"></canvas>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <canvas id="myChart3" width="400" height="250"></canvas>
+                                                </div>
+                                            </div>
+
+
+                                        </form>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
                 </div>
 </div>
@@ -78,9 +121,9 @@
             var seriname = <?php echo json_encode($seriname); ?>;
             var sericount = <?php echo json_encode($sericount); ?>;
             var ctx = document.getElementById('myChart').getContext('2d');
-            var ctx1 = document.getElementById('myChart1').getContext('2d');
             var ctx2 = document.getElementById('myChart2').getContext('2d');
             var ctx3 = document.getElementById('myChart3').getContext('2d');
+
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -89,20 +132,27 @@ var myChart = new Chart(ctx, {
             label: 'Засварын төрөл',
             data: zascount,
             backgroundColor: [
-
-                 "#ea9e70", "#a48a9e", "#c6e1e8", "#648177" ,"#0d5ac1" ,
-                "#f205e6" ,"#1c0365" ,"#14a9ad" ,"#4ca2f9" ,"#a4e43f" ,"#d298e2" ,"#6119d0",
-                "#d2737d" ,"#c0a43c" ,"#f2510e" ,"#651be6" ,"#79806e" ,"#61da5e" ,"#cd2f00" ,
-                "#9348af" ,"#01ac53" ,"#c5a4fb" ,"#996635","#b11573" ,"#4bb473" ,"#75d89e" ,
-                "#2f3f94" ,"#2f7b99" ,"#da967d" ,"#34891f" ,"#b0d87b" ,"#ca4751" ,"#7e50a8" ,
-                "#c4d647" ,"#e0eeb8" ,"#11dec1" ,"#289812" ,"#566ca0" ,"#ffdbe1" ,"#2f1179" ,
-                "#935b6d" ,"#916988" ,"#513d98" ,"#aead3a", "#9e6d71", "#4b5bdc", "#0cd36d",
-                "#250662", "#cb5bea", "#228916", "#ac3e1b", "#df514a", "#539397", "#880977",
-                "#f697c1", "#ba96ce", "#679c9d", "#c6c42c", "#5d2c52", "#48b41b", "#e1cf3b",
-                "#5be4f0", "#57c4d8", "#a4d17a", "#225b8", "#be608b", "#96b00c", "#088baf",
-                "#f158bf", "#e145ba", "#ee91e3", "#05d371", "#5426e0", "#4834d0", "#802234",
-                "#6749e8", "#0971f0", "#8fb413", "#b2b4f0", "#c3c89d", "#c9a941", "#41d158",
-                "#fb21a3", "#51aed9", "#5bb32d", "#807fb", "#21538e", "#89d534", "#d36647",
+                 "#48b41b",
+                "#e1cf3b",
+                "#5be4f0",
+                "#57c4d8",
+                "#a4d17a",
+                "#225b8",
+                "#be608b",
+                "#96b00c",
+                "#088baf",
+                "#f158bf",
+                "#e145ba",
+                "#ee91e3",
+                "#05d371", "#5426e0", "#4834d0", "#802234",
+                "#6749e8",
+                "#0971f0",
+                "#8fb413",
+                "#b2b4f0",
+                "#c3c89d",
+                "#c9a941", "#41d158",
+                "#fb21a3",
+                "#51aed9", "#5bb32d", "#807fb", "#21538e", "#89d534", "#d36647",
                 "#7fb411", "#0023b8", "#3b8c2a", "#986b53", "#f50422", "#983f7a", "#ea24a3",
                 "#79352c", "#521250", "#c79ed2", "#d6dd92", "#e33e52", "#b2be57", "#fa06ec"
             ],
@@ -116,130 +166,84 @@ var myChart = new Chart(ctx, {
                     beginAtZero: true
                 }
             }]
-        }
-   
+        },  legend: {
+            display: false
+        },
+        title: {
+            display: true,
+            text: 'Засварын төрөл'
+        },
     }
     
 });
-var myChart1 = new Chart(ctx1, {
-    type: 'bar',
-    data: {
-        labels: groupname,
-        datasets: [{
-            label: 'Группээр нь',
-            data: grouphour,
-            backgroundColor: [
-                "#63b598", "#ce7d78", "#ea9e70", "#a48a9e", "#c6e1e8", "#648177" ,"#0d5ac1" ,
-                "#f205e6" ,"#1c0365" ,"#14a9ad" ,"#4ca2f9" ,"#a4e43f" ,"#d298e2" ,"#6119d0",
-                "#d2737d" ,"#c0a43c" ,"#f2510e" ,"#651be6" ,"#79806e" ,"#61da5e" ,"#cd2f00" ,
-                "#9348af" ,"#01ac53" ,"#c5a4fb" ,"#996635","#b11573" ,"#4bb473" ,"#75d89e" ,
-                "#2f3f94" ,"#2f7b99" ,"#da967d" ,"#34891f" ,"#b0d87b" ,"#ca4751" ,"#7e50a8" ,
-                "#c4d647" ,"#e0eeb8" ,"#11dec1" ,"#289812" ,"#566ca0" ,"#ffdbe1" ,"#2f1179" ,
-                "#935b6d" ,"#916988" ,"#513d98" ,"#aead3a", "#9e6d71", "#4b5bdc", "#0cd36d",
-                "#250662", "#cb5bea", "#228916", "#ac3e1b", "#df514a", "#539397", "#880977",
-                "#f697c1", "#ba96ce", "#679c9d", "#c6c42c", "#5d2c52", "#48b41b", "#e1cf3b",
-                "#5be4f0", "#57c4d8", "#a4d17a", "#225b8", "#be608b", "#96b00c", "#088baf",
-                "#f158bf", "#e145ba", "#ee91e3", "#05d371", "#5426e0", "#4834d0", "#802234",
-                "#6749e8", "#0971f0", "#8fb413", "#b2b4f0", "#c3c89d", "#c9a941", "#41d158",
-                "#fb21a3", "#51aed9", "#5bb32d", "#807fb", "#21538e", "#89d534", "#d36647",
-                "#7fb411", "#0023b8", "#3b8c2a", "#986b53", "#f50422", "#983f7a", "#ea24a3",
-                "#79352c", "#521250", "#c79ed2", "#d6dd92", "#e33e52", "#b2be57", "#fa06ec"
-            ],
+            var myChart2 = new Chart(ctx2, {
+                type: 'pie',
+                data: {
+                    labels: groupname,
+                    datasets: [{
+                        label: 'Засварын төрөл',
+                        data: grouphour,
+                        backgroundColor: [
 
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-   
-    }
-    
-});
-var myChart2 = new Chart(ctx2, {
-    type: 'bar',
-    data: {
-        labels: seriname,
-        datasets: [{
-            label: 'Илчит тэрэгний серийн төрлөөр',
-            data: sericount,
-            backgroundColor: [
-                "#63b598", "#ce7d78", "#ea9e70", "#a48a9e", "#c6e1e8", "#648177" ,"#0d5ac1" ,
-                "#f205e6" ,"#1c0365" ,"#14a9ad" ,"#4ca2f9" ,"#a4e43f" ,"#d298e2" ,"#6119d0",
-                "#d2737d" ,"#c0a43c" ,"#f2510e" ,"#651be6" ,"#79806e" ,"#61da5e" ,"#cd2f00" ,
-                "#9348af" ,"#01ac53" ,"#c5a4fb" ,"#996635","#b11573" ,"#4bb473" ,"#75d89e" ,
-                "#2f3f94" ,"#2f7b99" ,"#da967d" ,"#34891f" ,"#b0d87b" ,"#ca4751" ,"#7e50a8" ,
-                "#c4d647" ,"#e0eeb8" ,"#11dec1" ,"#289812" ,"#566ca0" ,"#ffdbe1" ,"#2f1179" ,
-                "#935b6d" ,"#916988" ,"#513d98" ,"#aead3a", "#9e6d71", "#4b5bdc", "#0cd36d",
-                "#250662", "#cb5bea", "#228916", "#ac3e1b", "#df514a", "#539397", "#880977",
-                "#f697c1", "#ba96ce", "#679c9d", "#c6c42c", "#5d2c52", "#48b41b", "#e1cf3b",
-                "#5be4f0", "#57c4d8", "#a4d17a", "#225b8", "#be608b", "#96b00c", "#088baf",
-                "#f158bf", "#e145ba", "#ee91e3", "#05d371", "#5426e0", "#4834d0", "#802234",
-                "#6749e8", "#0971f0", "#8fb413", "#b2b4f0", "#c3c89d", "#c9a941", "#41d158",
-                "#fb21a3", "#51aed9", "#5bb32d", "#807fb", "#21538e", "#89d534", "#d36647",
-                "#7fb411", "#0023b8", "#3b8c2a", "#986b53", "#f50422", "#983f7a", "#ea24a3",
-                "#79352c", "#521250", "#c79ed2", "#d6dd92", "#e33e52", "#b2be57", "#fa06ec"
-            ]
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-   
-    }
-    
-});
-var myChart3= new Chart(ctx3, {
-    type: 'bar',
-    data: {
-        labels: tsahilgaanname,
-        datasets: [{
-            label: 'ТЦХ-ийн гэмтлийн судалгаа',
-            data: tsahilgaancount,
-            backgroundColor: [
+                            "#96b00c",
+                            "#088baf",
+                            "#05d371",
+                            "#5426e0",
+                            "#4834d0",
+                            "#802234",
+                            "#6749e8",
+                            "#0971f0",
+                            "#8fb413",
+                            "#b2b4f0",
+                        ],
 
-                "#63b598", "#ce7d78", "#ea9e70", "#a48a9e", "#c6e1e8", "#648177" ,"#0d5ac1" ,
-                "#f205e6" ,"#1c0365" ,"#14a9ad" ,"#4ca2f9" ,"#a4e43f" ,"#d298e2" ,"#6119d0",
-                "#d2737d" ,"#c0a43c" ,"#f2510e" ,"#651be6" ,"#79806e" ,"#61da5e" ,"#cd2f00" ,
-                "#9348af" ,"#01ac53" ,"#c5a4fb" ,"#996635","#b11573" ,"#4bb473" ,"#75d89e" ,
-                "#2f3f94" ,"#2f7b99" ,"#da967d" ,"#34891f" ,"#b0d87b" ,"#ca4751" ,"#7e50a8" ,
-                "#c4d647" ,"#e0eeb8" ,"#11dec1" ,"#289812" ,"#566ca0" ,"#ffdbe1" ,"#2f1179" ,
-                "#935b6d" ,"#916988" ,"#513d98" ,"#aead3a", "#9e6d71", "#4b5bdc", "#0cd36d",
-                "#250662", "#cb5bea", "#228916", "#ac3e1b", "#df514a", "#539397", "#880977",
-                "#f697c1", "#ba96ce", "#679c9d", "#c6c42c", "#5d2c52", "#48b41b", "#e1cf3b",
-                "#5be4f0", "#57c4d8", "#a4d17a", "#225b8", "#be608b", "#96b00c", "#088baf",
-                "#f158bf", "#e145ba", "#ee91e3", "#05d371", "#5426e0", "#4834d0", "#802234",
-                "#6749e8", "#0971f0", "#8fb413", "#b2b4f0", "#c3c89d", "#c9a941", "#41d158",
-                "#fb21a3", "#51aed9", "#5bb32d", "#807fb", "#21538e", "#89d534", "#d36647",
-                "#7fb411", "#0023b8", "#3b8c2a", "#986b53", "#f50422", "#983f7a", "#ea24a3",
-                "#79352c", "#521250", "#c79ed2", "#d6dd92", "#e33e52", "#b2be57", "#fa06ec"
-            ],
-
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    },  legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Гэмтлийн групп'
+                    },
                 }
-            }]
-        }
-   
-    }
-    
-});
-   
-        })
+
+            });
+            var myChart3 = new Chart(ctx3, {
+                type: 'line',
+                data: {
+                    labels: seriname,
+                    datasets: [{
+                        label: 'Засварын төрөл',
+                        data: sericount,
+                        backgroundColor:'transparent',
+                        borderColor: "#679c9d"
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    },  legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Засварын зогсолт'
+                    },
+                }
+            });
+            });
     </script>
 <style>
     .card {

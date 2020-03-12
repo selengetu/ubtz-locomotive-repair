@@ -60,7 +60,12 @@
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            <div class="col-md-2">
+                                                <div class="form-group form-md-line-input has-success">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                                    <button class="btn btn-info"  style="background-color: #2EB9A8; border-color: #2EB9A8"><i class="fa fa-search"></i> Хайх</button>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-md-12">
                                             <table class="table table-striped table-bordered table-hover"  id="testTable">
@@ -218,8 +223,6 @@ $("#zas_end").datepicker( {
 
             var mode = 'index'
             var intersect = true
-
-
             var groupname = <?php echo json_encode($groupname); ?>;
             var grouphour = <?php echo json_encode($grouphour); ?>;
             var groupcount = <?php echo json_encode($groupcount); ?>;
@@ -230,7 +233,7 @@ var myChart = new Chart(ctx, {
     data: {
         labels: groupname,
         datasets: [{
-
+            data: grouphour,
             backgroundColor: [
 
                 "#ea9e70", "#a48a9e", "#c6e1e8", "#648177" ,"#0d5ac1" ,
@@ -266,37 +269,24 @@ var myChart = new Chart(ctx, {
                 "#7fb411", "#0023b8", "#3b8c2a", "#986b53", "#f50422", "#983f7a", "#ea24a3",
                 "#79352c", "#521250", "#c79ed2", "#d6dd92", "#e33e52", "#b2be57", "#fa06ec"
             ],
-            data: groupcount,
+            borderWidth: 1
         }]
     },
     options: {
-        title: {
-            display: true,
-            text: 'Засварт орсон тоо'
-        },
-        maintainAspectRatio: true,
-
-        legend: {
-            display: false
-        },
-
         scales: {
-            xAxes: [{
-                display: true,
-                ticks: {
-                    beginAtZero: true   // minimum value will be 0.
-                }
-            }],
             yAxes: [{
-                display: true,
                 ticks: {
-                    beginAtZero: true,
-                    steps: 10,
-
+                    beginAtZero: true
                 }
             }]
         },
-
+        title: {
+            display: true,
+            text: 'Засварын зогсолт'
+        },
+        legend: {
+            display: false
+        },
     }
 
 });
@@ -339,11 +329,10 @@ var myChart = new Chart(ctx, {
                             "#7fb411", "#0023b8", "#3b8c2a", "#986b53", "#f50422", "#983f7a", "#ea24a3",
                             "#79352c", "#521250", "#c79ed2", "#d6dd92", "#e33e52", "#b2be57", "#fa06ec"
                         ],
-                        data: grouphour
+                        data: groupcount
                     }
                     ]
                 },
-
                 options: {
                     title: {
                         display: true,
@@ -363,11 +352,8 @@ var myChart = new Chart(ctx, {
                             }
                         }],
                         yAxes: [{
-                            display: true,
                             ticks: {
-                                beginAtZero: true,
-                                steps: 10,
-
+                                beginAtZero: true
                             }
                         }]
                     },

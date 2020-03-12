@@ -77,7 +77,16 @@
 
                                               </div>
                                           </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="name">Зүтгүүрийн дугаар</label>
+                                                    <select class="form-control select2" id="zas_zutnumber" name="zas_zutnumber" >
 
+
+                                                    </select>
+                                                </div>
+
+                                            </div>
                                                          <div class="col-md-2">
                                                             <div class="form-group form-md-line-input has-success">
                                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -131,8 +140,7 @@
                                 @foreach($zasplan as $zasplans)
                                     <tr class="zasplan" data-id="{{$zasplans->repairid}}" tag="{{$zasplans->repairid}}">
                                         <td>{{$no}}</td>
-                                        <td>{{$zasplans->seriname}} -{{$zasplans->zutnumber}}</td> 
-                                       
+                                        <td>{{$zasplans->seriname}} -{{$zasplans->zutnumber}}</td>
                                         <td>{{$zasplans->repshname}}</td>
                                         <td>{{$zasplans->repindate}}</td>
                                         <td>{{$zasplans->repoutdate}}</td>

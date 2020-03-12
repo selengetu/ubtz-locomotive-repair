@@ -145,10 +145,18 @@ class TailanController extends Controller
     public function tsahilgaan(){
 
         $query = "";
+        $part=Part::orderby('part_name')->get();
         $locserial=LocSerial::orderBy('sericode', 'ASC')->get();
         $startdate=Input::get('zas_start'); 
-        $enddate= Input::get('zas_end'); 
-
+        $enddate= Input::get('zas_end');
+        $gemtel_type=Input::get('gemtel_type');
+        if($gemtel_type ==NULL){
+            $gemtel_type=30;
+        }
+        $gr= DB::select('select lower(t.part_name) as part_name from SET_PART t
+        where t.part_id='.$gemtel_type.'
+        group by t.part_name');
+        $gru=$gr[0]->part_name;
         if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
             $query.=" and repindate between TO_DATE( '".$startdate."' , 'yyyy/mm/dd') and TO_DATE( '".$enddate."', 'yyyy/mm/dd')";
         }
@@ -160,10 +168,16 @@ class TailanController extends Controller
                $query.=" and repindate between TO_DATE( '".$startdate."' , 'yyyy/mm/dd') and TO_DATE( '".$enddate."', 'yyyy/mm/dd')";
  
         }
-    
+        if ($gemtel_type!=NULL && $gemtel_type !=0) {
+            $query.=" and gemtel_type = '".$gemtel_type."'";
+        }
+        else
+        {
+            $query.=" ";
+        }
         $group=DB::select('select t.gemtel_name as locgroupname, sum(stopsum) as stopclean, count(repairid)  as niit from V_ZASPLAN t
-        where t.gemtel_type=29 '.$query.'
+        where 1=1 '.$query.'
         group by t.gemtel_name');
-        return view('tailan.tsahilgaan')->with(['group'=>$group, 'startdate' =>$startdate,'enddate' => $enddate, 'locserial' => $locserial]);
+        return view('tailan.tsahilgaan')->with(['gru'=>$gru,'gemtel_type'=>$gemtel_type,'part'=>$part,'group'=>$group, 'startdate' =>$startdate,'enddate' => $enddate, 'locserial' => $locserial]);
     }
 }

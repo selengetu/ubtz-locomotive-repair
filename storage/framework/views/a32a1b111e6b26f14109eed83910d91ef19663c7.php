@@ -11,7 +11,7 @@
                         </i>
                         <span class="caption-subject font-green sbold uppercase">
                     
-                        Төлөвлөгөөт бус засварын татах цахилгаан хөдөлгүүрийн гэмтлийн судалгаа
+                        Төлөвлөгөөт бус засварын гэмтлийн судалгаа
                       
                             тайлан
                         </span>
@@ -22,8 +22,7 @@
                 <div class="panel">
                                                    <div class="panel-heading" style="background-color: #81b5d5; color: #fff">
                                                 <h4 class="panel-title">
-                                                    <a style="font-weight: bold;"> <i class="fa fa-search"> Хайлт </i> 
-                                                   </a>
+
                                                 </h4>
                                             </div>
                                             <div id="sear" class="panel-collapse collapse in">
@@ -62,7 +61,18 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                           
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="name">Групп</label>
+                                                    <select class="form-control select2" id="gemtel_type" name="gemtel_type" value="<?php echo e($gemtel_type); ?>" >
+
+                                                        <?php $__currentLoopData = $part; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $parts): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <option value= "<?php echo e($parts->part_id); ?>"><?php echo e($parts->part_name); ?></option>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    </select>
+                                                </div>
+
+                                            </div>
 
                                                          <div class="col-md-2">
                                                             <div class="form-group form-md-line-input has-success">
@@ -70,6 +80,44 @@
                                        <button class="btn btn-info"  style="background-color: #2EB9A8; border-color: #2EB9A8"><i class="fa fa-search"></i> Хайх</button>
                                      </div>
                                     </div>
+                                            <div class="col-md-12">
+                                                <p><center><b> <?php echo e($startdate); ?> -аас <?php echo e($enddate); ?> -ны төлөвлөгөөт бус засварын <?php echo e($gru); ?>-н гэмтлийн судалгаа
+                                                    </b></center> </p>
+                                                <table class="table table-striped table-bordered table-hover"  id="testTable">
+                                                    <thead style="background-color: #81b5d5; color: #fff">
+                                                    <tr>
+
+                                                        <th> # </th>
+                                                        <th>Групп</th>
+                                                        <th>Засварын зогсолт</th>
+                                                        <th>Засварт орсон тоо</th>
+
+
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    <?php $no = 1; ?>
+                                                    <?php $__currentLoopData = $group; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $groups): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <tr>
+                                                            <td><?php echo e($no); ?></td>
+                                                            <td><?php echo e($groups->locgroupname); ?></td>
+
+                                                            <td><?php echo e($groups->stopclean); ?></td>
+                                                            <td><?php echo e($groups->niit); ?></td>
+
+                                                        </tr>
+                                                        <?php $no++; ?>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <canvas id="myChart" width="400" height="250"></canvas>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <canvas id="myChart1" width="400" height="250"></canvas>
+                                            </div>
                                         </div>
                                         
                                           </form>
@@ -77,47 +125,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <p><center><b> <?php echo e($startdate); ?> -аас <?php echo e($enddate); ?> -ны төлөвлөгөөт бус засварын татах цахилгаан хөдөлгүүрийн гэмтлийн судалгаа
-                       </b></center> </p>
 
-             
-                        <div class="col-md-6">
-                        <canvas id="myChart" width="400" height="250"></canvas>
-                        </div>
-                        <div class="col-md-6">
-                        <canvas id="myChart1" width="400" height="250"></canvas>
-                        </div>
-                      
-               
-                          
-                            <table class="table table-striped table-bordered table-hover"  id="testTable">
-                                <thead style="background-color: #81b5d5; color: #fff">
-                                <tr>
 
-                                    <th> # </th>
-                                    <th>Групп</th>
-                                    <th>Засварын зогсолт</th>
-                                    <th>Засварт орсон тоо</th>
-                                 
-                                
-                                </tr>
-                                </thead>
-                                <tbody>
 
-                                <?php $no = 1; ?>
-                                <?php $__currentLoopData = $group; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $groups): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <tr>
-                                        <td><?php echo e($no); ?></td>
-                                        <td><?php echo e($groups->locgroupname); ?></td> 
-                                       
-                                        <td><?php echo e($groups->stopclean); ?></td>
-                                        <td><?php echo e($groups->niit); ?></td>
-                                       
-                                    </tr>
-                                    <?php $no++; ?>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </tbody>
-                            </table>
+
+
+
+
                
                         </div>
                         
@@ -243,25 +257,48 @@ var myChart = new Chart(ctx, {
             label: 'Засварт орсон хугацаа',
             data: grouphour,
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                "#ea9e70", "#a48a9e", "#c6e1e8", "#648177" ,"#0d5ac1" ,
+                "#f205e6" ,"#1c0365" ,"#14a9ad" ,"#4ca2f9" ,"#a4e43f" ,"#d298e2" ,"#6119d0",
+                "#d2737d" ,"#c0a43c" ,"#f2510e" ,"#651be6" ,"#79806e" ,"#61da5e" ,"#cd2f00" ,
+                "#9348af" ,"#01ac53" ,"#c5a4fb" ,"#996635","#b11573" ,"#4bb473" ,"#75d89e" ,
+                "#2f3f94" ,"#2f7b99" ,"#da967d" ,"#34891f" ,"#b0d87b" ,"#ca4751" ,"#7e50a8" ,
+                "#c4d647" ,"#e0eeb8" ,"#11dec1" ,"#289812" ,"#566ca0" ,"#ffdbe1" ,"#2f1179" ,
+                "#935b6d" ,"#916988" ,"#513d98" ,"#aead3a", "#9e6d71", "#4b5bdc", "#0cd36d",
+                "#250662", "#cb5bea", "#228916", "#ac3e1b", "#df514a", "#539397", "#880977",
+                "#f697c1", "#ba96ce", "#679c9d", "#c6c42c", "#5d2c52", "#48b41b", "#e1cf3b",
+                "#5be4f0", "#57c4d8", "#a4d17a", "#225b8", "#be608b", "#96b00c", "#088baf",
+                "#f158bf", "#e145ba", "#ee91e3", "#05d371", "#5426e0", "#4834d0", "#802234",
+                "#6749e8", "#0971f0", "#8fb413", "#b2b4f0", "#c3c89d", "#c9a941", "#41d158",
+                "#fb21a3", "#51aed9", "#5bb32d", "#807fb", "#21538e", "#89d534", "#d36647",
+                "#7fb411", "#0023b8", "#3b8c2a", "#986b53", "#f50422", "#983f7a", "#ea24a3",
+                "#79352c", "#521250", "#c79ed2", "#d6dd92", "#e33e52", "#b2be57", "#fa06ec"
             ],
             borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+                "#ea9e70", "#a48a9e", "#c6e1e8", "#648177" ,"#0d5ac1" ,
+                "#f205e6" ,"#1c0365" ,"#14a9ad" ,"#4ca2f9" ,"#a4e43f" ,"#d298e2" ,"#6119d0",
+                "#d2737d" ,"#c0a43c" ,"#f2510e" ,"#651be6" ,"#79806e" ,"#61da5e" ,"#cd2f00" ,
+                "#9348af" ,"#01ac53" ,"#c5a4fb" ,"#996635","#b11573" ,"#4bb473" ,"#75d89e" ,
+                "#2f3f94" ,"#2f7b99" ,"#da967d" ,"#34891f" ,"#b0d87b" ,"#ca4751" ,"#7e50a8" ,
+                "#c4d647" ,"#e0eeb8" ,"#11dec1" ,"#289812" ,"#566ca0" ,"#ffdbe1" ,"#2f1179" ,
+                "#935b6d" ,"#916988" ,"#513d98" ,"#aead3a", "#9e6d71", "#4b5bdc", "#0cd36d",
+                "#250662", "#cb5bea", "#228916", "#ac3e1b", "#df514a", "#539397", "#880977",
+                "#f697c1", "#ba96ce", "#679c9d", "#c6c42c", "#5d2c52", "#48b41b", "#e1cf3b",
+                "#5be4f0", "#57c4d8", "#a4d17a", "#225b8", "#be608b", "#96b00c", "#088baf",
+                "#f158bf", "#e145ba", "#ee91e3", "#05d371", "#5426e0", "#4834d0", "#802234",
+                "#6749e8", "#0971f0", "#8fb413", "#b2b4f0", "#c3c89d", "#c9a941", "#41d158",
+                "#fb21a3", "#51aed9", "#5bb32d", "#807fb", "#21538e", "#89d534", "#d36647",
+                "#7fb411", "#0023b8", "#3b8c2a", "#986b53", "#f50422", "#983f7a", "#ea24a3",
+                "#79352c", "#521250", "#c79ed2", "#d6dd92", "#e33e52", "#b2be57", "#fa06ec"
             ],
             borderWidth: 1
         }]
     },
     options: {
+
+        legend: {
+            display: false
+        },
+
         scales: {
             yAxes: [{
                 ticks: {
@@ -300,6 +337,11 @@ var myChart1 = new Chart(ctx1, {
         }]
     },
     options: {
+
+        legend: {
+            display: false
+        },
+
         scales: {
             yAxes: [{
                 ticks: {

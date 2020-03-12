@@ -76,7 +76,16 @@
 
                                               </div>
                                           </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="name">Зүтгүүрийн дугаар</label>
+                                                    <select class="form-control select2" id="zas_zutnumber" name="zas_zutnumber" >
 
+
+                                                    </select>
+                                                </div>
+
+                                            </div>
                                                          <div class="col-md-2">
                                                             <div class="form-group form-md-line-input has-success">
                                        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>" />
@@ -130,8 +139,7 @@
                                 <?php $__currentLoopData = $zasplan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $zasplans): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr class="zasplan" data-id="<?php echo e($zasplans->repairid); ?>" tag="<?php echo e($zasplans->repairid); ?>">
                                         <td><?php echo e($no); ?></td>
-                                        <td><?php echo e($zasplans->seriname); ?> -<?php echo e($zasplans->zutnumber); ?></td> 
-                                       
+                                        <td><?php echo e($zasplans->seriname); ?> -<?php echo e($zasplans->zutnumber); ?></td>
                                         <td><?php echo e($zasplans->repshname); ?></td>
                                         <td><?php echo e($zasplans->repindate); ?></td>
                                         <td><?php echo e($zasplans->repoutdate); ?></td>
