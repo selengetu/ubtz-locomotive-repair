@@ -12,7 +12,7 @@
                         </i>
                         <span class="caption-subject font-green sbold uppercase">
                     
-                        Төлөвлөгөөт бус засварын илчит тэрэгний серийн судалгаа
+                       Засварт орсон илчит тэрэгний  серийн судалгаа
                       
                             тайлан
                         </span>
@@ -23,15 +23,14 @@
                 <div class="panel">
                                                    <div class="panel-heading" style="background-color: #81b5d5; color: #fff">
                                                 <h4 class="panel-title">
-                                                    <a style="font-weight: bold;"> <i class="fa fa-search"> Хайлт </i> 
-                                                   </a>
+                                                   
                                                 </h4>
                                             </div>
                                             <div id="sear" class="panel-collapse collapse in">
                                                 <div class="panel-body">
                                                     <fieldset class="scheduler-border">
                                                      <form method="post"    
-                                                     action="group"
+                                                     action="repseri"
                         
                          >
                                         <div class="col-md-12">
@@ -72,26 +71,14 @@
                                      </div>
                                     </div>
                                         </div>
-                                        
-                                          </form>
-                                        </fieldset>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p><center><b> {{$startdate}} -аас {{$enddate}} -ны төлөвлөгөөт бус засварын илчит тэрэгний серийн судалгаа
+                                        <p><center><b> {{$startdate}} -аас {{$enddate}} -ны засварт орсон илчит тэрэгний серийн судалгаа
                        </b></center> </p>
 
              
-                        <div class="col-md-6">
-                        <canvas id="myChart" width="400" height="250"></canvas>
-                        </div>
-                        <div class="col-md-6">
-                        <canvas id="myChart1" width="400" height="250"></canvas>
-                        </div>
                       
-               
-                          
-                            <table class="table table-striped table-bordered table-hover"  id="testTable">
+                      
+                        <div class="col-md-12">
+                        <table class="table table-striped table-bordered table-hover"  id="testTable">
                                 <thead style="background-color: #81b5d5; color: #fff">
                                 <tr>
 
@@ -119,8 +106,22 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="col-md-6">
+                        <canvas id="myChart" width="400" height="250"></canvas>
+                        </div>
+                        <div class="col-md-6">
+                        <canvas id="myChart1" width="400" height="250"></canvas>
+                        </div>
+                            
                
                         </div>
+                                          </form>
+                                        </fieldset>
+                                                </div>
+                                            </div>
+                                        </div>
+                                      
                         
                             </div>
                           
@@ -241,28 +242,33 @@ var myChart = new Chart(ctx, {
     data: {
         labels: groupname,
         datasets: [{
-            label: 'Засварт орсон хугацаа',
+           
             data: grouphour,
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                             
+                "#DB4437",
+                "#F4B400",
+                "#0F9D58",
+                "#4285F4",
+                "#002D62",
+                "#79C1F1",
             ],
             borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+                             
+                "#DB4437",
+                "#F4B400",
+                "#0F9D58",
+                "#4285F4",
+                "#002D62",
+                "#79C1F1",
             ],
             borderWidth: 1
         }]
     },
     options: {
+        legend: {
+            display: false
+        },
         scales: {
             yAxes: [{
                 ticks: {
@@ -282,25 +288,30 @@ var myChart1 = new Chart(ctx1, {
             label: 'Засварт орсон тоо',
             data: groupcount,
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                           
+                "#DB4437",
+                "#F4B400",
+                "#0F9D58",
+                "#4285F4",
+                "#002D62",
+                "#79C1F1",
             ],
             borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+                             
+                "#DB4437",
+                "#F4B400",
+                "#0F9D58",
+                "#4285F4",
+                "#002D62",
+                "#79C1F1",
             ],
             borderWidth: 1
         }]
     },
     options: {
+        legend: {
+            display: false
+        },
         scales: {
             yAxes: [{
                 ticks: {

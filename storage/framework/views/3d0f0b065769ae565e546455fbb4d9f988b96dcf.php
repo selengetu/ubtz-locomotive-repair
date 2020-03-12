@@ -132,29 +132,14 @@ var myChart = new Chart(ctx, {
             label: 'Засварын төрөл',
             data: zascount,
             backgroundColor: [
-                 "#48b41b",
-                "#e1cf3b",
-                "#5be4f0",
-                "#57c4d8",
-                "#a4d17a",
-                "#225b8",
-                "#be608b",
-                "#96b00c",
-                "#088baf",
-                "#f158bf",
-                "#e145ba",
-                "#ee91e3",
-                "#05d371", "#5426e0", "#4834d0", "#802234",
-                "#6749e8",
-                "#0971f0",
-                "#8fb413",
-                "#b2b4f0",
-                "#c3c89d",
-                "#c9a941", "#41d158",
-                "#fb21a3",
-                "#51aed9", "#5bb32d", "#807fb", "#21538e", "#89d534", "#d36647",
-                "#7fb411", "#0023b8", "#3b8c2a", "#986b53", "#f50422", "#983f7a", "#ea24a3",
-                "#79352c", "#521250", "#c79ed2", "#d6dd92", "#e33e52", "#b2be57", "#fa06ec"
+                              
+                "#DB4437",
+                "#F4B400",
+                "#0F9D58",
+                "#4285F4",
+                "#002D62",
+                "#79C1F1",
+               
             ],
 
         }]
@@ -184,17 +169,13 @@ var myChart = new Chart(ctx, {
                         label: 'Засварын төрөл',
                         data: grouphour,
                         backgroundColor: [
-
-                            "#96b00c",
-                            "#088baf",
-                            "#05d371",
-                            "#5426e0",
-                            "#4834d0",
-                            "#802234",
-                            "#6749e8",
-                            "#0971f0",
-                            "#8fb413",
-                            "#b2b4f0",
+                            
+                "#DB4437",
+                "#F4B400",
+                "#0F9D58",
+                "#4285F4",
+                "#002D62",
+                "#79C1F1",
                         ],
 
                     }]
@@ -224,7 +205,7 @@ var myChart = new Chart(ctx, {
                         label: 'Засварын төрөл',
                         data: sericount,
                         backgroundColor:'transparent',
-                        borderColor: "#679c9d"
+                        borderColor: "#F4B400"
                     }]
                 },
                 options: {

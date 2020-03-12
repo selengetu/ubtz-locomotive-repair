@@ -69,7 +69,7 @@ class TailanController extends Controller
          else 
          {
             
-                $startdate= Carbon::today()->subDays(2)->toDateString();
+                $startdate= Carbon::today()->subDays(30)->toDateString();
                 $enddate=  Carbon::today()->toDateString();
                 $query.=" and repindate between TO_DATE( '".$startdate."' , 'yyyy/mm/dd') and TO_DATE( '".$enddate."', 'yyyy/mm/dd')";
   
@@ -106,7 +106,7 @@ class TailanController extends Controller
         else 
         {
            
-               $startdate= Carbon::today()->subDays(2)->toDateString();
+               $startdate= Carbon::today()->subDays(30)->toDateString();
                $enddate=  Carbon::today()->toDateString();
                $query.=" and repindate between TO_DATE( '".$startdate."' , 'yyyy/mm/dd') and TO_DATE( '".$enddate."', 'yyyy/mm/dd')";
  
@@ -130,7 +130,7 @@ class TailanController extends Controller
         else 
         {
            
-               $startdate= Carbon::today()->subDays(2)->toDateString();
+               $startdate= Carbon::today()->subDays(30)->toDateString();
                $enddate=  Carbon::today()->toDateString();
                $query.=" and repindate between TO_DATE( '".$startdate."' , 'yyyy/mm/dd') and TO_DATE( '".$enddate."', 'yyyy/mm/dd')";
  
@@ -163,7 +163,7 @@ class TailanController extends Controller
         else 
         {
            
-               $startdate= Carbon::today()->subDays(2)->toDateString();
+               $startdate= Carbon::today()->subDays(30)->toDateString();
                $enddate=  Carbon::today()->toDateString();
                $query.=" and repindate between TO_DATE( '".$startdate."' , 'yyyy/mm/dd') and TO_DATE( '".$enddate."', 'yyyy/mm/dd')";
  
