@@ -11,28 +11,25 @@
                         <i class="icon-settings font-green">
                         </i>
                         <span class="caption-subject font-green sbold uppercase">
-                    
+
                         Төлөвлөгөөт бус засварын группийн судалгаа
-                      
+
                             тайлан
                         </span>
                     </div>
-                 
+
                 </div>
             </div>
                 <div class="panel">
                                                    <div class="panel-heading" style="background-color: #81b5d5; color: #fff">
-                                                <h4 class="panel-title">
-                                                    <a style="font-weight: bold;"> <i class="fa fa-search"> Хайлт </i> 
-                                                   </a>
-                                                </h4>
+
                                             </div>
                                             <div id="sear" class="panel-collapse collapse in">
                                                 <div class="panel-body">
                                                     <fieldset class="scheduler-border">
-                                                     <form method="post"    
+                                                     <form method="post"
                                                      action="group"
-                        
+
                          >
                                         <div class="col-md-12">
                                             <div class="col-md-3">
@@ -63,82 +60,74 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                           
 
-                                                         <div class="col-md-2">
-                                                            <div class="form-group form-md-line-input has-success">
-                                       <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                                       <button class="btn btn-info"  style="background-color: #2EB9A8; border-color: #2EB9A8"><i class="fa fa-search"></i> Хайх</button>
-                                     </div>
-                                    </div>
                                         </div>
-                                        
+                                        <div class="col-md-12">
+                                            <table class="table table-striped table-bordered table-hover"  id="testTable">
+                                                <thead style="background-color: #81b5d5; color: #fff">
+                                                <tr>
+
+                                                    <th> # </th>
+                                                    <th>Групп</th>
+                                                    <th>Засварын зогсолт</th>
+                                                    <th>Засварт орсон тоо</th>
+
+
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                <?php $no = 1; ?>
+                                                @foreach($group as $groups)
+                                                    <tr>
+                                                        <td>{{$no}}</td>
+                                                        <td>{{$groups->locgroupname}}</td>
+
+                                                        <td>{{$groups->stopclean}}</td>
+                                                        <td>{{$groups->niit}}</td>
+
+                                                    </tr>
+                                                    <?php $no++; ?>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                                         <div class="col-md-6">
+                                                             <canvas id="myChart" width="400" height="250"></canvas>
+                                                         </div>
+                                                         <div class="col-md-6">
+                                                             <canvas id="myChart1" width="400" height="250"></canvas>
+                                                         </div>
                                           </form>
                                         </fieldset>
                                                 </div>
                                             </div>
                                         </div>
-                                        <p><center><b> {{$startdate}} -аас {{$enddate}} -ны төлөвлөгөөт бус засварын групп судалгаа
-                       </b></center> </p>
 
-             
-                        <div class="col-md-6">
-                        <canvas id="myChart" width="400" height="250"></canvas>
-                        </div>
-                        <div class="col-md-6">
-                        <canvas id="myChart1" width="400" height="250"></canvas>
-                        </div>
-                      
-               
-                          
-                            <table class="table table-striped table-bordered table-hover"  id="testTable">
-                                <thead style="background-color: #81b5d5; color: #fff">
-                                <tr>
 
-                                    <th> # </th>
-                                    <th>Групп</th>
-                                    <th>Засварын зогсолт</th>
-                                    <th>Засварт орсон тоо</th>
-                                   
-                                
-                                </tr>
-                                </thead>
-                                <tbody>
 
-                                <?php $no = 1; ?>
-                                @foreach($group as $groups)
-                                    <tr>
-                                        <td>{{$no}}</td>
-                                        <td>{{$groups->locgroupname}}</td> 
-                                       
-                                        <td>{{$groups->stopclean}}</td>
-                                        <td>{{$groups->niit}}</td>
-                                       
-                                    </tr>
-                                    <?php $no++; ?>
-                                @endforeach
-                                </tbody>
-                            </table>
-               
+
+
                         </div>
-                        
+
                             </div>
-                          
-                           
-                           
+
+
+
                         </div>
-                      
-        
-                           
-                       
-                 
-
-        </div>   
 
 
+
+
+
+
+        </div>
+
+</div>
                 <!-- END CONTENT BODY -->
             </div>
-         
+
               </div>
           </div>
             @endsection
@@ -198,7 +187,7 @@ $("#zas_end").datepicker( {
                 var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
                 var blob = new Blob([format(template, ctx)]);
                 var blobURL = window.URL.createObjectURL(blob);
- 
+
                 if (ifIE()) {
                     csvData = table.innerHTML;
                     if (window.navigator.msSaveBlob) {
@@ -212,7 +201,7 @@ $("#zas_end").datepicker( {
                 window.location.href = uri + base64(format(template, ctx))
             }
         })()
- 
+
         function ifIE() {
             var isIE11 = navigator.userAgent.indexOf(".NET CLR") > -1;
             var isIE11orLess = isIE11 || navigator.appVersion.indexOf("MSIE") != -1;
@@ -230,7 +219,7 @@ $("#zas_end").datepicker( {
             var mode = 'index'
             var intersect = true
 
-    
+
             var groupname = <?php echo json_encode($groupname); ?>;
             var grouphour = <?php echo json_encode($grouphour); ?>;
             var groupcount = <?php echo json_encode($groupcount); ?>;
@@ -241,82 +230,155 @@ var myChart = new Chart(ctx, {
     data: {
         labels: groupname,
         datasets: [{
-            label: 'Засварт орсон хугацаа',
-            data: grouphour,
+
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+
+                "#ea9e70", "#a48a9e", "#c6e1e8", "#648177" ,"#0d5ac1" ,
+                "#f205e6" ,"#1c0365" ,"#14a9ad" ,"#4ca2f9" ,"#a4e43f" ,"#d298e2" ,"#6119d0",
+                "#d2737d" ,"#c0a43c" ,"#f2510e" ,"#651be6" ,"#79806e" ,"#61da5e" ,"#cd2f00" ,
+                "#9348af" ,"#01ac53" ,"#c5a4fb" ,"#996635","#b11573" ,"#4bb473" ,"#75d89e" ,
+                "#2f3f94" ,"#2f7b99" ,"#da967d" ,"#34891f" ,"#b0d87b" ,"#ca4751" ,"#7e50a8" ,
+                "#c4d647" ,"#e0eeb8" ,"#11dec1" ,"#289812" ,"#566ca0" ,"#ffdbe1" ,"#2f1179" ,
+                "#935b6d" ,"#916988" ,"#513d98" ,"#aead3a", "#9e6d71", "#4b5bdc", "#0cd36d",
+                "#250662", "#cb5bea", "#228916", "#ac3e1b", "#df514a", "#539397", "#880977",
+                "#f697c1", "#ba96ce", "#679c9d", "#c6c42c", "#5d2c52", "#48b41b", "#e1cf3b",
+                "#5be4f0", "#57c4d8", "#a4d17a", "#225b8", "#be608b", "#96b00c", "#088baf",
+                "#f158bf", "#e145ba", "#ee91e3", "#05d371", "#5426e0", "#4834d0", "#802234",
+                "#6749e8", "#0971f0", "#8fb413", "#b2b4f0", "#c3c89d", "#c9a941", "#41d158",
+                "#fb21a3", "#51aed9", "#5bb32d", "#807fb", "#21538e", "#89d534", "#d36647",
+                "#7fb411", "#0023b8", "#3b8c2a", "#986b53", "#f50422", "#983f7a", "#ea24a3",
+                "#79352c", "#521250", "#c79ed2", "#d6dd92", "#e33e52", "#b2be57", "#fa06ec"
             ],
             borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+                "#ea9e70", "#a48a9e", "#c6e1e8", "#648177" ,"#0d5ac1" ,
+                "#f205e6" ,"#1c0365" ,"#14a9ad" ,"#4ca2f9" ,"#a4e43f" ,"#d298e2" ,"#6119d0",
+                "#d2737d" ,"#c0a43c" ,"#f2510e" ,"#651be6" ,"#79806e" ,"#61da5e" ,"#cd2f00" ,
+                "#9348af" ,"#01ac53" ,"#c5a4fb" ,"#996635","#b11573" ,"#4bb473" ,"#75d89e" ,
+                "#2f3f94" ,"#2f7b99" ,"#da967d" ,"#34891f" ,"#b0d87b" ,"#ca4751" ,"#7e50a8" ,
+                "#c4d647" ,"#e0eeb8" ,"#11dec1" ,"#289812" ,"#566ca0" ,"#ffdbe1" ,"#2f1179" ,
+                "#935b6d" ,"#916988" ,"#513d98" ,"#aead3a", "#9e6d71", "#4b5bdc", "#0cd36d",
+                "#250662", "#cb5bea", "#228916", "#ac3e1b", "#df514a", "#539397", "#880977",
+                "#f697c1", "#ba96ce", "#679c9d", "#c6c42c", "#5d2c52", "#48b41b", "#e1cf3b",
+                "#5be4f0", "#57c4d8", "#a4d17a", "#225b8", "#be608b", "#96b00c", "#088baf",
+                "#f158bf", "#e145ba", "#ee91e3", "#05d371", "#5426e0", "#4834d0", "#802234",
+                "#6749e8", "#0971f0", "#8fb413", "#b2b4f0", "#c3c89d", "#c9a941", "#41d158",
+                "#fb21a3", "#51aed9", "#5bb32d", "#807fb", "#21538e", "#89d534", "#d36647",
+                "#7fb411", "#0023b8", "#3b8c2a", "#986b53", "#f50422", "#983f7a", "#ea24a3",
+                "#79352c", "#521250", "#c79ed2", "#d6dd92", "#e33e52", "#b2be57", "#fa06ec"
             ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-   
-    }
-    
-});
-var myChart1 = new Chart(ctx1, {
-    type: 'bar',
-    data: {
-        labels: groupname,
-        datasets: [{
-            label: 'Засварт орсон тоо',
             data: groupcount,
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
         }]
     },
     options: {
+        title: {
+            display: true,
+            text: 'Засварт орсон тоо'
+        },
+        maintainAspectRatio: true,
+
+        legend: {
+            display: false
+        },
+
         scales: {
-            yAxes: [{
+            xAxes: [{
+                display: true,
                 ticks: {
-                    beginAtZero: true
+                    beginAtZero: true   // minimum value will be 0.
+                }
+            }],
+            yAxes: [{
+                display: true,
+                ticks: {
+                    beginAtZero: true,
+                    steps: 10,
+
                 }
             }]
-        }
-   
+        },
+
     }
-    
+
 });
-   
+            var myChart1 = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels:  groupname,
+                    datasets: [{
+                        backgroundColor:  [
+                            "#ea9e70", "#a48a9e", "#c6e1e8", "#648177" ,"#0d5ac1" ,
+                            "#f205e6" ,"#1c0365" ,"#14a9ad" ,"#4ca2f9" ,"#a4e43f" ,"#d298e2" ,"#6119d0",
+                            "#d2737d" ,"#c0a43c" ,"#f2510e" ,"#651be6" ,"#79806e" ,"#61da5e" ,"#cd2f00" ,
+                            "#9348af" ,"#01ac53" ,"#c5a4fb" ,"#996635","#b11573" ,"#4bb473" ,"#75d89e" ,
+                            "#2f3f94" ,"#2f7b99" ,"#da967d" ,"#34891f" ,"#b0d87b" ,"#ca4751" ,"#7e50a8" ,
+                            "#c4d647" ,"#e0eeb8" ,"#11dec1" ,"#289812" ,"#566ca0" ,"#ffdbe1" ,"#2f1179" ,
+                            "#935b6d" ,"#916988" ,"#513d98" ,"#aead3a", "#9e6d71", "#4b5bdc", "#0cd36d",
+                            "#250662", "#cb5bea", "#228916", "#ac3e1b", "#df514a", "#539397", "#880977",
+                            "#f697c1", "#ba96ce", "#679c9d", "#c6c42c", "#5d2c52", "#48b41b", "#e1cf3b",
+                            "#5be4f0", "#57c4d8", "#a4d17a", "#225b8", "#be608b", "#96b00c", "#088baf",
+                            "#f158bf", "#e145ba", "#ee91e3", "#05d371", "#5426e0", "#4834d0", "#802234",
+                            "#6749e8", "#0971f0", "#8fb413", "#b2b4f0", "#c3c89d", "#c9a941", "#41d158",
+                            "#fb21a3", "#51aed9", "#5bb32d", "#807fb", "#21538e", "#89d534", "#d36647",
+                            "#7fb411", "#0023b8", "#3b8c2a", "#986b53", "#f50422", "#983f7a", "#ea24a3",
+                            "#79352c", "#521250", "#c79ed2", "#d6dd92", "#e33e52", "#b2be57", "#fa06ec"
+                        ],
+                        borderColor:  [
+                            "#ea9e70", "#a48a9e", "#c6e1e8", "#648177" ,"#0d5ac1" ,
+                            "#f205e6" ,"#1c0365" ,"#14a9ad" ,"#4ca2f9" ,"#a4e43f" ,"#d298e2" ,"#6119d0",
+                            "#d2737d" ,"#c0a43c" ,"#f2510e" ,"#651be6" ,"#79806e" ,"#61da5e" ,"#cd2f00" ,
+                            "#9348af" ,"#01ac53" ,"#c5a4fb" ,"#996635","#b11573" ,"#4bb473" ,"#75d89e" ,
+                            "#2f3f94" ,"#2f7b99" ,"#da967d" ,"#34891f" ,"#b0d87b" ,"#ca4751" ,"#7e50a8" ,
+                            "#c4d647" ,"#e0eeb8" ,"#11dec1" ,"#289812" ,"#566ca0" ,"#ffdbe1" ,"#2f1179" ,
+                            "#935b6d" ,"#916988" ,"#513d98" ,"#aead3a", "#9e6d71", "#4b5bdc", "#0cd36d",
+                            "#250662", "#cb5bea", "#228916", "#ac3e1b", "#df514a", "#539397", "#880977",
+                            "#f697c1", "#ba96ce", "#679c9d", "#c6c42c", "#5d2c52", "#48b41b", "#e1cf3b",
+                            "#5be4f0", "#57c4d8", "#a4d17a", "#225b8", "#be608b", "#96b00c", "#088baf",
+                            "#f158bf", "#e145ba", "#ee91e3", "#05d371", "#5426e0", "#4834d0", "#802234",
+                            "#6749e8", "#0971f0", "#8fb413", "#b2b4f0", "#c3c89d", "#c9a941", "#41d158",
+                            "#fb21a3", "#51aed9", "#5bb32d", "#807fb", "#21538e", "#89d534", "#d36647",
+                            "#7fb411", "#0023b8", "#3b8c2a", "#986b53", "#f50422", "#983f7a", "#ea24a3",
+                            "#79352c", "#521250", "#c79ed2", "#d6dd92", "#e33e52", "#b2be57", "#fa06ec"
+                        ],
+                        data: grouphour
+                    }
+                    ]
+                },
+
+                options: {
+                    title: {
+                        display: true,
+                        text: 'Засварт орсон тоо'
+                    },
+                    maintainAspectRatio: true,
+
+                    legend: {
+                        display: false
+                    },
+
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true   // minimum value will be 0.
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                steps: 10,
+
+                            }
+                        }]
+                    },
+
+                }
+            })
+
         })
     </script>
 
-     
+
           <style type="text/css">
               .disabledTab {
                   pointer-events: none;

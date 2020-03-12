@@ -286,9 +286,9 @@
                       <div class="modal-body">
                           <ul class="nav nav-tabs">
                               <li class="active"><a data-toggle="tab" href="#home">Үндсэн</a></li>
-                              <li class="disabled disabledTab"><a data-toggle="tab" id="modaltabadd" href="#menu1">Нэмэлт ажил</a></li>
-                              <li   class="disabled disabledTab"><a data-toggle="tab" id="modaltabbaig" href="#menu2">Байгууллага</a></li>
-                              <li  class="disabled disabledTab"><a data-toggle="tab" id="modaltabmat" href="#menu3">Материал</a></li>
+                              <li ><a data-toggle="tab" id="modaltabadd" href="#menu1">Нэмэлт ажил</a></li>
+                              <li><a data-toggle="tab" id="modaltabbaig" href="#menu2">Байгууллага</a></li>
+                              <li><a data-toggle="tab" id="modaltabmat" href="#menu3">Материал</a></li>
                           </ul>
 
 

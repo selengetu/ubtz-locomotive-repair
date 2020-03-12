@@ -141,30 +141,7 @@ class TailanController extends Controller
         group by t.seriname');
         return view('tailan.seri')->with(['group'=>$group, 'startdate' =>$startdate,'enddate' => $enddate, 'locserial' => $locserial]);
     }
-    public function salsan(){
 
-        $query = "";
-        $locserial=LocSerial::orderBy('sericode', 'ASC')->get();
-        $startdate=Input::get('zas_start'); 
-        $enddate= Input::get('zas_end'); 
-
-        if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
-            $query.=" and repindate between TO_DATE( '".$startdate."' , 'yyyy/mm/dd') and TO_DATE( '".$enddate."', 'yyyy/mm/dd')";
-        }
-        else 
-        {
-           
-               $startdate= Carbon::today()->subDays(2)->toDateString();
-               $enddate=  Carbon::today()->toDateString();
-               $query.=" and repindate between TO_DATE( '".$startdate."' , 'yyyy/mm/dd') and TO_DATE( '".$enddate."', 'yyyy/mm/dd')";
- 
-        }
-    
-        $group=DB::select('select t.locgroupname, sum(stopsum) as stopclean, count(repairid)  as niit from V_ZASPLAN t
-        where t.locgroup is not null '.$query.'
-        group by t.locgroupname');
-        return view('tailan.salsan')->with(['group'=>$group, 'startdate' =>$startdate,'enddate' => $enddate, 'locserial' => $locserial]);
-    }
     public function tsahilgaan(){
 
         $query = "";

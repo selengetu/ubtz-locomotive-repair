@@ -91,16 +91,9 @@
          </a>
      </li>
      <li class="nav-item  ">
-         <a href="<?php echo e(route('group')); ?>" class="nav-link nav-toggle">
-             <i class="icon-bar-chart"></i>
-             <span class="title">Салсан тохиолдлын судалгаа</span>
-
-         </a>
-     </li>
-     <li class="nav-item  ">
          <a href="<?php echo e(route('tsahilgaan')); ?>" class="nav-link nav-toggle">
              <i class="icon-bar-chart"></i>
-             <span class="title">ТЦХ гэмтлийн судалгаа</span>
+             <span class="title">Гэмтлийн судалгаа</span>
 
          </a>
      </li>
