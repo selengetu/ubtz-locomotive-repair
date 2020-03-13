@@ -151,7 +151,7 @@ class TailanController extends Controller
         $enddate= Input::get('zas_end');
         $gemtel_type=Input::get('gemtel_type');
         if($gemtel_type ==NULL){
-            $gemtel_type=30;
+            $gemtel_type=29;
         }
         $gr= DB::select('select lower(t.part_name) as part_name from SET_PART t
         where t.part_id='.$gemtel_type.'

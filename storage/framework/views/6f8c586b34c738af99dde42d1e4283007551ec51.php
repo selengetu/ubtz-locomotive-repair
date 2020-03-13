@@ -175,7 +175,7 @@
                                         <?php if($zastype ==2 ): ?> 
                                         <td><?php echo e($zasplans->to2depo); ?></td>
                                         <td><?php echo e($zasplans->replastdate); ?></td>
-                                        <td><?php echo e($zasplans->gpart_name); ?></td>
+                                        <td><?php echo e($zasplans->gemtel_name); ?></td>
                                         <td><?php echo e($zasplans->locgroupname); ?></td>
                                         <td><?php echo e($zasplans->decision); ?></td>
                                         <?php endif; ?>
@@ -771,8 +771,8 @@ $('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', fu
                       "   <td class='m2'>" + qwe1.stopadd + "</td>" +
                       "   <td class='m2'>" + qwe1.stopclean + "</td>" +                     
                       "   <td class='m2'>" + qwe1.runkm + "</td>" +                  
-                      "   <td class='m2'>" + qwe1.reciever + "</td>" +
-                      "   <td class='m2'> <button type='button' class='btn btn-primary add' data-toggle='modal' data-target='#matmodal' ><i class='fa fa-pencil-o' aria-hidden='true'></i></button></td>" +
+                      "   <td class='m2'>" + qwe1.receiver_name + "</td>" +
+                      "   <td class='m2'> <button type='button' class='btn btn-primary update' data-toggle='modal' data-target='#myModal1' data-backdrop='static' data-keyboard='false' style='background-color: #2EB9A8; border-color: #2EB9A8'><i class='fa fa-check-square-o' aria-hidden='true'></i></button></td>" +
                         
                       "</tr>";
 

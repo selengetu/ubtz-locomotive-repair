@@ -134,8 +134,6 @@ var myChart = new Chart(ctx, {
             backgroundColor: [
                               
                 "#DB4437",
-                "#F4B400",
-                "#0F9D58",
                 "#4285F4",
                 "#002D62",
                 "#79C1F1",
