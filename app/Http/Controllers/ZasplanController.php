@@ -97,7 +97,7 @@ class ZasplanController extends Controller
     {
       
         $zasplan = new Zasplan;
-        $zasplan->depocode = Auth::user()->id;
+        $zasplan->depocode = Auth::user()->depocode;
         $zasplan->zasyear = Carbon::now()->year;
         $zasplan->zasmonth = Carbon::now()->month;
         $zasplan->sericode = Request::input('zas_seri');

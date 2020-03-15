@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
 use App\AttentionSpeed;
 use DB;  
 use Illuminate\Support\Facades\Input;
@@ -27,6 +27,14 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $zaswar = DB::select('select t.zastype, count(repairid) as niit, sum(stopsum) as tsag from ZASPLAN t 
+        where t.zasyear= '.Carbon::now()->year.'
+        group by t.zastype');
+        $tsag = DB::select('select sum(stopsum) as tsag from ZASPLAN t 
+        where t.zasyear= '.Carbon::now()->year.'');
+        $tul = DB::select('select sum(plantoo) as plantoo from ZUTGUUR.ZASTUL t where t.zasyear= '.Carbon::now()->year.'');
+        $plan = DB::select('select sum(stopsum) as tsag from ZASPLAN t 
+        where t.zasyear= '.Carbon::now()->year.' and t.zastype=1');
         $niit=DB::select('select t.zastype_name, sum(stopsum) as niit from V_ZASPLAN t
         group by t.zastype_name');
             
@@ -41,6 +49,6 @@ class HomeController extends Controller
         where t.locgroup is not null
         group by t.locgroupname');
 
-        return view('devter.home')->with(['niit'=>$niit,'seri'=>$seri,'tsahilgaan'=>$tsahilgaan,'group'=>$group]);
+        return view('devter.home')->with(['tul'=>$tul,'plan'=>$plan,'niit'=>$niit,'seri'=>$seri,'tsahilgaan'=>$tsahilgaan,'group'=>$group,'zaswar'=>$zaswar,'tsag'=>$tsag]);
     }
 }

@@ -37,9 +37,9 @@ class ZastulController extends Controller
 
         $zastul=Zastul::all();
         $locserial=LocSerial::orderBy('sericode', 'ASC')->get();
-        $start_year= Carbon::now()->format('Y');;
-        $start_month=  Request::input('start_month');
-        $zastul=DB::select('select * from V_ZASTUL t where  zasyear = '.$start_year.'');
+        $start_year= Carbon::now()->format('Y');
+        $start_month= Carbon::now()->format('m');;
+        $zastul=DB::select('select * from V_ZASTUL t where  zasyear = '.$start_year.'and zasmonth ='.$start_month.' order by depocode, sericode ');
         return view('devter.zastul')->with(['start_year' =>$start_year, 'start_month' => $start_month,'locserial' => $locserial, 'zastul' => $zastul,'rep' => $rep]);
     }
 

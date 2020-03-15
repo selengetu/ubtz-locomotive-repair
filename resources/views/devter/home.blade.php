@@ -8,7 +8,11 @@
                             <div class="card" style="border-left: .25rem solid green ">
                                 <div class="container">
                                     <h4 style="color: green"><b>Төлөвлөгөөт засвар</b></h4>
-                                    <h2>17</h2>
+                                    <h2> @foreach($zaswar as $zas)
+                                    @if($zas->zastype==1)
+                                                    {{$zas->niit}}
+                                    @endif
+                                                            @endforeach</h2>
                                 </div>
                             </div>
                         </div>
@@ -16,7 +20,12 @@
                             <div class="card" style="border-left: .25rem solid #2A00FF ">
                                 <div class="container">
                                     <h4 style="color: #2A00FF"><b>Төлөвлөгөөт бус засвар</b></h4>
-                                    <h2>32</h2>
+                                    <h2> @foreach($zaswar as $zas)
+                                    @if($zas->zastype==2)
+                                                    {{$zas->niit}}
+                                    @endif
+                                                            @endforeach
+                                    </h2>
                                 </div>
                             </div>
                         </div>
@@ -24,7 +33,7 @@
                             <div class="card" style="border-left: .25rem solid #8F0000 ">
                                 <div class="container">
                                     <h4 style="color: #8F0000"><b>Гүйцэтгэл</b></h4>
-                                    <h2>14,5%</h2>
+                                    <h2>{{number_format($plan[0]->tsag/$tul[0]->plantoo,2)}}%</h2>
                                 </div>
                             </div>
                         </div>
@@ -32,7 +41,9 @@
                             <div class="card" style="border-left: .25rem solid #3e6e99 ">
                                 <div class="container">
                                     <h4 style="color: #3e6e99"><b>Нийт засварын цаг</b></h4>
-                                    <h2>1040,0</h2>
+                                    <h2> @foreach($tsag as $zas)
+                                    {{$zas->tsag}}                     
+                                         @endforeach</h2>
                                 </div>
                             </div>
                         </div>
