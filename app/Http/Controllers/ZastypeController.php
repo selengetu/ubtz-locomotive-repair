@@ -91,5 +91,14 @@ class ZastypeController extends Controller
         Zastype::where('sericode', '=', $id)->delete();
         return Redirect('zastype');
     }
+    public function zasrun()
+    {
+        $locserial=LocSerial::orderBy('sericode', 'ASC')->get();
+        $start_year= Carbon::now()->format('Y');
+        $start_month= Carbon::now()->format('m');;
+        $zasrun=DB::table('Zutguur.zasrun')->where('dansdepo', Auth::user()->depo_id)->get();
+
+        return view('devter.zasrun')->with(['zasrun' => $zasrun,  'locserial' => $locserial, 'start_year' => $start_year, 'start_month' => $start_month]);
+    }
 
 }
