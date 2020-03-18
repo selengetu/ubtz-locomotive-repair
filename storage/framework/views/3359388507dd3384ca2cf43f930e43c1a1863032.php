@@ -95,7 +95,7 @@
                       <th>Зогсоох нормт өдөр</th>
                       <th>Зогсоох нормт цаг</th>
                       <th>Зогсоох нормт минут</th>
-                      <th>Давуу эрх</th>
+
 
                   </tr>
                   </thead>
@@ -113,7 +113,7 @@
                       <td><?php echo e($zastypes->stopday); ?></td>
                       <td><?php echo e($zastypes->stoptsag); ?></td>
                       <td><?php echo e($zastypes->stopmin); ?></td>
-                      <td><?php echo e($zastypes->priority); ?></td>
+
 
                   </tr>
                   <?php $no++; ?>
@@ -233,13 +233,7 @@
                                   </div>
 <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                               </div>
-                              <div class="col-md-3">
-                                  <div class="form-group">
-                                      <label for="name">Давуу эрх</label>
-                                      <input type="text" class="form-control inputtext" id="priority" name="priority">
-                                  </div>
 
-                              </div>
                           </div>
 
                       </div>
@@ -360,7 +354,7 @@
                           $('#stopday').val(qwe.stopday);
                           $('#stoptsag').val(qwe.stoptsag);
                           $('#stopmin').val(qwe.stopmin);
-                          $('#priority').val(qwe.priority);
+
 
                       });
 
