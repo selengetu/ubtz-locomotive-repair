@@ -80,7 +80,11 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-
+                                                <?php
+                                    $stopclean=0;
+                                    $niit=0;
+                                
+                                    ?>
                                                 <?php $no = 1; ?>
                                                 <?php $__currentLoopData = $group; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $groups): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <tr>
@@ -88,11 +92,24 @@
                                                         <td><?php echo e($groups->locgroupname); ?></td>
 
                                                         <td><?php echo e($groups->stopclean); ?></td>
+                                                    
                                                         <td><?php echo e($groups->niit); ?></td>
 
                                                     </tr>
+                                                    <?php
+                                      
+                                        $stopclean=$stopclean+$groups->stopclean;
+                                        $niit=$niit+$groups->niit;
+                      
+                                            ?>
                                                     <?php $no++; ?>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                <tr>
+                                                <td colspan=2><center>Нийт</center></td>
+                                                <td><?php echo e($stopclean); ?></td>
+                                                <td><?php echo e($niit); ?></td>
+                                                </tr>
+
                                                 </tbody>
                                             </table>
 

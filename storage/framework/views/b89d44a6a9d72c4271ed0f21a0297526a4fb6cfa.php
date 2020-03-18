@@ -134,7 +134,12 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-
+                                <?php
+                                    $stopsum=0;
+                                    $stopadd=0;
+                                    $stopclean=0;
+                                    $runkm=0;
+                                    ?>
                                 <?php $no = 1; ?>
                                 <?php $__currentLoopData = $zasplan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $zasplans): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr class="zasplan" data-id="<?php echo e($zasplans->repairid); ?>" tag="<?php echo e($zasplans->repairid); ?>">
@@ -156,8 +161,30 @@
                                         <td><?php echo e($zasplans->decision); ?></td>
                                         <?php endif; ?>
                                     </tr>
+                                    <?php
+                                      $stopsum=$stopsum+$zasplans->stopsum;
+                                      $stopadd=$stopadd+$zasplans->stopadd;
+                                      $stopclean=$stopclean+$zasplans->stopclean;
+                                      $runkm=$runkm+$zasplans->runkm;
+                                          ?>
                                     <?php $no++; ?>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <tr>
+                                                <td colspan=5>Нийт</td>
+                                                <td><?php echo e($stopsum); ?></td>
+                                                <td><?php echo e($stopadd); ?></td>
+                                                <td><?php echo e($stopclean); ?></td>
+                                                <td><?php echo e($runkm); ?></td>
+                                                <td></td>
+                                                <?php if($zastype ==2 ): ?> 
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                        <?php endif; ?>
+                                                </tr>
+
                                 </tbody>
                             </table>
                         </div>

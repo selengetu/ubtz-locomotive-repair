@@ -135,7 +135,12 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-
+                                <?php
+                                    $stopsum=0;
+                                    $stopadd=0;
+                                    $stopclean=0;
+                                    $runkm=0;
+                                    ?>
                                 <?php $no = 1; ?>
                                 @foreach($zasplan as $zasplans)
                                     <tr class="zasplan" data-id="{{$zasplans->repairid}}" tag="{{$zasplans->repairid}}">
@@ -157,8 +162,30 @@
                                         <td>{{$zasplans->decision}}</td>
                                         @endif
                                     </tr>
+                                    <?php
+                                      $stopsum=$stopsum+$zasplans->stopsum;
+                                      $stopadd=$stopadd+$zasplans->stopadd;
+                                      $stopclean=$stopclean+$zasplans->stopclean;
+                                      $runkm=$runkm+$zasplans->runkm;
+                                          ?>
                                     <?php $no++; ?>
                                 @endforeach
+                                <tr>
+                                                <td colspan=5>Нийт</td>
+                                                <td>{{  $stopsum}}</td>
+                                                <td>{{  $stopadd}}</td>
+                                                <td>{{  $stopclean}}</td>
+                                                <td>{{  $runkm}}</td>
+                                                <td></td>
+                                                @if($zastype ==2 ) 
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                        @endif
+                                                </tr>
+
                                 </tbody>
                             </table>
                         </div>

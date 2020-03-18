@@ -81,7 +81,11 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-
+                                                <?php
+                                    $stopclean=0;
+                                    $niit=0;
+                                
+                                    ?>
                                                 <?php $no = 1; ?>
                                                 @foreach($group as $groups)
                                                     <tr>
@@ -89,11 +93,24 @@
                                                         <td>{{$groups->locgroupname}}</td>
 
                                                         <td>{{$groups->stopclean}}</td>
+                                                    
                                                         <td>{{$groups->niit}}</td>
 
                                                     </tr>
+                                                    <?php
+                                      
+                                        $stopclean=$stopclean+$groups->stopclean;
+                                        $niit=$niit+$groups->niit;
+                      
+                                            ?>
                                                     <?php $no++; ?>
                                                 @endforeach
+                                                <tr>
+                                                <td colspan=2><center>Нийт</center></td>
+                                                <td>{{  $stopclean}}</td>
+                                                <td>{{  $niit}}</td>
+                                                </tr>
+
                                                 </tbody>
                                             </table>
 
