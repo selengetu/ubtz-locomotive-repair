@@ -1,5 +1,5 @@
- @extends('layouts.app')
-@section('content')
+ 
+<?php $__env->startSection('content'); ?>
 <div class="page-content-wrapper">
                 <!-- BEGIN CONTENT BODY -->
                 <div class="page-content">
@@ -72,10 +72,10 @@
                 </div>
                 </div>
 </div>
-  @include('layouts.partials.modal')
-   @endsection
+  <?php echo $__env->make('layouts.partials.modal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+   <?php $__env->stopSection(); ?>
           
-@section('cscript')
+<?php $__env->startSection('cscript'); ?>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <?php
     $groupname = array();
@@ -242,5 +242,6 @@ var myChart = new Chart(ctx, {
         padding: 2px 16px;
     }
 </style>
-@include('layouts.partials.devterscript')
-@endsection
+<?php echo $__env->make('layouts.partials.devterscript', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
