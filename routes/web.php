@@ -19,7 +19,12 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/users', 'UsersController@index')->name('users');
 Route::get('/zastuuh', 'ZasController@index')->name('zastuuh');
 Route::post('/searchilchittuuh','ZasController@search');
+Route::get('/devedangi', 'EdangiController@index')->name('devedangi');
 
+Route::match(['get', 'post'],'/edangi', 'TailanController@index')->name('edangi');
+Route::match(['get', 'post'],'/ilchitedangi', 'TailanController@ilchitedangi')->name('ilchitedangi');
+Route::match(['get', 'post'],'/nasjilt', 'TailanController@nasjilt')->name('nasjilt');
+Route::post('/searchnasjilt','TailanController@searchnasjilt');
 Route::match(['get', 'post'],'/reportplan', 'TailanController@index')->name('reportplan');
 Route::match(['get', 'post'],'/reportunplan', 'TailanController@index')->name('reportunplan');
 Route::match(['get', 'post'],'/group', 'TailanController@group')->name('group');
@@ -28,11 +33,14 @@ Route::match(['get', 'post'],'/tsahilgaan', 'TailanController@tsahilgaan')->name
 Route::match(['get', 'post'],'/zasplan', 'ZasplanController@index')->name('zasplan');
 Route::match(['get', 'post'],'/zasunplan', 'ZasplanController@index')->name('zasunplan');
 Route::match(['get', 'post'],'/zasrun', 'ZastypeController@zasrun')->name('zasrun');
+
 Route::post('/addzasadd','ZasplanController@storeadd');
 Route::post('/addzasbaig','ZasplanController@storebaig');
 Route::post('/addzasmat','ZasplanController@storemat');
 Route::match(['get', 'post'],'/zastype', 'ZastypeController@index')->name('zastype');
 Route::get('/destroyzastype/{id}/delete', ['as' => 'zastype.destroy', 'uses' => 'ZastypeController@destroy']);
+
+
 Route::post('/addzastype','ZastypeController@store');
 Route::post('/searchzastype','ZastypeController@search');
 Route::post('/updatezastype','ZastypeController@update');
@@ -53,6 +61,8 @@ Route::get('/gemteltypefill/{id?}',function($id = 0){
     $dt=App\GemteltypeController::where('gemtel_id','=',$id)->get();
     return $dt;
 });
+
+
 Route::match(['get', 'post'],'/zasplan', 'ZasplanController@index')->name('zasplan');
 Route::get('/destroyzasplan/{id}/delete', ['as' => 'zasplan.destroy', 'uses' => 'ZasplanController@destroy']);
 Route::post('/addzasplan','ZasplanController@store');
@@ -65,6 +75,8 @@ Route::get('/getzasdetail/{id?}',function($id = 0){
     $dt=DB::table('V_ZAS_SOLILT_DETAIL')->where('solilt_id','=',$id)->get();
     return $dt;
 });
+
+
 Route::get('/getzasplanbase/{id?}',function($id = 0){
     $dt=DB::table('ZUTGUUR.ZASPLANBASE')->where('sericode','=',$id)->get();
     return $dt;
@@ -78,6 +90,14 @@ Route::post('/searchzastul','ZastulController@search');
 
 Route::get('/repfill/{id?}/{seri?}',function($id = 0,$seri = 0){
     $dt=DB::table('V_REP')->where('repid','=',$id)->where('reptype','=',$seri)->get();
+    return $dt;
+});
+Route::match(['get', 'post'],'/zasunplan', 'ZasplanController@index')->name('zasunplan');
+Route::get('/destroyzasunplan/{id}/delete', ['as' => 'zasunplan.destroy', 'uses' => 'ZasunplanController@destroy']);
+Route::post('/addzasdetail','ZasunplanController@storedetail');
+Route::post('/updatezasdetail','ZasunplanController@updatestoredetail');
+Route::get('/zasunplanfill/{id?}',function($id = 0){
+    $dt=DB::table('ZAS_SOLILT')->where('solilt_id','=',$id)->get();
     return $dt;
 });
 
@@ -95,6 +115,14 @@ Route::get('/getseri/{id?}/{id1?}/{id2?}',function($id = 0,$id1=0,$id2=0){
     $dt=DB::table('V_ZASZUT_SERI')->where('zas_seri','=',$id)->where('zas_zutnumber','=',$id1)->where('part_det_id','=',$id2)->get();
     return $dt;
 });
+
+Route::match(['get', 'post'],'/zastul', 'ZastulController@index')->name('zastul');
+Route::get('/destroyzastul/{id}/delete', ['as' => 'zastul.destroy', 'uses' => 'ZastulController@destroy']);
+Route::post('/addzastul','ZastulController@store');
+Route::post('/updatezastul','ZastulController@update');
+Route::post('/searchzastul','ZastulController@search');
+
+
 Route::get('/getnewseri/{id?}',function($id = 0){
     $dt=DB::table('V_SERI')->where('part_id','=',$id)->get();
     return $dt;
