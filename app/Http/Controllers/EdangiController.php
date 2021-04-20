@@ -108,7 +108,7 @@ class EdangiController extends Controller
         }
 
         $zaspart=DB::select('select * from V_ZASZUT t where 1=1 '.$query. '');
-        return view('devter.home')->with(['seri'=>$seri,'locserial'=>$locserial,'loc'=>$loc,'loc_zutnumber'=>$loc_zutnumber,'zpart'=>$zpart,'part'=>$part,'stat'=>$stat, 'zaspart' => $zaspart, 'startdate' =>$startdate, 'enddate' => $enddate, 'loc_seri' =>$loc_seri, 'loc_part' => $loc_part, 'depo' => $depo]);
+        return view('devter.edangi')->with(['seri'=>$seri,'locserial'=>$locserial,'loc'=>$loc,'loc_zutnumber'=>$loc_zutnumber,'zpart'=>$zpart,'part'=>$part,'stat'=>$stat, 'zaspart' => $zaspart, 'startdate' =>$startdate, 'enddate' => $enddate, 'loc_seri' =>$loc_seri, 'loc_part' => $loc_part, 'depo' => $depo]);
     }
 
     public function filter_zaspart(Request $request) {
@@ -116,7 +116,7 @@ class EdangiController extends Controller
         Session::put('loc_zutnumber',$request->Input('loc_zutnumber'));
         Session::put('loc_part',$request->Input('loc_part'));
 
-        return redirect('home');
+        return back();
     }
 
     public function store()
@@ -144,7 +144,7 @@ class EdangiController extends Controller
         $zaszut->zas_begindate=Request::input('ed_tavisanognoo');
         $zaszut->save();
 
-        return Redirect('home');
+        return back();
     }
     public function update(Request $request)
     {
@@ -155,13 +155,13 @@ class EdangiController extends Controller
             ->update(['zas_seri' => Request::input('angi_loc'),'zas_zutnumber' => Request::input('angi_zutnum'),'zas_depo' => Request::input('angi_depo'),
                 'zas_sekts' => Request::input('angi_sekts'), 'zas_sekts_num' => Request::input('angi_sekts_num'), 'zas_begindate' => Request::input('angi_tavisanognoo')]);
 
-        return Redirect('home');
+                return back();
     }
 
     public function destroy($id)
     {
         Zaspart::where('part_id', '=', $id)->delete();
-        return Redirect('home');
+        return back();
     }
     public function filter_loc_part($loc_part) {
 

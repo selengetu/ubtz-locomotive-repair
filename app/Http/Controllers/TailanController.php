@@ -9,6 +9,7 @@ use Spatie\Activitylog\Models\Activity;
 use \Cache;
 use App\Station;
 use App\Zastype;
+use App\Gemtel;
 use App\Zasplan;
 use App\Part;
 use App\Rep;
