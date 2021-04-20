@@ -123,6 +123,14 @@ Route::post('/addzastul','ZastulController@store');
 Route::post('/updatezastul','ZastulController@update');
 Route::post('/searchzastul','ZastulController@search');
 
+Route::post('/addzaspart','EdangiController@store')->name('addzaspart');
+Route::get('/getzaspart/{id?}',function($id = 0){
+    $dt=DB::table('V_ZASZUT')->where('part_id','=',$id)->get();
+    return $dt;
+});
+Route::post('/updatezaspart','EdangiController@update');
+Route::get('/destroyzaspart/{id}/delete', ['as' => 'zaspart.destroy', 'uses' => 'EdangiController@destroy']);
+Route::post('/searchzaspart','EdangiController@search');
 
 Route::get('/getnewseri/{id?}',function($id = 0){
     $dt=DB::table('V_SERI')->where('part_id','=',$id)->get();
