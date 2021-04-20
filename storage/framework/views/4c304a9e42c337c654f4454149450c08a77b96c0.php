@@ -6,6 +6,20 @@
                               <h3 class="uppercase"><b>Тохиргоо</b></h3>
                                  </li>
                                  <li class="nav-item  ">
+                             <a href="<?php echo e(route('devedangi')); ?>" class="nav-link nav-toggle">
+                                 <i class="icon-settings"></i>
+                                 <span class="">Гал тэрэгний эд анги</span>
+                             </a>
+
+                         </li>
+                         <li class="nav-item  ">
+                             <a href="<?php echo e(route('seri')); ?>" class="nav-link nav-toggle">
+                                 <i class="icon-wrench"></i>
+                                 <span class="title">Эд ангийн марк</span>
+                             </a>
+
+                         </li>
+                                 <li class="nav-item  ">
                              <a href="<?php echo e(route('part')); ?>" class="nav-link nav-toggle">
                                  <i class="icon-settings"></i>
                                  <span class="">Эд ангийн төрөл</span>
@@ -17,6 +31,13 @@
                              <a href="<?php echo e(route('gemteltype')); ?>" class="nav-link nav-toggle">
                                  <i class="icon-wrench"></i>
                                  <span class="">Гэмтлийн төрөл</span>
+                             </a>
+
+                         </li>
+                         <li class="nav-item  ">
+                             <a href="<?php echo e(route('zastype')); ?>" class="nav-link nav-toggle">
+                                 <i class="icon-settings"></i>
+                                 <span class="title">Засварын ангилал</span>
                              </a>
 
                          </li>
@@ -78,6 +99,29 @@
          </a>
 
      </li>
+     <li class="nav-item">
+         <a href="<?php echo e(route('ilchitedangi')); ?>" class="nav-link nav-toggle">
+             <i class="icon-bulb"></i>
+             <span class="title">Илчит тэрэгний эд ангийн түүх</span>
+             <span class="arrow"></span>
+         </a>
+     </li>
+
+     <li class="nav-item  ">
+         <a href="<?php echo e(route('nasjilt')); ?>" class="nav-link nav-toggle">
+             <i class="icon-puzzle"></i>
+             <span class="title">Эд ангийн насжилтын судалгаа</span>
+
+         </a>
+
+     </li>
+     <li class="nav-item  ">
+         <a href="<?php echo e(route('zastuuh')); ?>" class="nav-link nav-toggle">
+             <i class="icon-bar-chart"></i>
+             <span class="title">Илчит тэрэгний засварын түүх</span>
+
+         </a>  </li>
+
      <li class="nav-item  ">
          <a href="<?php echo e(route('group')); ?>" class="nav-link nav-toggle">
              <i class="icon-bar-chart"></i>
@@ -99,5 +143,12 @@
 
          </a>
      </li>
+     <li class="nav-item">
+                                    <a href="<?php echo e(route('guilt')); ?>" class="nav-link ">
+                                        <i class="icon-settings"></i>
+                                        <span class="title">Эд ангийн гүйлт</span>
+                                        <span class="selected"></span>
+                                    </a>
+                                </li>
                     </ul>   </div>
                     </div>

@@ -8,12 +8,7 @@
                             <div class="card" style="border-left: .25rem solid green ">
                                 <div class="container">
                                     <h4 style="color: green"><b>Төлөвлөгөөт засвар</b></h4>
-                                    <h2> <?php $__currentLoopData = $zaswar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $zas): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <?php if($zas->zastype==1): ?>
-                                                    <?php echo e($zas->niit); ?>
-
-                                    <?php endif; ?>
-                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?></h2>
+                                    <h2> 65</h2>
                                 </div>
                             </div>
                         </div>
@@ -21,12 +16,7 @@
                             <div class="card" style="border-left: .25rem solid #2A00FF ">
                                 <div class="container">
                                     <h4 style="color: #2A00FF"><b>Төлөвлөгөөт бус засвар</b></h4>
-                                    <h2> <?php $__currentLoopData = $zaswar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $zas): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <?php if($zas->zastype==2): ?>
-                                                    <?php echo e($zas->niit); ?>
-
-                                    <?php endif; ?>
-                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <h2> 24
                                     </h2>
                                 </div>
                             </div>
@@ -35,7 +25,7 @@
                             <div class="card" style="border-left: .25rem solid #8F0000 ">
                                 <div class="container">
                                     <h4 style="color: #8F0000"><b>Гүйцэтгэл</b></h4>
-                                    <h2><?php echo e(number_format($plan[0]->tsag/$tul[0]->plantoo,2)); ?>%</h2>
+                                    <h2>85%</h2>
                                 </div>
                             </div>
                         </div>
@@ -43,9 +33,7 @@
                             <div class="card" style="border-left: .25rem solid #3e6e99 ">
                                 <div class="container">
                                     <h4 style="color: #3e6e99"><b>Нийт засварын цаг</b></h4>
-                                    <h2> <?php $__currentLoopData = $tsag; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $zas): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <?php echo e($zas->tsag); ?>                     
-                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?></h2>
+                                    <h2>658</h2>
                                 </div>
                             </div>
                         </div>

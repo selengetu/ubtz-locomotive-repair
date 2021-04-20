@@ -33,6 +33,7 @@ Route::match(['get', 'post'],'/tsahilgaan', 'TailanController@tsahilgaan')->name
 Route::match(['get', 'post'],'/zasplan', 'ZasplanController@index')->name('zasplan');
 Route::match(['get', 'post'],'/zasunplan', 'ZasplanController@index')->name('zasunplan');
 Route::match(['get', 'post'],'/zasrun', 'ZastypeController@zasrun')->name('zasrun');
+Route::match(['get', 'post'],'/guilt', 'TailanController@guilt')->name('guilt');
 
 Route::post('/addzasadd','ZasplanController@storeadd');
 Route::post('/addzasbaig','ZasplanController@storebaig');
