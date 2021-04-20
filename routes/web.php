@@ -21,7 +21,7 @@ Route::get('/zastuuh', 'ZasController@index')->name('zastuuh');
 Route::post('/searchilchittuuh','ZasController@search');
 Route::get('/devedangi', 'EdangiController@index')->name('devedangi');
 
-Route::match(['get', 'post'],'/edangi', 'TailanController@index')->name('edangi');
+Route::match(['get', 'post'],'/edangi', 'TailanController@edangi')->name('edangi');
 Route::match(['get', 'post'],'/ilchitedangi', 'TailanController@ilchitedangi')->name('ilchitedangi');
 Route::match(['get', 'post'],'/nasjilt', 'TailanController@nasjilt')->name('nasjilt');
 Route::post('/searchnasjilt','TailanController@searchnasjilt');

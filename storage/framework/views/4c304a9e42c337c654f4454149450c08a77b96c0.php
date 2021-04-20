@@ -34,28 +34,7 @@
                              </a>
 
                          </li>
-                         <li class="nav-item  ">
-                             <a href="<?php echo e(route('zastype')); ?>" class="nav-link nav-toggle">
-                                 <i class="icon-settings"></i>
-                                 <span class="title">Засварын ангилал</span>
-                             </a>
-
-                         </li>
-                                   <li class="nav-item  ">
-                             <a href="<?php echo e(route('zastype')); ?>" class="nav-link nav-toggle">
-                                 <i class="icon-settings"></i>
-                                 <span class="">Засварын төрөл</span>
-                             </a>
-
-                         </li>
-                       
-                         <li class="nav-item  ">
-                             <a href="" class="nav-link nav-toggle">
-                                 <i class="icon-bar-chart"></i>
-                                 <span class="">Засварын гүйлт</span>
-                             </a>
-
-                         </li>
+                        
                                  <li class="heading">
                                      <h3 class="uppercase"><b>Засвар</b></h3>
                                  </li>
@@ -67,6 +46,22 @@
          </a>
 
      </li>
+     <li class="nav-item  ">
+                             <a href="<?php echo e(route('zastype')); ?>" class="nav-link nav-toggle">
+                                 <i class="icon-settings"></i>
+                                 <span class="title">Засварын ангилал</span>
+                             </a>
+
+                         </li>
+                                 
+                       
+                         <li class="nav-item  ">
+                             <a href="" class="nav-link nav-toggle">
+                                 <i class="icon-bar-chart"></i>
+                                 <span class="">Засварын гүйлт</span>
+                             </a>
+
+                         </li>
                          <li class="nav-item  ">
                              <a href="<?php echo e(route('zasplan')); ?>" class="nav-link nav-toggle">
                                  <i class="icon-settings"></i>
