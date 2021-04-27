@@ -125,6 +125,15 @@ class ZasplanController extends Controller
         $zasplan->decision = Request::input('decision');
         }
         $zasplan->save();
+        $p=DB::getPdo()->lastInsertId();
+        DB::table('activity_log')->insert(
+            array(
+                   'log_name'     =>   'Add zasplan', 
+                   'description'     =>  $p, 
+                   'causer_id'   =>   Auth::user()->id,
+                   'created_at'     =>   Carbon::now(), 
+            )
+       );
         $max =DB::select("select max(repairid) as repairid from ZASPLAN");
          return $max[0]->repairid;
     }
@@ -158,6 +167,14 @@ class ZasplanController extends Controller
         $zasmat->mattoo = Request::input('mattoo');
         $zasmat->matprice = Request::input('matprice');
         $zasmat->save();
-       
+        $p=DB::getPdo()->lastInsertId();
+        DB::table('activity_log')->insert(
+            array(
+                   'log_name'     =>   'Add zasmat', 
+                   'description'     =>  $p, 
+                   'causer_id'   =>   Auth::user()->id,
+                   'created_at'     =>   Carbon::now(), 
+            )
+       );
     }
 }
