@@ -3,7 +3,7 @@
                 <div class="page-header-inner ">
                     <!-- BEGIN LOGO -->
                     <div class="page-logo">
-                        <a href="{{ route('home') }}">
+                        <a href="{{ route('mainhome') }}">
                              <img src="{{asset('image/logo1.png')}}" alt="logo" class="logo-default" width="95%" /> </a>
                      
                     </div>
