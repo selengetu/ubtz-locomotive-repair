@@ -1,7 +1,7 @@
 <div class="body"></div>
         <div class="grad"></div>
         <div class="header">
-            <div><span>Илчит тэрэгний</span> <br><span> засвар бvртгэл</span></div>
+            <div><span>НЭВТРЭХ</span></div>
         </div>
         <br>
         <div class="login">
@@ -57,9 +57,8 @@
             bottom: -40px;
             width: auto;
             height: auto;
-            background-image: url('image/galt.jpg');
+            background-image: url('image/LocSystem.jpg');
             background-size: cover;
-            -webkit-filter: blur(3px);
             z-index: 0;
         }
 
@@ -79,7 +78,7 @@
             .header{
                 position: absolute;
                 top: calc(50% - 35px);
-                left: calc(35% - 270px);
+                left: calc(85% - 70px);
                 z-index: 2;
             }
             
@@ -100,8 +99,8 @@
 
             .login{
                 position: absolute;
-                top: calc(50% - 75px);
-                left: calc(38% - 50px);
+                top: calc(60% - 75px);
+                left: calc(80% - 50px);
                 height: 150px;
                 width: 350px;
                 padding: 10px;
