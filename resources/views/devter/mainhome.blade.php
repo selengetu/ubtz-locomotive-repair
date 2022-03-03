@@ -54,7 +54,7 @@
                         <div class="col-md-4">
                             <div class="card" style="border-left: .25rem solid #2A00FF ">
                                 <div class="container">
-                                    <h4 style="color: #2A00FF"><b><a href="{{ route('home') }}">Цахим пасспорт, эд анги</a></b></h4>
+                                    <h4 style="color: #2A00FF"><b><a href="{{ route('devedangi') }}">Цахим пасспорт, эд анги</a></b></h4>
                                     <h2> 12
                                     </h2>
                                 </div>
@@ -85,7 +85,7 @@
                                                     <div class="col-md-4">
                                                     <div class="card" style="border-left: .25rem solid #2A00FF ">
                                                     <div class="container">
-                                                    <h4 style="color: #2A00FF"><b><a href="{{ route('devedangi') }}">Засварын чанарын хяналт, стандартчилал</a></b></h4>
+                                                    <h4 style="color: #2A00FF"><b><a href="{{ route('home') }}">Засварын чанарын хяналт, стандартчилал</a></b></h4>
                                                     <h2> 4
                                                     </h2>
                                                     </div>
