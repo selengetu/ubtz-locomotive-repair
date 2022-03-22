@@ -34,7 +34,7 @@
                                             <div class="col-md-4">
                                             <div class="card" style="border-left: .25rem solid #8F0000 ">
                                             <div class="container">
-                                            <h3 style="color: #8F0000"><b>Хөдөлмөрийн аюулгүй байдлын хяналт</b></h3>
+                                            <h3 style="color: #8F0000"><b>Хөдөлгөөний аюулгүй байдлын хяналт</b></h3>
                                            
                                             </div>
                                             </div>
