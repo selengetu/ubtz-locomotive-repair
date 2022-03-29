@@ -4,7 +4,7 @@
    
     <head>
         <meta charset="utf-8" />
-        <title>Илчит тэрэгний засварын програм</title>
+        <title> Тууз бүртгэлийн програм</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="Илчит тэрэгний засварын програм" name="description" />
@@ -30,7 +30,7 @@
         <div class="page-container">
             <!-- BEGIN SIDEBAR -->
            
-                 @include('layouts.partials.sidebar')
+                 @include('layouts.partials.sidebar2')
             
             <!-- END SIDEBAR -->
             <!-- BEGIN CONTENT -->

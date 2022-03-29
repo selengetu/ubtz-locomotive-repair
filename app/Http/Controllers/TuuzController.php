@@ -7,11 +7,10 @@ use Illuminate\Support\Facades\Input;
 use Request;
 use Spatie\Activitylog\Models\Activity;
 use \Cache;
-use App\FaultDetail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
-class TailanController extends Controller
+class TuuzController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -50,7 +49,7 @@ class TailanController extends Controller
                         s.statfullname as fromstationname,
                             count(f.fromstation) as count,
                          sum(SUBSTR(d.stoptime, 1, 2)*60 + SUBSTR(d.stoptime, 4, 2)) as sum
-                        from  ribbon t
+                        from  ZUTLENT.ribbon t
                         inner join ZUTGUUR.MARSHBRIG g on g.marshid=t.route_id and g.depocode=t.depo_id
                         inner join ZUTGUUR.MARSHZUT e on e.marshid=t.route_id
                         inner join ZUTLENT.fault f on f.ribbon_id = t.ribbon_id
@@ -60,9 +59,9 @@ class TailanController extends Controller
                         LEFT JOIN  ZUTLENT.V_Broketype b on b.broketype_id= d.broketype
                         where t.depo_id=g.depocode and e.depocode= t.depo_id and e.marshyear=g.marshyear and e.marshmonth=g.marshmonth and f.fault_no=12 and (SUBSTR(d.stoptime, 1, 2)*60 + SUBSTR(d.stoptime, 4, 2))>29 and  (SUBSTR(d.stoptime, 1, 2)*60 + SUBSTR(d.stoptime, 4, 2))<120 and  t.depo_id =  ".Auth::user()->depo_id. " " .$query."
                         group by s.statfullname, g.depocode");
-        $zurchil=DB::select('select  * from ZURCHIL_30  t where t.depocode =  '.Auth::user()->depo_id. ' '.$query.'');
+        $zurchil=DB::select('select  * from ZUTLENT.ZURCHIL_30  t where t.depocode =  '.Auth::user()->depo_id. ' '.$query.'');
 
-        return view('tailan.urtuu30')->with(['zurchil'=>$zurchil,'z'=>$z,'startdate'=>$startdate,'enddate'=>$enddate]);
+        return view('tuuz.urtuu30')->with(['zurchil'=>$zurchil,'z'=>$z,'startdate'=>$startdate,'enddate'=>$enddate]);
     }
     public function urtuu120()
     {
@@ -85,7 +84,7 @@ class TailanController extends Controller
                         s.statfullname as fromstationname,
                             count(f.fromstation) as count,
                          sum(SUBSTR(d.stoptime, 1, 2)*60 + SUBSTR(d.stoptime, 4, 2)) as sum
-                        from  ribbon t
+                        from  ZUTLENT.ribbon t
                         inner join ZUTGUUR.MARSHBRIG g on g.marshid=t.route_id and g.depocode=t.depo_id
                         inner join ZUTGUUR.MARSHZUT e on e.marshid=t.route_id
                         inner join  ZUTLENT.fault f on f.ribbon_id = t.ribbon_id
@@ -95,9 +94,9 @@ class TailanController extends Controller
                         LEFT JOIN  ZUTLENT.V_Broketype b on b.broketype_id= d.broketype
                         where t.depo_id=g.depocode and e.depocode= t.depo_id and e.marshyear=g.marshyear and e.marshmonth=g.marshmonth and f.fault_no=12 and (SUBSTR(d.stoptime, 1, 2)*60 + SUBSTR(d.stoptime, 4, 2))>119 and t.depo_id =  ".Auth::user()->depo_id. " " .$query."
                         group by s.statfullname, g.depocode");
-        $zurchil=DB::select('select  * from ZURCHIL_120  t where t.depocode =  '.Auth::user()->depo_id. ' '.$query.'');
+        $zurchil=DB::select('select  * from ZUTLENT.ZURCHIL_120  t where t.depocode =  '.Auth::user()->depo_id. ' '.$query.'');
 
-        return view('tailan.urtuu120')->with(['zurchil'=>$zurchil,'z'=>$z,'startdate'=>$startdate,'enddate'=>$enddate]);
+        return view('tuuz.urtuu120')->with(['zurchil'=>$zurchil,'z'=>$z,'startdate'=>$startdate,'enddate'=>$enddate]);
     }
     public function anhaaramj()
     {
@@ -117,7 +116,7 @@ class TailanController extends Controller
 
          $zurchil=DB::select('select  st1.statfullname as fromstat, st2.statfullname as tostat, t.*, b.*, r.* from  ZUTLENT.V_FAULT_DET t, ZUTGUUR.MARSHBRIG b ,  ZUTLENT.Ribbon r, zutguur.stations st1,zutguur.stations st2 where b.marshid=r.route_id and t.RIBBON_ID=r.ribbon_id and t.FAULT_NO=9 and st1.statcode= r.fromstation and st2.statcode= r.tostation and b.depocode = '.Auth::user()->depo_id. '  '.$query.' ');
            
-        return view('tailan.anhaaramj')->with(['zurchil'=>$zurchil,'startdate'=>$startdate,'enddate'=>$enddate]);
+        return view('tuuz.anhaaramj')->with(['zurchil'=>$zurchil,'startdate'=>$startdate,'enddate'=>$enddate]);
     }
        public function attention()
     {
@@ -135,7 +134,7 @@ class TailanController extends Controller
   
         }
 
-         $zurchil=DB::select('select  * from V_ATTENTION_TAILAN t where t.depo_id = '.Auth::user()->depo_id. '  '.$query.' order by t.ARRTIME');
+         $zurchil=DB::select('select  * from ZUTLENT.V_ATTENTION_TAILAN t where t.depo_id = '.Auth::user()->depo_id. '  '.$query.' order by t.ARRTIME');
          $z=DB::select("select  sum(a.time) as time,
                         r.DEPO_ID, p.speed as speedname, count(p.speed) as count
                         from  ZUTLENT.Attention a,  ZUTLENT.ribbon t,  ZUTLENT.attention_speed p,  ZUTLENT.ribbon r, zutguur.marshbrig b
@@ -144,11 +143,11 @@ class TailanController extends Controller
                         order by p.speed");
         $z1=DB::select(" select  sum(a.time) as time,
                       t.DEPO_ID, s.statfullname as fromstat, s1.statfullname as tostat, count(a.attention_id) as count
-                        from  ZUTLENT.Attention a, ribbon t,  ZUTLENT.V_STATION s,  ZUTLENT.attention_speed p,  ZUTLENT.V_STATION s1, zutguur.marshbrig b
+                        from  ZUTLENT.Attention a, ZUTLENT.ribbon t,  ZUTLENT.V_STATION s,  ZUTLENT.attention_speed p,  ZUTLENT.V_STATION s1, zutguur.marshbrig b
                         where a.ribbon_id=t.ribbon_id and t.fromstation = s.statcode and p.attentionspeed_id=a.speed and t.tostation=s1.statcode and t.ribbon_id= a.ribbon_id and b.marshid= t.route_id and t.depo_id= b.depocode and t.depo_id = ".Auth::user()->depo_id. " " .$query."
                   group by s.statfullname, s1.statfullname, t.depo_id
                         order by s.statfullname");
-        return view('tailan.attention')->with(['zurchil'=>$zurchil,'z'=>$z,'z1'=>$z1,'startdate'=>$startdate,'enddate'=>$enddate]);
+        return view('tuuz.attention')->with(['zurchil'=>$zurchil,'z'=>$z,'z1'=>$z1,'startdate'=>$startdate,'enddate'=>$enddate]);
     }
      public function hurdhemjigch()
     {
@@ -165,9 +164,9 @@ class TailanController extends Controller
                     $enddate=  Carbon::today()->toDateString();
   
         }
-          $zurchil=DB::select('select  * from ZURCHIL_HURDHEMJIGCH t where t.depocode = '.Auth::user()->depo_id. '  '.$query.' ');
+          $zurchil=DB::select('select  * from ZUTLENT.ZURCHIL_HURDHEMJIGCH t where t.depocode = '.Auth::user()->depo_id. '  '.$query.' ');
         
-        return view('tailan.hurdhemjigch')->with(['zurchil'=>$zurchil,'startdate'=>$startdate,'enddate'=>$enddate]);
+        return view('tuuz.hurdhemjigch')->with(['zurchil'=>$zurchil,'startdate'=>$startdate,'enddate'=>$enddate]);
     } public function hurdhureegui()
     {
          $query = "";
@@ -184,9 +183,9 @@ class TailanController extends Controller
   
         }
          
-         $zurchil=DB::select('select  * from ZURCHIL_HURDHUREEGUI t where t.depocode = '.Auth::user()->depo_id. ' '.$query.'');
+         $zurchil=DB::select('select  * from ZUTLENT.ZURCHIL_HURDHUREEGUI t where t.depocode = '.Auth::user()->depo_id. ' '.$query.'');
            
-        return view('tailan.hurdhureegui')->with(['zurchil'=>$zurchil,'startdate'=>$startdate,'enddate'=>$enddate]);
+        return view('tuuz.hurdhureegui')->with(['zurchil'=>$zurchil,'startdate'=>$startdate,'enddate'=>$enddate]);
     }
      public function dooshorson()
     {
@@ -208,7 +207,7 @@ class TailanController extends Controller
                         g.mashname,
                         count(g.mashcode) as count,
                         substr(numtodsinterval(sum(SUBSTR(d.stoptime, 1, 2)*3600 + SUBSTR(d.stoptime, 4, 2)*60 + SUBSTR(d.stoptime, 7, 2)), 'SECOND'),12,  5) as sum
-                        from  ribbon t
+                        from  ZUTLENT.ribbon t
                       inner join  ZUTLENT.V_MARSHBRIG g on g.marshid=t.route_id and g.depocode=t.depo_id
                         inner join ZUTGUUR.MARSHZUT e on e.marshid=t.route_id
                         inner join  ZUTLENT.fault f on f.ribbon_id = t.ribbon_id
@@ -216,9 +215,9 @@ class TailanController extends Controller
                         LEFT JOIN  ZUTLENT.V_Broketype b on b.broketype_id= d.broketype
                         where t.depo_id=g.depocode and e.depocode= t.depo_id and e.marshyear=g.marshyear and e.marshmonth=g.marshmonth and f.fault_no=81 and  t.depo_id =  ".Auth::user()->depo_id. " " .$query."
                         group by g.mashname, g.depocode");
-        $zurchil=DB::select('select  * from ZURCHIL_DOOSHORSON t where t.depocode = '.Auth::user()->depo_id. ' '.$query.' ');
+        $zurchil=DB::select('select  * from ZUTLENT.ZURCHIL_DOOSHORSON t where t.depocode = '.Auth::user()->depo_id. ' '.$query.' ');
        
-        return view('tailan.dooshorson')->with(['zurchil'=>$zurchil,'z'=>$z,'startdate'=>$startdate,'enddate'=>$enddate]);
+        return view('tuuz.dooshorson')->with(['zurchil'=>$zurchil,'z'=>$z,'startdate'=>$startdate,'enddate'=>$enddate]);
     }
      public function technoiluu()
     {
@@ -240,8 +239,8 @@ class TailanController extends Controller
                         s.statfullname as fromstationname,
                         count(f.fromstation) as count,
                         sum(d.constkilo) as sum
-                        from  ribbon t
-                      inner join V_MARSHBRIG g on g.marshid=t.route_id and g.depocode=t.depo_id
+                        from  ZUTLENT.ribbon t
+                      inner join ZUTLENT.V_MARSHBRIG g on g.marshid=t.route_id and g.depocode=t.depo_id
                         inner join ZUTGUUR.MARSHZUT e on e.marshid=t.route_id
                         inner join  ZUTLENT.fault f on f.ribbon_id = t.ribbon_id
                         left join  ZUTLENT.fault_det d on d.fault_id=f.fault_id
@@ -251,9 +250,9 @@ class TailanController extends Controller
                         where t.depo_id=g.depocode and e.depocode= t.depo_id and e.marshyear=g.marshyear and e.marshmonth=g.marshmonth and f.fault_no=83 and  t.depo_id =  ".Auth::user()->depo_id. " " .$query."
                         group by s.statfullname, g.depocode");
 
-         $zurchil=DB::select('select  * from ZURCHIL_TECHNO t where t.depocode = '.Auth::user()->depo_id. ' '.$query.'');
+         $zurchil=DB::select('select  * from ZUTLENT.ZURCHIL_TECHNO t where t.depocode = '.Auth::user()->depo_id. ' '.$query.'');
             
-        return view('tailan.technoiluu')->with(['zurchil'=>$zurchil,'z'=>$z,'startdate'=>$startdate,'enddate'=>$enddate]);
+        return view('tuuz.technoiluu')->with(['zurchil'=>$zurchil,'z'=>$z,'startdate'=>$startdate,'enddate'=>$enddate]);
     }
      public function orohdohio()
 {
@@ -272,7 +271,7 @@ class TailanController extends Controller
     }
     $zurchil=DB::select('select  * from ZURCHIL_OROHDOHIO t where t.depocode = '.Auth::user()->depo_id. ' '.$query.'');
 
-    return view('tailan.orohdohio')->with(['zurchil'=>$zurchil,'startdate'=>$startdate,'enddate'=>$enddate]);
+    return view('tuuz.orohdohio')->with(['zurchil'=>$zurchil,'startdate'=>$startdate,'enddate'=>$enddate]);
 }
     public function busad()
     {
@@ -299,7 +298,7 @@ class TailanController extends Controller
 
         $zurchil=DB::select('select  * from  ZUTLENT.ZURCHIL_busad t where t.depocode = '.Auth::user()->depo_id. ' '.$query.'');
   
-        return view('tailan.busad')->with(['zurchil'=>$zurchil,'startdate'=>$startdate,'enddate'=>$enddate]);
+        return view('tuuz.busad')->with(['zurchil'=>$zurchil,'startdate'=>$startdate,'enddate'=>$enddate]);
     }
     public function nagon()
     {
@@ -319,7 +318,7 @@ class TailanController extends Controller
         $achaa=DB::select('select  * from  ZUTLENT.V_NAGON t where t.depocode = '.Auth::user()->depo_id. ' '.$query.'');
 
         $train=DB::select('select distinct t.ROUTE_ID, t.TRAIN_NO from  ZUTLENT.V_Ribbon t where t.depocode = '.Auth::user()->depo_id. ' '.$query.'');
-        return view('tailan.niilberanhaaramj')->with(['achaa'=>$achaa,'train'=>$train,'startdate'=>$startdate,'enddate'=>$enddate]);
+        return view('tuuz.niilberanhaaramj')->with(['achaa'=>$achaa,'train'=>$train,'startdate'=>$startdate,'enddate'=>$enddate]);
     }
      public function hiiergesen()
     {
@@ -338,7 +337,7 @@ class TailanController extends Controller
         }
             
         $zurchil=DB::select('select  * from  ZUTLENT.ZURCHIL_HII t where t.depocode = '.Auth::user()->depo_id. ' '.$query.' ');
-        return view('tailan.hiiergesen')->with(['zurchil'=>$zurchil,'startdate'=>$startdate,'enddate'=>$enddate]);
+        return view('tuuz.hiiergesen')->with(['zurchil'=>$zurchil,'startdate'=>$startdate,'enddate'=>$enddate]);
     }
     public function graph()
     {
@@ -365,7 +364,7 @@ class TailanController extends Controller
         }
 
         $zurchil=DB::select('select  * from  ZUTLENT.ZURCHIL_GRAPH t where t.depocode = '.Auth::user()->depo_id. ' '.$query.' ');
-        return view('tailan.graph')->with(['zurchil'=>$zurchil,'startdate'=>$startdate,'enddate'=>$enddate,'type'=>$type]);
+        return view('tuuz.graph')->with(['zurchil'=>$zurchil,'startdate'=>$startdate,'enddate'=>$enddate,'type'=>$type]);
     }
       public function yaraltaitormoz()
     {
@@ -390,16 +389,16 @@ class TailanController extends Controller
                         substr(numtodsinterval(sum(SUBSTR(d.stoptime, 1, 2)*3600 + SUBSTR(d.stoptime, 4, 2)*60 + SUBSTR(d.stoptime, 7, 2)), 'SECOND'),12,  5) as sum
                         from   ZUTLENT.ribbon t
                       inner join  ZUTLENT.V_MARSHBRIG g on g.marshid=t.route_id and g.depocode=t.depo_id
-                        inner join  ZUTLENT.ZUTGUUR.MARSHZUT e on e.marshid=t.route_id
+                        inner join  ZUTGUUR.MARSHZUT e on e.marshid=t.route_id
                         inner join  ZUTLENT.fault f on f.ribbon_id = t.ribbon_id
                         left join  ZUTLENT.fault_det d on d.fault_id=f.fault_id
                         LEFT JOIN  ZUTLENT.V_Broketype b on b.broketype_id= d.broketype
                         where t.depo_id=g.depocode and e.depocode=t.depo_id and e.marshyear=g.marshyear and e.marshmonth=g.marshmonth and b.broketype_id is not null and f.fault_no=35 and  t.depo_id =  ".Auth::user()->depo_id. " " .$query."
                         group by d.is_stop, b.broketype_name, b.broketype_id, g.depocode
                         order by b.broketype_id");
-          $zurchil=DB::select('select  * from ZURCHIL_YARALTAITORMOZ t where t.depocode = '.Auth::user()->depo_id. ' '.$query.' ');
+          $zurchil=DB::select('select  * from ZUTLENT.ZURCHIL_YARALTAITORMOZ t where t.depocode = '.Auth::user()->depo_id. ' '.$query.' ');
              
-        return view('tailan.yaraltaitormoz')->with(['zurchil'=>$zurchil,'z'=>$z,'startdate'=>$startdate,'enddate'=>$enddate]);
+        return view('tuuz.yaraltaitormoz')->with(['zurchil'=>$zurchil,'z'=>$z,'startdate'=>$startdate,'enddate'=>$enddate]);
     }
       public function uharsan()
     {
@@ -418,13 +417,10 @@ class TailanController extends Controller
         }
             
         $zurchil=DB::select('select  * from  ZUTLENT.ZURCHIL_UHARSAN t where t.depocode = '.Auth::user()->depo_id. ' '.$query.' ');
-        return view('tailan.uharsan')->with(['zurchil'=>$zurchil,'startdate'=>$startdate,'enddate'=>$enddate]);
+        return view('tuuz.uharsan')->with(['zurchil'=>$zurchil,'startdate'=>$startdate,'enddate'=>$enddate]);
     }
   
-      public function niilberanhaaramj()
-    {
-        return view('tailan.niilberanhaaramj');
-    }
+     
        public function hoorondzamzogsolt()
     {
         $query = "";
@@ -443,7 +439,7 @@ class TailanController extends Controller
 
         $zurchil=DB::select('select  * from  ZUTLENT.ZURCHIL_HOORONDZAM t where t.depocode = '.Auth::user()->depo_id. ' '.$query.' ');
             
-        return view('tailan.hoorondzamzogsolt')->with(['zurchil'=>$zurchil,'startdate'=>$startdate,'enddate'=>$enddate]);
+        return view('tuuz.hoorondzamzogsolt')->with(['zurchil'=>$zurchil,'startdate'=>$startdate,'enddate'=>$enddate]);
     }
        public function hajuugiinzam()
     {
@@ -465,7 +461,7 @@ class TailanController extends Controller
         group by fromst, fromstat, tost, tostat
         order by fromstat, tostat');
            
-        return view('tailan.hajuugiinzam')->with(['z'=>$z,'zurchil'=>$zurchil,'startdate'=>$startdate,'enddate'=>$enddate]);
+        return view('tuuz.hajuugiinzam')->with(['z'=>$z,'zurchil'=>$zurchil,'startdate'=>$startdate,'enddate'=>$enddate]);
     }
      public function buguiwch()
     {
@@ -483,7 +479,7 @@ class TailanController extends Controller
         }
         $zurchil=DB::select('select  * from  ZUTLENT.ZURCHIL_BUGUIWCH t where t.depocode = '.Auth::user()->depo_id. ' '.$query.'');
             
-        return view('tailan.buguiwch')->with(['zurchil'=>$zurchil,'startdate'=>$startdate,'enddate'=>$enddate]);
+        return view('tuuz.buguiwch')->with(['zurchil'=>$zurchil,'startdate'=>$startdate,'enddate'=>$enddate]);
     }
     public function tuslamj()
     {
@@ -518,7 +514,7 @@ class TailanController extends Controller
         }
         $zurchil=DB::select('select  * from  ZUTLENT.ZURCHIL_TUSLAMJ t where t.depocode = '.Auth::user()->depo_id. ' '.$query.'');
 
-        return view('tailan.tuslamj')->with(['zurchil'=>$zurchil,'type'=>$type,'startdate'=>$startdate,'enddate'=>$enddate]);
+        return view('tuuz.tuslamj')->with(['zurchil'=>$zurchil,'type'=>$type,'startdate'=>$startdate,'enddate'=>$enddate]);
     }
     public function norm()
     {
@@ -563,7 +559,7 @@ class TailanController extends Controller
                 (select t.translator_id, t.depo_id, u.name,
                                         case when workcode in ('377') then 500 else workcode end as wcode, runkm, worktime,
                                             to_char(t.translate_date, 'YYYY/MM/DD') as depdatetime from
-                                        (select distinct r.route_id, r.translator_id, r.depo_id,r.translate_date from Ribbon r
+                                        (select distinct r.route_id, r.translator_id, r.depo_id,r.translate_date from ZUTLENT.Ribbon r
                                         ) t, 
                                         ZUTGUUR.Calcaddition c,  ZUTLENT.USERS u
                                         where t.route_id=c.marshid and u.id=t.translator_id and u.grand_type !=1  ".$query." ".$query1."   ".$date." ) q
@@ -577,9 +573,9 @@ class TailanController extends Controller
                                 )
                                 order by depdatetime desc
               ");
-        $user=DB::select("select * from Users t where 1=1 ".$query." and t.grand_type !=1 order by name");
+        $user=DB::select("select * from ZUTLENT.Users t where 1=1 ".$query." and t.grand_type !=1 order by name");
 
-        return view('tailan.normative')->with(['zurchil'=>$zurchil,'startdate'=>$startdate,'enddate'=>$enddate,'user'=>$user]);
+        return view('tuuz.normative')->with(['zurchil'=>$zurchil,'startdate'=>$startdate,'enddate'=>$enddate,'user'=>$user]);
     }
     public function machinistnagon()
     {
@@ -608,6 +604,6 @@ class TailanController extends Controller
                                group by t.DEPOCODE,t.TUSLCODE, t.TUSLNAME
                                order by t.TUSLCODE");
 
-        return view('tailan.machinistnagon')->with(['startdate' => $startdate, 'enddate' => $enddate, 'machinist' => $machinist, 'tuslah' => $tuslah]);
+        return view('tuuz.machinistnagon')->with(['startdate' => $startdate, 'enddate' => $enddate, 'machinist' => $machinist, 'tuslah' => $tuslah]);
     }
 }

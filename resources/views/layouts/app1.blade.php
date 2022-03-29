@@ -46,7 +46,7 @@
         <!-- END CONTAINER -->
         <!-- BEGIN FOOTER -->
         <div class="page-footer">
-            <div class="page-footer-inner"> 2018 &copy; СБМТА
+            <div class="page-footer-inner"> 2022 &copy; СБМТА
                
                
             </div>
