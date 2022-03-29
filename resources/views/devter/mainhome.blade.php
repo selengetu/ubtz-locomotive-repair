@@ -15,26 +15,33 @@
                                     <fieldset class="scheduler-border">
                                         <form method="post" action="group">
                                         <div class="col-md-12">
-
-                                            <div class="col-md-4">
-                                            <div class="card" style="border-left: .25rem solid green ">
+                                        <div class="col-md-3">
+                                            <div class="card" style="border-left: .25rem solid #f5e727 ">
                                             <div class="container">
-                                            <h3 style="color: green"><b>Ашиглалтын үйл ажиллагаа</b></h3>
+                                            <h3 style="color: #f5e727"><b>Хяналт</b></h3>
                                         
                                             </div>
                                             </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
+                                            <div class="card" style="border-left: .25rem solid green ">
+                                            <div class="container">
+                                            <h3 style="color: green"><b>Ашиглалт</b></h3>
+                                        
+                                            </div>
+                                            </div>
+                                            </div>
+                                            <div class="col-md-3">
                                             <div class="card" style="border-left: .25rem solid #2A00FF ">
                                             <div class="container">
-                                            <h3 style="color: #2A00FF"><b>Засварын бүртгэл</b></h3>
+                                            <h3 style="color: #2A00FF"><b>Засвар</b></h3>
                                             </div>
                                             </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                             <div class="card" style="border-left: .25rem solid #8F0000 ">
                                             <div class="container">
-                                            <h3 style="color: #8F0000"><b>Хөдөлгөөний аюулгүй байдлын хяналт</b></h3>
+                                            <h3 style="color: #8F0000"><b>Хөдөлгөөний аюулгүй байдал</b></h3>
                                            
                                             </div>
                                             </div>
@@ -42,8 +49,15 @@
 
                                             </div>
                                             <div class="col-md-12" style="margin-top:60px">
-
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
+                            <div class="card" style="border-left: .25rem solid #f5e727 ">
+                                <div class="container">
+                                <h4 style="color: #f5e727"><b>Чанарын үзүүлэлт</b></h4>
+                                    <h2> 5</h2>
+                                </div>
+                            </div>
+                        </div>
+                                            <div class="col-md-3">
                             <div class="card" style="border-left: .25rem solid green ">
                                 <div class="container">
                                     <h4 style="color: green"><b>Машинчийн маршрут, түлш зарцуулалт</b></h4>
@@ -51,7 +65,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="card" style="border-left: .25rem solid #2A00FF ">
                                 <div class="container">
                                     <h4 style="color: #2A00FF"><b><a href="{{ route('devedangi') }}">Цахим пасспорт, эд анги</a></b></h4>
@@ -60,7 +74,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="card" style="border-left: .25rem solid #8F0000 ">
                                 <div class="container">
                                     <h4 style="color: #8F0000"><b>Зурмагийн Гүйцэтгэл</b></h4>
@@ -74,15 +88,15 @@
                                            
                                             <div class="col-md-12" style="margin-top:60px">
 
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3 col-md-offset-3">
                                                     <div class="card" style="border-left: .25rem solid green ">
                                                     <div class="container">
-                                                    <h4 style="color: green"><b>Тууз бүртгэл, чанарын үзүүлэлт</b></h4>
+                                                    <h4 style="color: green"><b>Тууз бүртгэл</b></h4>
                                                     <h2> 16</h2>
                                                     </div>
                                                     </div>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                     <div class="card" style="border-left: .25rem solid #2A00FF ">
                                                     <div class="container">
                                                     <h4 style="color: #2A00FF"><b><a href="{{ route('home') }}">Засварын чанарын хяналт, стандартчилал</a></b></h4>
@@ -91,7 +105,7 @@
                                                     </div>
                                                     </div>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                     <div class="card" style="border-left: .25rem solid #8F0000 ">
                                                     <div class="container">
                                                     <h4 style="color: #8F0000"><b>Гологдол дутагдал</b></h4>
@@ -103,15 +117,15 @@
                                                     </div>
                                                     <div class="col-md-12" style="margin-top:60px">
 
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3 col-md-offset-3">
                                                     <div class="card" style="border-left: .25rem solid green ">
                                                     <div class="container">
-                                                    <h4 style="color: green"><b>Зүтгүүрийн бригадын ажлын хувиарлалт</b></h4>
+                                                    <h4 style="color: green"><b>Зүтгүүрийн бригад</b></h4>
                                                     <h2> 6</h2>
                                                     </div>
                                                     </div>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                     <div class="card" style="border-left: .25rem solid #2A00FF ">
                                                     <div class="container">
                                                     <h4 style="color: #2A00FF"><b>Сэлбэгийн зарцуулалт</b></h4>
