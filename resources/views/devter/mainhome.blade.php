@@ -61,7 +61,7 @@
                             <div class="card" style="border-left: .25rem solid green ">
                                 <div class="container">
                                     <h4 style="color: green"><b>Машинчийн маршрут, түлш зарцуулалт</b></h4>
-                                    <h2> 65</h2>
+                                    <h2> 6</h2>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                                                     <div class="col-md-3">
                                                     <div class="card" style="border-left: .25rem solid #8F0000 ">
                                                     <div class="container">
-                                                    <h4 style="color: #8F0000"><b>Гологдол дутагдал</b></h4>
+                                                    <h4 style="color: #8F0000"><b>Гологдол, дутагдал, тасалдал </b></h4>
                                                     <h2>11</h2>
                                                     </div>
                                                     </div>
