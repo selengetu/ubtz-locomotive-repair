@@ -91,7 +91,7 @@
                                                     <div class="col-md-3 col-md-offset-3">
                                                     <div class="card" style="border-left: .25rem solid green ">
                                                     <div class="container">
-                                                    <h4 style="color: green"><b>Тууз бүртгэл</b></h4>
+                                                    <h4 style="color: green"><b><a href="{{ route('urtuu30') }}">Тууз бүртгэл</a></b></h4>
                                                     <h2> 16</h2>
                                                     </div>
                                                     </div>
