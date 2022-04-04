@@ -181,7 +181,13 @@ Route::get('/filter_loc_number/{date}', 'EdangiController@filter_loc_number');
 Route::get('/filter_loc_part/{date}', 'EdangiController@filter_loc_part');
 Route::get('/filter_loc_depo/{date}', 'EdangiController@filter_loc_depo');
 
+
+Route::get('/mashzurchil', 'MachinistController@indexzurchil')->name('mashzurchil');
+Route::post('/searchmachinistzurchil', 'MachinistController@searchzurchil')->name('searchmachinistzurchil');
+Route::post('/searchmachinist', 'MachinistController@search')->name('searchmachinist');
+
 Route::match(['get', 'post'],'/haluunzogsolttailan', 'HaluunZogsoltController@tailan')->name('haluunzogsolttailan');
+Route::match(['get', 'post'],'/haluunzogsoltseri', 'HaluunZogsoltController@seri')->name('haluunzogsoltseri');Route::match(['get', 'post'],'/haluunzogsolttailan', 'HaluunZogsoltController@tailan')->name('haluunzogsolttailan');
 Route::match(['get', 'post'],'/haluunzogsoltseri', 'HaluunZogsoltController@seri')->name('haluunzogsoltseri');
 Route::match(['get', 'post'],'/tuuzorchuulsan', 'TuuzController@index')->name('tuuzorchuulsan');
 Route::match(['get', 'post'],'/dooshorson', 'TuuzController@dooshorson')->name('dooshorson');
