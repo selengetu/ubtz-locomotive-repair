@@ -1,4 +1,4 @@
-         @extends('layouts.app')
+@extends('layouts.app')
 @section('content')
 
           <div class="page-content-wrapper">
@@ -295,7 +295,16 @@
                                               </div>
 
                                           </div>
-                                          
+                                          <div class="col-md-3">
+                                              <div class="form-group">
+                                                  <label for="name">Секц</label>
+                                                  <select class="form-control select2" id="sec" name="sec" >
+                                                          <option value= "1" tag="1"> А </option>
+                                                          <option value= "2" tag="2"> Б </option>
+                                                  </select>
+                                              </div>
+
+                                          </div>
                                           <div class="col-md-3">
                                               <div class="form-group">
                                                   <label for="name">Урсгал засварын томьёолол</label>
@@ -345,10 +354,92 @@
                                               </div>
 
                                           </div>
+                                          <div class="col-md-3">
+                                              <div class="form-group">
+                                                  <label for="name">Гүйлт</label>
+                                                  <input type="number" class="form-control inputtext" id="zasrun" name="zasrun">
+                                              </div>
 
-                                         
+                                          </div>
+                                          <div class="col-md-3">
+                                              <div class="form-group">
+                                                  <label for="name">ТО-4</label>
+                                                  <input type="number" class="form-control inputtext" id="stopto4" name="stopto4">
+                                              </div>
+
+                                          </div>
+                                          <div class="col-md-3">
+                                              <div class="form-group">
+                                                  <label for="name">Нэмэлт зогсолт</label>
+                                                  <input type="number" class="form-control inputtext" id="stopadd" name="stopadd">
+                                              </div>
+
+                                          </div>
+                                          <div class="col-md-3">
+                                              <div class="form-group">
+                                                  <label for="name">Хүлээн авагч</label>
+                                                  <select class="form-control select2" id="receiver" name="receiver">
+                                                      @foreach($receiver as $receivers)
+                                                          <option value= "{{$receivers->receiver_id}}">{{$receivers->receiver_name}}</option>
+                                                      @endforeach
+                                                  </select>
+                                              </div>
+
+                                          </div>
+                                        
                                       </div>
+                                      @if($zastype ==2 )
+                                      <div class="col-md-12">
+                                      <div class="col-md-3">
+                                              <div class="form-group">
+                                                  <label for="name">ТО-2 орсон депо</label>
+                                                  <select class="form-control select2" id="to2depo" name="to2depo" >
                                   
+                                  @foreach($depo as $depos) 
+                                       <option value= "{{$depos->depocode}}">{{$depos->deponame}}</option>
+                                   @endforeach
+          </select>
+                                              </div>
+
+                                          </div>
+                                          <div class="col-md-3">
+                                              <div class="form-group">
+                                                  <label for="name">Сүүлийн засварын огноо</label>
+                                                  <input class="form-control datepicker" id="replastdate" name="replastdate" type="text" value="{{$enddate}}">
+                                              </div>
+
+                                          </div>
+                                          <div class="col-md-3">
+                                              <div class="form-group">
+                                                  <label for="name">Групп</label>
+                                                  <select class="form-control select2" id="locgroup" name="locgroup" >
+                                  
+                                                                          @foreach($part as $parts) 
+                                                                               <option value= "{{$parts->part_id}}">{{$parts->part_name}}</option>
+                                                                           @endforeach
+                                                  </select>
+                                              </div>
+
+                                          </div>
+                                          <div class="col-md-3">
+                                              <div class="form-group">
+                                                  <label for="name">Гэмтэл</label>
+                                                  <select class="form-control select2" id="damage" name="damage" >
+
+                                                  </select>
+                                              </div>
+
+                                          </div>
+                                          <div class="col-md-12">
+                                              <div class="form-group">
+                                                  <label for="name">Шийдвэр</label>
+                                                  <input type="text" class="form-control inputtext" id="decision" name="decision">
+                                              </div>
+
+                                          </div>
+
+                                      </div>
+                                      @endif
                                           <div class="col-md-12">
                                               <div class="col-md-3">
                                                   <div class="form-group">

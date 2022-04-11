@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel">
-                            <div class="panel-heading" style="background-color: #5432ff; color: #fff">
+                            <div class="panel-heading" style="background-color: #2A00FF; color: #fff">
 
                             </div>
                             <div id="sear" class="panel-collapse collapse in">
@@ -16,32 +16,33 @@
                                         <form method="post" action="group">
                                         <div class="col-md-12">
                                         <div class="col-md-3">
-                                            <div class="card" style="border-left: .25rem solid #f5e727 ">
+                                            <div class="card text-white bg-warning" style="border-left: .25rem solid #f58027;">
                                             <div class="container">
-                                            <h3 style="color: #f5e727"><b>Хяналт</b></h3>
+                                                
+                                            <h3 style="color: #f58027"><img src="{{asset('image/Picture7.png')}}" alt="logo" class="logo-default" height="30px"/> <b>Хяналт</b></h3>
                                         
                                             </div>
                                             </div>
                                             </div>
                                             <div class="col-md-3">
-                                            <div class="card" style="border-left: .25rem solid green ">
+                                            <div class="card text-white bg-success" style="border-left: .25rem solid green ">
                                             <div class="container">
-                                            <h3 style="color: green"><b>Ашиглалт</b></h3>
+                                            <h3 style="color: green"><img src="{{asset('image/Picture2.png')}}" alt="logo" class="logo-default" height="30px" /> <b>Ашиглалт</b></h3>
                                         
                                             </div>
                                             </div>
                                             </div>
                                             <div class="col-md-3">
-                                            <div class="card" style="border-left: .25rem solid #2A00FF ">
+                                            <div class="card text-white bg-info" style="border-left: .25rem solid #2A00FF ">
                                             <div class="container">
-                                            <h3 style="color: #2A00FF"><b>Засвар</b></h3>
+                                            <h3 style="color: #2A00FF"><img src="{{asset('image/Picture4.png')}}" alt="logo" class="logo-default" width="35px" /> <b>Засвар</b></h3>
                                             </div>
                                             </div>
                                             </div>
                                             <div class="col-md-3">
-                                            <div class="card" style="border-left: .25rem solid #8F0000 ">
+                                            <div class="card  text-white bg-danger" style="border-left: .25rem solid #8F0000 ">
                                             <div class="container">
-                                            <h3 style="color: #8F0000"><b>Хөдөлгөөний аюулгүй байдал</b></h3>
+                                            <h3 style="color: #8F0000"><img src="{{asset('image/Picture9.png')}}" alt="logo" class="logo-default" width="35px" /> <b>Хөдөлгөөний аюулгүй байдал</b></h3>
                                            
                                             </div>
                                             </div>
@@ -50,10 +51,10 @@
                                             </div>
                                             <div class="col-md-12" style="margin-top:60px">
                                             <div class="col-md-3">
-                            <div class="card" style="border-left: .25rem solid #f5e727 ">
+                            <div class="card " style="border-left: .25rem solid #f58027 ">
                                 <div class="container">
-                                <h4 style="color: #f5e727"><b>Чанарын үзүүлэлт</b></h4>
-                                    <h2> 5</h2>
+                                <h4 style="color: #f58027"><b>Чанарын үзүүлэлт</b></h4>
+                                
                                 </div>
                             </div>
                         </div>
@@ -61,7 +62,7 @@
                             <div class="card" style="border-left: .25rem solid green ">
                                 <div class="container">
                                     <h4 style="color: green"><b>Машинчийн маршрут, түлш зарцуулалт</b></h4>
-                                    <h2> 6</h2>
+                                  
                                 </div>
                             </div>
                         </div>
@@ -69,8 +70,7 @@
                             <div class="card" style="border-left: .25rem solid #2A00FF ">
                                 <div class="container">
                                     <h4 style="color: #2A00FF"><b><a href="{{ route('devedangi') }}">Цахим пасспорт, эд анги</a></b></h4>
-                                    <h2> 12
-                                    </h2>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                             <div class="card" style="border-left: .25rem solid #8F0000 ">
                                 <div class="container">
                                     <h4 style="color: #8F0000"><b>Зурмагийн Гүйцэтгэл</b></h4>
-                                    <h2>8</h2>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -92,7 +92,7 @@
                                                     <div class="card" style="border-left: .25rem solid green ">
                                                     <div class="container">
                                                     <h4 style="color: green"><b><a href="{{ route('urtuu30') }}">Тууз бүртгэл</a></b></h4>
-                                                    <h2> 16</h2>
+                                                  
                                                     </div>
                                                     </div>
                                                     </div>
@@ -100,8 +100,7 @@
                                                     <div class="card" style="border-left: .25rem solid #2A00FF ">
                                                     <div class="container">
                                                     <h4 style="color: #2A00FF"><b><a href="{{ route('home') }}">Засварын чанарын хяналт, стандартчилал</a></b></h4>
-                                                    <h2> 4
-                                                    </h2>
+                                                  
                                                     </div>
                                                     </div>
                                                     </div>
@@ -109,7 +108,7 @@
                                                     <div class="card" style="border-left: .25rem solid #8F0000 ">
                                                     <div class="container">
                                                     <h4 style="color: #8F0000"><b>Гологдол, дутагдал, тасалдал </b></h4>
-                                                    <h2>11</h2>
+                                                 
                                                     </div>
                                                     </div>
                                                     </div>
@@ -121,7 +120,7 @@
                                                     <div class="card" style="border-left: .25rem solid green ">
                                                     <div class="container">
                                                     <h4 style="color: green"><b>Зүтгүүрийн бригад</b></h4>
-                                                    <h2> 6</h2>
+                                                    
                                                     </div>
                                                     </div>
                                                     </div>
@@ -129,7 +128,7 @@
                                                     <div class="card" style="border-left: .25rem solid #2A00FF ">
                                                     <div class="container">
                                                     <h4 style="color: #2A00FF"><b>Сэлбэгийн зарцуулалт</b></h4>
-                                                    <h2> 2</h2>
+                                                   
                                                     </div>
                                                     </div>
                                                     </div>
