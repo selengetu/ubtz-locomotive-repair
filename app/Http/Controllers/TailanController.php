@@ -55,7 +55,7 @@ class TailanController extends Controller
         $addbase=DB::select("select * from zutguur.zasaddbase");
         $zasbaig=DB::select("select * from zutguur.zasbaig");
         $damage=DB::select("select * from V_SET_GEMTEL");
-        $locserial=LocSerial::orderBy('sericode', 'ASC')->get();
+        $locserial=LocSerial::orderBy('seriname', 'ASC')->get();
         $startdate=Input::get('zas_start'); 
         $enddate= Input::get('zas_end'); 
         $unit=DB::select("select * from set_unit");
@@ -97,7 +97,7 @@ class TailanController extends Controller
     public function group(){
 
         $query = "";
-        $locserial=LocSerial::orderBy('sericode', 'ASC')->get();
+        $locserial=LocSerial::orderBy('seriname', 'ASC')->get();
         $startdate=Input::get('zas_start'); 
         $enddate= Input::get('zas_end'); 
 
@@ -121,7 +121,7 @@ class TailanController extends Controller
     public function seri(){
 
         $query = "";
-        $locserial=LocSerial::orderBy('sericode', 'ASC')->get();
+        $locserial=LocSerial::orderBy('seriname', 'ASC')->get();
         $startdate=Input::get('zas_start'); 
         $enddate= Input::get('zas_end'); 
 
@@ -210,7 +210,7 @@ class TailanController extends Controller
     {
         $part=Part::orderby('part_name')->get();
         $loc_part= 3;
-        $locserial=LocSerial::all();
+        $locserial=LocSerial::orderBy('seriname', 'ASC')->get();
         $zaspart=DB::table('V_ZASZUT')->get();
         $loc_nas= Input::get('loc_seri');
         return view('tailan.nasjilt')->with(['locserial'=>$locserial,'part'=>$part, 'zaspart' => $zaspart, 'loc_part' => $loc_part, 'loc_nas' => $loc_nas]);
@@ -220,7 +220,7 @@ class TailanController extends Controller
     public function searchnasjilt()
     {
         $loc_part= Input::get('loc_part');
-        $locserial=LocSerial::all();
+        $locserial=LocSerial::orderBy('seriname', 'ASC')->get();
 
         $part=Part::orderby('part_name')->get();
         $loc_nas= Input::get('loc_nas');
@@ -303,7 +303,7 @@ group by z.zas_id,
          s.seri_name
 ");
 
-        $locserial=LocSerial::all();
+$locserial=LocSerial::orderBy('seriname', 'ASC')->get();
         return view('tailan.guilt')->with(['year'=>$year,'zaspart'=>$zaspart,'startdate'=>$startdate,'month'=>$month,'locserial'=>$locserial]);
     }
     public function edangi()
@@ -314,7 +314,7 @@ group by z.zas_id,
         $loc_zut= '';
         $startdate= Carbon::today()->subDays(2)->toDateString();
         $enddate=  Carbon::today()->toDateString();
-        $locserial=LocSerial::all();
+        $locserial=LocSerial::orderBy('seriname', 'ASC')->get();
 
         $zaspart=DB::table('V_ZASZUT')->get();
         $part=Part::orderby('part_name')->get();
