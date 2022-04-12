@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Input;
 use Request;
 use Spatie\Activitylog\Models\Activity;
 use \Cache;
-use App\LocSerial;
 use App\Rep;
 use App\Part;
 use App\Gemtel;
@@ -43,7 +42,7 @@ class ZasunplanController extends Controller
         $break=Gemtel::all();
 
         $zasdetail = DB::table('V_ZAS_SOLILT_DETAIL')->get();
-        $locserial=LocSerial::orderBy('sericode', 'ASC')->get();
+        $locserial=DB::select("select * from V_ZUTGUURSERI");
         $startdate= Input::get('mach_start');
         $enddate= Input::get('mach_end');
     

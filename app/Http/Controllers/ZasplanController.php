@@ -13,7 +13,6 @@ use App\Zasplan;
 use App\Part;
 use App\Rep;
 use App\Zasaddbase;
-use App\LocSerial;
 use App\Zasadd;
 use App\Zasbaig;
 use App\Zasmat;
@@ -53,7 +52,7 @@ class ZasplanController extends Controller
         $addbase=DB::select("select * from zutguur.zasaddbase");
         $zasbaig=DB::select("select * from zutguur.zasbaig");
         $damage=DB::select("select * from V_SET_GEMTEL");
-        $locserial=LocSerial::orderBy('seriname', 'ASC')->get();
+        $locserial=DB::select("select * from V_ZUTGUURSERI");
         $startdate=Input::get('zas_start'); 
         $enddate= Input::get('zas_end'); 
         $unit=DB::select("select * from set_unit");

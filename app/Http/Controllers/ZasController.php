@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Input;
 use Request;
 use Spatie\Activitylog\Models\Activity;
 use \Cache;
-use App\LocSerial;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,7 +30,7 @@ class ZasController extends Controller
     public function index()
     {
 
-        $locserial=LocSerial::orderBy('seriname', 'ASC')->get();
+        $locserial=DB::select("select * from V_ZUTGUURSERI");
         $startdate= Carbon::today()->subDays(30)->toDateString();
         $enddate=  Carbon::today()->toDateString();
         $zasunplan = DB::table('V_ZASPLAN')->get();
@@ -43,7 +42,7 @@ class ZasController extends Controller
         $startdate= Input::get('zut_start');
         $enddate=  Input::get('zut_end');
         $query = "";
-        $locserial=LocSerial::orderBy('seriname', 'ASC')->get();
+        $locserial=DB::select("select * from V_ZUTGUURSERI");
         $zut_seri= Input::get('zut_seri');
         $zut_num= Input::get('zut_num');
         if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {

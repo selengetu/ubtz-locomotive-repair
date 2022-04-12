@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Input;
 use Request;
 use Spatie\Activitylog\Models\Activity;
 use \Cache;
-use App\LocSerial;
 use App\Zastype;
 use App\Rep;
 use App\Baig;
@@ -37,7 +36,7 @@ class ZastypeController extends Controller
         $seri = Request::input('achaa_seri');
         $baig = Baig::all();
         $rep=Rep::all();
-        $locserial=LocSerial::orderBy('seriname', 'ASC')->get();
+        $locserial=DB::select("select * from V_ZUTGUURSERI");
         $zastype=DB::table('V_ZASPLANBASE')->get();
 
         return view('devter.zastype')->with(['zastype' => $zastype,  'locserial' => $locserial, 'rep' => $rep, 'baig' => $baig, 'seri' => $seri]);
@@ -47,7 +46,7 @@ class ZastypeController extends Controller
         $baig = Baig::all();
         $seri = Request::input('achaa_seri');
         $rep=Rep::all();
-        $locserial=LocSerial::orderBy('seriname', 'ASC')->get();
+        $locserial=DB::select("select * from V_ZUTGUURSERI");
         $zastype=DB::table('V_ZASPLANBASE')->where('sericode' ,$seri)->get();
 
         return view('devter.zastype')->with(['zastype' => $zastype,  'locserial' => $locserial, 'rep' => $rep, 'seri' => $seri, 'baig' => $baig]);
@@ -93,7 +92,7 @@ class ZastypeController extends Controller
     }
     public function zasrun()
     {
-        $locserial=LocSerial::orderBy('sericode', 'ASC')->get();
+        $locserial=DB::select("select * from V_ZUTGUURSERI");
         $start_year= Carbon::now()->format('Y');
         $start_month= Carbon::now()->format('m');;
         $zasrun=DB::table('Zutguur.zasrun')->where('dansdepo', Auth::user()->depo_id)->get();

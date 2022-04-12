@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Input;
 use Request;
 use Spatie\Activitylog\Models\Activity;
 use \Cache;
-use App\LocSerial;
 use App\Zastul;
 use App\Zastype;
 use App\Rep;
@@ -36,7 +35,7 @@ class ZastulController extends Controller
         $rep=Rep::all();
 
         $zastul=Zastul::all();
-        $locserial=LocSerial::orderBy('seriname', 'ASC')->get();
+        $locserial=DB::select("select * from V_ZUTGUURSERI");
         $start_year= Carbon::now()->format('Y');
         $start_month= Carbon::now()->format('m');;
         $zastul=DB::select('select * from V_ZASTUL t where  zasyear = '.$start_year.'and zasmonth ='.$start_month.' order by depocode, sericode ');
@@ -47,7 +46,7 @@ class ZastulController extends Controller
     {
         $rep=Rep::all();
 
-        $locserial=LocSerial::orderBy('seriname', 'ASC')->get();
+        $locserial=DB::select("select * from V_ZUTGUURSERI");
         $start_year= Request::input('start_year');
         $start_month=  Request::input('start_month');
         $loc_seri=  Request::input('loc_seri');
@@ -84,7 +83,7 @@ class ZastulController extends Controller
 
     public function store()
     {
-        $locserial=LocSerial::orderBy('seriname', 'ASC')->get();
+        $locserial=DB::select("select * from V_ZUTGUURSERI");
         $rep=Zastype::where('repid' ,Request::input('repid') )->where('sericode' ,Request::input('sericode') )->value('repshname');
         $zastul = new Zastul;
         $zastul->zasyear = Request::input('zasyear');
