@@ -37,7 +37,7 @@ class ZastypeController extends Controller
         $seri = Request::input('achaa_seri');
         $baig = Baig::all();
         $rep=Rep::all();
-        $locserial=LocSerial::orderBy('sericode', 'ASC')->get();
+        $locserial=LocSerial::orderBy('seriname', 'ASC')->get();
         $zastype=DB::table('V_ZASPLANBASE')->get();
 
         return view('devter.zastype')->with(['zastype' => $zastype,  'locserial' => $locserial, 'rep' => $rep, 'baig' => $baig, 'seri' => $seri]);
@@ -47,7 +47,7 @@ class ZastypeController extends Controller
         $baig = Baig::all();
         $seri = Request::input('achaa_seri');
         $rep=Rep::all();
-        $locserial=LocSerial::orderBy('sericode', 'ASC')->get();
+        $locserial=LocSerial::orderBy('seriname', 'ASC')->get();
         $zastype=DB::table('V_ZASPLANBASE')->where('sericode' ,$seri)->get();
 
         return view('devter.zastype')->with(['zastype' => $zastype,  'locserial' => $locserial, 'rep' => $rep, 'seri' => $seri, 'baig' => $baig]);

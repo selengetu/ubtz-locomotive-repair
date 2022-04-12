@@ -31,7 +31,7 @@ class ZasController extends Controller
     public function index()
     {
 
-        $locserial=LocSerial::all();
+        $locserial=LocSerial::orderBy('seriname', 'ASC')->get();
         $startdate= Carbon::today()->subDays(30)->toDateString();
         $enddate=  Carbon::today()->toDateString();
         $zasunplan = DB::table('V_ZASPLAN')->get();
@@ -43,7 +43,7 @@ class ZasController extends Controller
         $startdate= Input::get('zut_start');
         $enddate=  Input::get('zut_end');
         $query = "";
-        $locserial=LocSerial::all();
+        $locserial=LocSerial::orderBy('seriname', 'ASC')->get();
         $zut_seri= Input::get('zut_seri');
         $zut_num= Input::get('zut_num');
         if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
