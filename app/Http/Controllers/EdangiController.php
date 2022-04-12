@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\LocSerial;
 use App\Station;
 use App\Part;
 use App\Seri;
