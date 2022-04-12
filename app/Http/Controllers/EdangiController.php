@@ -42,7 +42,7 @@ class EdangiController extends Controller
         $loc_part= '0';
         $loc_depo= Auth::user()->depo_id;
         $loc_zutnumber= '0';
-        $startdate= Carbon::today()->subDays(2)->toDateString();
+        $startdate= Carbon::today()->subDays(7)->toDateString();
         $enddate=  Carbon::today()->toDateString();
         $depo=DB::table('SET_DEPO')->get();
         $stat=Station::all();

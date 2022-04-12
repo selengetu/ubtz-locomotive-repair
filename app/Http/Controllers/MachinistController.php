@@ -38,7 +38,7 @@ class MachinistController extends Controller
             });
     }
       $zurch= FaultDetail::where('fault_type',2)->orderby('fault_detail_name')->get();
-         $startdate= Carbon::today()->subDays(2)->toDateString();
+         $startdate= Carbon::today()->subDays(7)->toDateString();
         $enddate=  Carbon::today()->toDateString();
         $machinist= Input::get('machinist'); 
         $z= Input::get('zurch_type'); 
@@ -120,7 +120,7 @@ class MachinistController extends Controller
             });
     }
         $zurch= FaultDetail::where('fault_type',2)->orderby('fault_detail_name')->get();
-        $startdate= Carbon::today()->subDays(2)->toDateString();
+        $startdate= Carbon::today()->subDays(7)->toDateString();
         $enddate=  Carbon::today()->toDateString();
         $machinist= Input::get('machinist'); 
         $z= Input::get('zurch_type'); 
