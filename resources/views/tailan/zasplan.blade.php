@@ -114,7 +114,6 @@
                             <table class="table table-striped table-bordered table-hover"  id="testTable">
                                 <thead style="background-color: #81b5d5; color: #fff">
                                 <tr>
-
                                     <th> # </th>
                                     <th>Илчит тэрэг</th>
                                     <th>Засвар</th>

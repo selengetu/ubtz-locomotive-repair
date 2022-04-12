@@ -112,8 +112,8 @@
                                             </div>
                                         </div>
                     <ul class="nav nav-tabs">
-                        <li class="disabled disabledTab"><a data-toggle="tab" href="#ho">Үндсэн</a></li>
-                        <li class="disabled disabledTab" ><a data-toggle="tab" href="#me1" id="addtab">Нэмэлт ажил</a></li>
+                        <li class="active"><a data-toggle="tab" href="#ho">Үндсэн</a></li>
+                        <li><a data-toggle="tab" href="#me1" id="addtab">Нэмэлт ажил</a></li>
 
                     </ul>
 
@@ -129,12 +129,12 @@
                             <table class="table table-striped table-bordered table-hover"  id="example">
                                 <thead style="background-color: #81b5d5; color: #fff">
                                 <tr>
-
-                                <th>Илчит тэрэг</th>
+                                    <th>#</th>
+                                    <th>Илчит тэрэг</th>
                                     <th>Засварын томьёолол</th>
                                     <th>Засварт орсон хугацаа</th>
                                     <th>Засвараас гарах хугацаа</th>
-                                    <th>Засвараас гарах нормт хугацаа</th>
+                                    <th>Төлөвлөсөн хугацаа</th>
                                     <th>Засвараас гарсан хугацаа</th>
                                     <th>Нийт зогсолт</th>
                                     <th>Хийсэн</th>
@@ -146,16 +146,21 @@
 
                                 <?php $no = 1; ?>
                                 @foreach($zasplan as $zasplans)
-                                    <tr class="zasplan" data-id="{{$zasplans->repairid}}" tag="{{$zasplans->repairid}}">
+                                    <tr>
                                         <td>{{$no}}</td>
                                         <td>{{$zasplans->seriname}} -{{$zasplans->zutnumber}}</td> 
                                        
                                         <td>{{$zasplans->repshname}}</td>
                                         <td>{{$zasplans->repindate}}</td>
                                         <td>{{$zasplans->repoutdate}}</td>
+                                        <td>{{$zasplans->repplandate}}</td>
+                                        <td>{{$zasplans->repouteddate}}</td>
                                         <td>{{$zasplans->stopsum}}</td>
-                                   
-                                    </tr>
+                                        <td>{{$zasplans->done}}</td>
+                                        <td>{{$zasplans->do}}</td>
+                                        <td class='m2'> <button type='button' class='btn btn-primary update' data-toggle='modal' data-target='#myModal1' data-backdrop='static' data-keyboard='false' style='background-color: #2EB9A8; border-color: #2EB9A8'><i class='fa fa-pencil' aria-hidden='true'></i></button></td>
+                        
+                                        </tr>
                                     <?php $no++; ?>
                                 @endforeach
                                 </tbody>
@@ -662,22 +667,30 @@ $('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', fu
                   $('#example tbody').off('click');
               $('#example tbody').on('click', 'tr', function () {
                 var itag=$(this).attr('tag');
-        
-        $('#addtab').trigger('click');
         $.get('getplan/'+itag,function(data){
               $("#planzas tbody").empty();
-              $.each(data,function(i,qwe1){
-                  console.log(qwe1);
+              $.each(data,function(i,qwe){
+                          $('#zas_seri').val(qwe.seri_code);
+                          $('#zas_zutnumber').val(qwe.zutnumber);
+                          $('#repid').val(qwe.repid);
+                          $('#repindate').val(qwe.reprate);
+                          $('#repoutdate').val(qwe.repoutdate);
+                          $('#repouteddate').val(qwe.repouteddate);
+                          $('#repplandate').val(qwe.repplandate);
+                          $('#done').val(qwe.done);
+                          $('#do').val(qwe.do);
+                        
+
                   var sHtml1 = "<tr>" +
-                      "   <td class='m1'>" + qwe1.seriname +"-"+ qwe1.zutnumber + "</td>" +
-                      "   <td class='m2'>" + qwe1.repname + "</td>" +
-                      "   <td class='m2'>" + qwe1.repindate + "</td>" +
-                      "   <td class='m2'>" + qwe1.repoutdate + "</td>" +
-                      "   <td class='m2'>" + qwe1.stopsum + "</td>" +
-                      "   <td class='m2'>" + qwe1.stopto4 + "</td>" +
-                      "   <td class='m2'>" + qwe1.stopadd + "</td>" +
-                      "   <td class='m2'>" + qwe1.stopclean + "</td>" +                     
-                      "   <td class='m2'>" + qwe1.runkm + "</td>" +                  
+                      "   <td class='m1'>" + qwe.seriname +"-"+ qwe.zutnumber + "</td>" +
+                      "   <td class='m2'>" + qwe.repname + "</td>" +
+                      "   <td class='m2'>" + qwe.repindate + "</td>" +
+                      "   <td class='m2'>" + qwe.repoutdate + "</td>" +
+                      "   <td class='m2'>" + qwe.repplandate + "</td>" +
+                      "   <td class='m2'>" + qwe.repouteddate + "</td>" +
+                      "   <td class='m2'>" + qwe.stopsum + "</td>" +
+                      "   <td class='m2'>" + qwe.done + "</td>" +                     
+                      "   <td class='m2'>" + qwe.do + "</td>" +                  
                       "   <td class='m2'> <button type='button' class='btn btn-primary update' data-toggle='modal' data-target='#myModal1' data-backdrop='static' data-keyboard='false' style='background-color: #2EB9A8; border-color: #2EB9A8'><i class='fa fa-check-square-o' aria-hidden='true'></i></button></td>" +
                         
                       "</tr>";
@@ -899,9 +912,7 @@ $('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', fu
               } );
           </script>
           <script>
-          $('#myModal1').on('hidden.bs.modal', function () {
- location.reload();
-})
+         
               function getplanbaig(itag){
                         $.get('getplanbaig/'+itag,function(data){
                           $("#tableplanbaig tbody").empty();
@@ -970,9 +981,7 @@ $('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', fu
                       }
           </script>
           <style type="text/css">
-              .disabledTab {
-                  pointer-events: none;
-              }
+             
               .table-row{
                   cursor:pointer;
               }

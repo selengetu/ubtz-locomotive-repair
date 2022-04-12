@@ -312,7 +312,7 @@ $locserial=LocSerial::orderBy('seriname', 'ASC')->get();
         $loc_seri= Input::get('loc_seri');
         $loc_part= 3;
         $loc_zut= '';
-        $startdate= Carbon::today()->subDays(2)->toDateString();
+        $startdate= Carbon::today()->subDays(7)->toDateString();
         $enddate=  Carbon::today()->toDateString();
         $locserial=LocSerial::orderBy('seriname', 'ASC')->get();
 

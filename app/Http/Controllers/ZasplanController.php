@@ -68,7 +68,7 @@ class ZasplanController extends Controller
          else 
          {
             
-                $startdate= Carbon::today()->subDays(2)->toDateString();
+                $startdate= Carbon::today()->subDays(7)->toDateString();
                 $enddate=  Carbon::today()->toDateString();
                 $query.=" and repindate between TO_DATE( '".$startdate."' , 'yyyy/mm/dd') and TO_DATE( '".$enddate."', 'yyyy/mm/dd')";
   
@@ -104,21 +104,23 @@ class ZasplanController extends Controller
         $zasplan->repid = Request::input('repid');
         $zasplan->repindate = Request::input('repindate');
         $zasplan->repoutdate = Request::input('repoutdate');
+        $zasplan->repplandate = Request::input('repplandate');
+        $zasplan->repouteddate = Request::input('repouteddate');
         $zasplan->stopsum = Request::input('stopsum');
         $zasplan->stopclean = Request::input('stoprep');
         $zasplan->runkm = Request::input('zasrun');
+        $zasplan->do = Request::input('do');
+        $zasplan->done = Request::input('done');
         if(Request::input('zastype')== 1){
         $zasplan->zastype = 1;
         }
-
         if(Request::input('zastype')==2){
         $zasplan->zastype = 2;
         $zasplan->replastdate = Request::input('replastdate');
         $zasplan->damage = Request::input('damage');
         $zasplan->locgroup = Request::input('locgroup');
         $zasplan->decision = Request::input('decision');
-        $zasplan->do = Request::input('do');
-        $zasplan->done = Request::input('done');
+      
         }
         $zasplan->save();
         $p=DB::getPdo()->lastInsertId();
