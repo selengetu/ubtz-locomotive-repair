@@ -71,7 +71,7 @@
                                                   <select class="form-control select2" id="zas_sericode" name="zas_sericode" required="true">
                                                       <option value="0">Бүгд</option>
                                                       @foreach($locserial as $locserials)
-                                                          <option value= "{{$locserials->sericode}}"> {{$locserials->sericode}} - {{$locserials->seriname}}</option>
+                                                          <option value= "{{$locserials->sericode}}">{{$locserials->seriname}}</option>
                                                       @endforeach
                                                   </select>
 
@@ -124,9 +124,7 @@
                                     <th>Нэмэлт зогсолт</th>
                                     <th>Засварын зогсолт</th>
                                     <th>Гүйлт</th>
-                                    <th>Хүлээн авагч</th>
                                     @if($zastype ==2 ) 
-                                    <th>ТО-2 огноо</th>
                                     <th>Сүүлийн засварын огноо</th>
                                     <th>Гэмтлийн шалтгаан</th>
                                     <th>Групп</th>
@@ -153,7 +151,6 @@
                                         <td>{{$zasplans->stopadd}}</td>
                                         <td>{{$zasplans->stopclean}}</td>
                                         <td>{{$zasplans->runkm}}</td>
-                                        <td>{{$zasplans->receiver}}</td>
                                         @if($zastype ==2 ) 
                                         <td>{{$zasplans->to2depo}}</td>
                                         <td>{{$zasplans->replastdate}}</td>

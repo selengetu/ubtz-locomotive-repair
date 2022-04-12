@@ -91,7 +91,7 @@
                                                   <select class="form-control select2" id="zas_sericode" name="zas_sericode" required="true">
                                                       <option value="0">Бүгд</option>
                                                       @foreach($locserial as $locserials)
-                                                          <option value= "{{$locserials->sericode}}"> {{$locserials->sericode}} - {{$locserials->seriname}}</option>
+                                                          <option value= "{{$locserials->sericode}}">{{$locserials->seriname}}</option>
                                                       @endforeach
                                                   </select>
 
@@ -153,8 +153,11 @@
                                         <td>{{$zasplans->repshname}}</td>
                                         <td>{{$zasplans->repindate}}</td>
                                         <td>{{$zasplans->repoutdate}}</td>
+                                        <td>{{$zasplans->repplandate}}</td>
+                                        <td>{{$zasplans->repouteddate}}</td>
                                         <td>{{$zasplans->stopsum}}</td>
-                                   
+                                        <td>{{$zasplans->done}}</td>
+                                        <td>{{$zasplans->do}}</td>
                                     </tr>
                                     <?php $no++; ?>
                                 @endforeach
@@ -279,7 +282,7 @@
                                                   <select class="form-control select2" id="zas_seri" name="zas_seri" required="true">
                                                       <option value="0">Бүгд</option>
                                                       @foreach($locserial as $locserials)
-                                                          <option value= "{{$locserials->sericode}}"> {{$locserials->sericode}} - {{$locserials->seriname}}</option>
+                                                          <option value= "{{$locserials->sericode}}"> {{$locserials->seriname}}</option>
                                                       @endforeach
                                                   </select>
 
@@ -295,16 +298,7 @@
                                               </div>
 
                                           </div>
-                                          <div class="col-md-3">
-                                              <div class="form-group">
-                                                  <label for="name">Секц</label>
-                                                  <select class="form-control select2" id="sec" name="sec" >
-                                                          <option value= "1" tag="1"> А </option>
-                                                          <option value= "2" tag="2"> Б </option>
-                                                  </select>
-                                              </div>
-
-                                          </div>
+                                        
                                           <div class="col-md-3">
                                               <div class="form-group">
                                                   <label for="name">Урсгал засварын томьёолол</label>
@@ -347,61 +341,18 @@
 
                                           </div>
 
-                                          <div class="col-md-3">
-                                              <div class="form-group">
-                                                  <label for="name">Засварын зогсолт</label>
-                                                  <input type="number" class="form-control inputtext" id="stoprep" name="stoprep"  readonly="true" value="0" >
-                                              </div>
-
-                                          </div>
+                                         
                                           <div class="col-md-3">
                                               <div class="form-group">
                                                   <label for="name">Гүйлт</label>
                                                   <input type="number" class="form-control inputtext" id="zasrun" name="zasrun">
                                               </div>
 
-                                          </div>
-                                          <div class="col-md-3">
-                                              <div class="form-group">
-                                                  <label for="name">ТО-4</label>
-                                                  <input type="number" class="form-control inputtext" id="stopto4" name="stopto4">
-                                              </div>
-
-                                          </div>
-                                          <div class="col-md-3">
-                                              <div class="form-group">
-                                                  <label for="name">Нэмэлт зогсолт</label>
-                                                  <input type="number" class="form-control inputtext" id="stopadd" name="stopadd">
-                                              </div>
-
-                                          </div>
-                                          <div class="col-md-3">
-                                              <div class="form-group">
-                                                  <label for="name">Хүлээн авагч</label>
-                                                  <select class="form-control select2" id="receiver" name="receiver">
-                                                      @foreach($receiver as $receivers)
-                                                          <option value= "{{$receivers->receiver_id}}">{{$receivers->receiver_name}}</option>
-                                                      @endforeach
-                                                  </select>
-                                              </div>
-
-                                          </div>
-                                        
+                                          </div>                               
                                       </div>
                                       @if($zastype ==2 )
                                       <div class="col-md-12">
-                                      <div class="col-md-3">
-                                              <div class="form-group">
-                                                  <label for="name">ТО-2 орсон депо</label>
-                                                  <select class="form-control select2" id="to2depo" name="to2depo" >
-                                  
-                                  @foreach($depo as $depos) 
-                                       <option value= "{{$depos->depocode}}">{{$depos->deponame}}</option>
-                                   @endforeach
-          </select>
-                                              </div>
-
-                                          </div>
+                                      
                                           <div class="col-md-3">
                                               <div class="form-group">
                                                   <label for="name">Сүүлийн засварын огноо</label>
@@ -736,12 +687,11 @@ $('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', fu
                       "   <td class='m2'>" + qwe1.repname + "</td>" +
                       "   <td class='m2'>" + qwe1.repindate + "</td>" +
                       "   <td class='m2'>" + qwe1.repoutdate + "</td>" +
+                      "   <td class='m2'>" + qwe1.repplandate + "</td>" +
+                      "   <td class='m2'>" + qwe1.repouteddate + "</td>" +
                       "   <td class='m2'>" + qwe1.stopsum + "</td>" +
-                      "   <td class='m2'>" + qwe1.stopto4 + "</td>" +
-                      "   <td class='m2'>" + qwe1.stopadd + "</td>" +
                       "   <td class='m2'>" + qwe1.stopclean + "</td>" +                     
                       "   <td class='m2'>" + qwe1.runkm + "</td>" +                  
-                      "   <td class='m2'>" + qwe1.receiver_name + "</td>" +
                       "   <td class='m2'> <button type='button' class='btn btn-primary update' data-toggle='modal' data-target='#myModal1' data-backdrop='static' data-keyboard='false' style='background-color: #2EB9A8; border-color: #2EB9A8'><i class='fa fa-check-square-o' aria-hidden='true'></i></button></td>" +
                         
                       "</tr>";

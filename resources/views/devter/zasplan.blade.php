@@ -91,7 +91,7 @@
                                                   <select class="form-control select2" id="zas_sericode" name="zas_sericode" required="true">
                                                       <option value="0">Бүгд</option>
                                                       @foreach($locserial as $locserials)
-                                                          <option value= "{{$locserials->sericode}}"> {{$locserials->sericode}} - {{$locserials->seriname}}</option>
+                                                          <option value= "{{$locserials->sericode}}"> {{$locserials->seriname}}</option>
                                                       @endforeach
                                                   </select>
 
@@ -112,7 +112,7 @@
                                             </div>
                                         </div>
                     <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#ho">Үндсэн</a></li>
+                        <li class="disabled disabledTab"><a data-toggle="tab" href="#ho">Үндсэн</a></li>
                         <li class="disabled disabledTab" ><a data-toggle="tab" href="#me1" id="addtab">Нэмэлт ажил</a></li>
 
                     </ul>
@@ -260,9 +260,9 @@
                       <div class="modal-body">
                           <ul class="nav nav-tabs">
                               <li class="active"><a data-toggle="tab" href="#home">Үндсэн</a></li>
-                              <li ><a data-toggle="tab" id="modaltabadd" href="#menu1">Нэмэлт ажил</a></li>
-                              <li><a data-toggle="tab" id="modaltabbaig" href="#menu2">Байгууллага</a></li>
-                              <li><a data-toggle="tab" id="modaltabmat" href="#menu3">Материал</a></li>
+                              <li class="disabled disabledTab"><a data-toggle="tab" id="modaltabadd" href="#menu1">Нэмэлт ажил</a></li>
+                              <li class="disabled disabledTab"><a data-toggle="tab" id="modaltabbaig" href="#menu2">Байгууллага</a></li>
+                              <li class="disabled disabledTab"><a data-toggle="tab" id="modaltabmat" href="#menu3">Материал</a></li>
                           </ul>
 
 
@@ -279,7 +279,7 @@
                                                   <select class="form-control select2" id="zas_seri" name="zas_seri" required="true">
                                                       <option value="0">Бүгд</option>
                                                       @foreach($locserial as $locserials)
-                                                          <option value= "{{$locserials->sericode}}"> {{$locserials->sericode}} - {{$locserials->seriname}}</option>
+                                                          <option value= "{{$locserials->sericode}}"> {{$locserials->seriname}}</option>
                                                       @endforeach
                                                   </select>
 
@@ -318,35 +318,55 @@
                                                 
                                                     </div>
                                                 </div>
-                                            </div>     <div class="col-md-3">
+                                            </div>    
+                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <div class="input-icon">
                                                        
                                                         <label for="form_control_1">
-                                                        Засвараас гарсан огноо
+                                                        Засвараас гарах огноо
                                                         </label>
                                                         <input class="form-control datepicker" id="repoutdate" name="repoutdate" type="text" value="{{$enddate}}">
                                                     </div>
                                                 </div>
                                             </div>
-                                       
-                                          <div class="col-md-3">
-                                              <div class="form-group">
-                                                  <label for="name">Нийт цаг</label>
-                                                  <input type="number" class="form-control inputtext" id="stopsum" name="stopsum" readonly="true">
-                                              </div>
-
-                                          </div>
-
-                                          <div class="col-md-3">
-                                              <div class="form-group">
-                                                  <label for="name">Засварын зогсолт</label>
-                                                  <input type="number" class="form-control inputtext" id="stoprep" name="stoprep"  readonly="true" value="0" >
-                                              </div>
-
-                                          </div>
-
-                                         
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <div class="input-icon">
+                                                       
+                                                        <label for="form_control_1">
+                                                        Төлөвлөсөн огноо
+                                                        </label>
+                                                        <input class="form-control datepicker" id="repplandate" name="repplandate" type="text" value="{{$enddate}}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <div class="input-icon">
+                                                       
+                                                        <label for="form_control_1">
+                                                        Гарсан огноо
+                                                        </label>
+                                                        <input class="form-control datepicker" id="repouteddate" name="repouteddate" type="text" value="{{$enddate}}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                      
+                                            <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">Хийсэн</label>
+                                                <textarea class="form-control" id="done" name="done" rows="2" maxlength="500"></textarea>
+                                            </div>
+                                               
+                                            </div>
+                                            <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">Хийхээр төлөвлөсөн</label>
+                                                <textarea class="form-control" id="do" name ="do" rows="2" maxlength="500"></textarea>
+                                            </div>
+                                               
+                                            </div>
                                       </div>
                                   
                                           <div class="col-md-12">
@@ -536,6 +556,12 @@
               </div>
           </div>
             @endsection
+
+            <style>
+                 .disabledTab {
+                    pointer-events: none;
+                }
+                </style>
             @section('cscript')
           <script type="text/javascript">
             $("#zas_start").datepicker( {
@@ -552,6 +578,8 @@ $("#zas_end").datepicker( {
 });
 $("#repindate").datetimepicker({format: 'YYYY-MM-DD HH:mm'});
 $("#replastdate").datetimepicker({format: 'YYYY-MM-DD HH:mm'});
+$("#repouteddate").datetimepicker({format: 'YYYY-MM-DD HH:mm'});
+$("#repplandate").datetimepicker({format: 'YYYY-MM-DD HH:mm'});
 $('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', function (event) {
     var date1 = $("#repoutdate").val();   
         var date2 = $("#repindate").val();
@@ -650,7 +678,6 @@ $('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', fu
                       "   <td class='m2'>" + qwe1.stopadd + "</td>" +
                       "   <td class='m2'>" + qwe1.stopclean + "</td>" +                     
                       "   <td class='m2'>" + qwe1.runkm + "</td>" +                  
-                      "   <td class='m2'>" + qwe1.receiver_name + "</td>" +
                       "   <td class='m2'> <button type='button' class='btn btn-primary update' data-toggle='modal' data-target='#myModal1' data-backdrop='static' data-keyboard='false' style='background-color: #2EB9A8; border-color: #2EB9A8'><i class='fa fa-check-square-o' aria-hidden='true'></i></button></td>" +
                         
                       "</tr>";
