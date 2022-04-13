@@ -253,7 +253,7 @@
               <div class="modal-dialog modal-lg" role="document">
                   <div class="modal-content">
                       <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLongTitle">  @if($zastype ==1 ) 
+                          <h5 class="modal-title" id="modal-title" name="modal-title">  @if($zastype ==1 ) 
                         Төлөвлөгөөт засвар
                         @elseif($zastype ==2 ) 
                         Төлөвлөгөөт бус засвар 
@@ -273,7 +273,7 @@
 
                           <div class="tab-content">
                               <div id="home" class="tab-pane fade in active">
-                                  <form method="post" action="addzasplan" id="formzasplan">
+                                  <form method="post" action="addzasplan">
                                       <div class="col-md-12">
                                       {{ csrf_field() }}
                             
@@ -281,6 +281,8 @@
                                               <div class="form-group">
                                                   <label for="name">Зүтгүүрийн сери</label>
                                                   <input class="form-control hidden" id="zastype" name="zastype" type="text" value="{{$zastype}}">
+                                                  <input class="form-control hidden" id="type" name="type" type="text" value="1">
+                                                  <input class="form-control hidden" id="zasid" name="zasid" type="text" value="">
                                                   <div id="zas_seridiv">
                                                   <select class="form-control select2" id="zas_seri" name="zas_seri" required="true">
                                                       <option value="0">Бүгд</option>
@@ -388,7 +390,7 @@
                                               <div class="col-md-3">
                                                   <div class="form-group">
 
-                                                      <button type="submit" class="btn btn-primary" form="formzasplan" value="Submit">Хадгалах</button>
+                                                      <button type="submit" class="btn btn-primary" value="Submit">Хадгалах</button>
 
                                                   </div>
                                               </div>
@@ -580,10 +582,10 @@
             @section('cscript')
           <script type="text/javascript">
             $("#zas_start").datepicker( {
-                format: "yyyy-mm-dd HH:SS",
+                format: "yyyy-mm-dd",
             });
             $("#zas_end").datepicker( {
-                format: "yyyy-mm-dd HH:SS",
+                format: "yyyy-mm-dd",
 
             });
             $("#repindate").datetimepicker({format: 'YYYY-MM-DD HH:mm'});
@@ -672,18 +674,25 @@
                   $('.add').on('click', function () {
                     $('#zas_seridiv1').hide();
                     $('#zas_seridiv').show();
-
+                    $('#type').val('0');
+                    $('#zasid').val('0');
+                    var title = document.getElementById("modal-title");
+                    title.innerHTML = "Засвар бүртгэх";
                 } );   
               $('.update').on('click', function () {
                 var itag=$(this).attr('tag');
+                var title = document.getElementById("modal-title");
+                title.innerHTML = "Засвар засварлах";
                 $('#zas_seridiv1').show();
                 $('#zas_seridiv').hide();
+                $('#type').val('1');
                 getrep(0);
               getzutnumber(0);
         $.get('getplan/'+itag,function(data){
               $("#planzas tbody").empty();
            
               $.each(data,function(i,qwe){
+                         $('#zasid').val(qwe.repairid);
                           $('#zas_seri1').val(qwe.sericode).trigger('change'); 
                           $('#repindate').val(qwe.repindate);
                           $('#repoutdate').val(qwe.repoutdate);

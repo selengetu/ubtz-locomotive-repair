@@ -93,46 +93,56 @@ class ZasplanController extends Controller
     }
     public function store()
     {
-      
-        $zasplan = new Zasplan;
-        $zasplan->depocode = Auth::user()->depocode;
-        $zasplan->zasyear = Carbon::now()->year;
-        $zasplan->zasmonth = Carbon::now()->month;
-        $zasplan->sericode = Request::input('zas_seri');
-        $zasplan->zutnumber = Request::input('zas_zutnumber');
-        $zasplan->repid = Request::input('repid');
-        $zasplan->repindate = Request::input('repindate');
-        $zasplan->repoutdate = Request::input('repoutdate');
-        $zasplan->repplandate = Request::input('repplandate');
-        $zasplan->repouteddate = Request::input('repouteddate');
-        $zasplan->stopsum = Request::input('stopsum');
-        $zasplan->stopclean = Request::input('stoprep');
-        $zasplan->runkm = Request::input('zasrun');
-        $zasplan->do = Request::input('do');
-        $zasplan->done = Request::input('done');
-        if(Request::input('zastype')== 1){
-        $zasplan->zastype = 1;
+        if(Request::input('type') == 0){
+            $zasplan = new Zasplan;
+            $zasplan->depocode = Auth::user()->depocode;
+            $zasplan->zasyear = Carbon::now()->year;
+            $zasplan->zasmonth = Carbon::now()->month;
+            $zasplan->sericode = Request::input('zas_seri');
+            $zasplan->zutnumber = Request::input('zas_zutnumber');
+            $zasplan->repid = Request::input('repid');
+            $zasplan->repindate = Request::input('repindate');
+            $zasplan->repoutdate = Request::input('repoutdate');
+            $zasplan->repplandate = Request::input('repplandate');
+            $zasplan->repouteddate = Request::input('repouteddate');
+            $zasplan->stopsum = Request::input('stopsum');
+            $zasplan->stopclean = Request::input('stoprep');
+            $zasplan->runkm = Request::input('zasrun');
+            $zasplan->do = Request::input('do');
+            $zasplan->done = Request::input('done');
+            if(Request::input('zastype')== 1){
+            $zasplan->zastype = 1;
+            }
+            if(Request::input('zastype')==1){
+            $zasplan->zastype = 2;
+            $zasplan->replastdate = Request::input('replastdate');
+            $zasplan->damage = Request::input('damage');
+            $zasplan->locgroup = Request::input('locgroup');
+            $zasplan->decision = Request::input('decision');
+          
+            }
+            $zasplan->save();
+            $p=DB::getPdo()->lastInsertId();
+            DB::table('activity_log')->insert(
+                array(
+                       'log_name'     =>   'Add zasplan', 
+                       'description'     =>  $p, 
+                       'causer_id'   =>   Auth::user()->id,
+                       'created_at'     =>   Carbon::now(), 
+                )
+           );
+
         }
-        if(Request::input('zastype')==2){
-        $zasplan->zastype = 2;
-        $zasplan->replastdate = Request::input('replastdate');
-        $zasplan->damage = Request::input('damage');
-        $zasplan->locgroup = Request::input('locgroup');
-        $zasplan->decision = Request::input('decision');
-      
+        else{
+
+            $department = DB::table('ZASPLAN')
+            ->where('repairid', Request::input('zasid'))
+            ->update(['sericode' =>  Request::input('zas_seri'),'zutnumber' =>  Request::input('zas_zutnumber'),'repid' =>  Request::input('repid'),'repindate' =>  Request::input('repindate'),
+            'repoutdate' =>  Request::input('repoutdate'),'repplandate' =>  Request::input('repplandate'),'repouteddate' =>  Request::input('repouteddate'),'stopsum' =>  Request::input('stopsum'),'do' =>  Request::input('do'),'done' => Request::input('done')]);
+        
         }
-        $zasplan->save();
-        $p=DB::getPdo()->lastInsertId();
-        DB::table('activity_log')->insert(
-            array(
-                   'log_name'     =>   'Add zasplan', 
-                   'description'     =>  $p, 
-                   'causer_id'   =>   Auth::user()->id,
-                   'created_at'     =>   Carbon::now(), 
-            )
-       );
-        $max =DB::select("select max(repairid) as repairid from ZASPLAN");
-         return $max[0]->repairid;
+        return back();
+       
     }
     public function storeadd()
     {
