@@ -21,7 +21,7 @@
                     </div>
                     <div class="actions">
                         <div class="btn-group btn-group-devided" data-toggle="buttons">
-                            <a class="joshview1 " id="add" data-toggle="modal" data-target="#myModal1" data-backdrop="static" data-keyboard="false">
+                            <a class="  " id="add" data-toggle="modal" data-target="#myModal1" data-backdrop="static" data-keyboard="false">
                                 <label class="btn btn-transparent green btn-circle btn-sm active">
                                     <i class="icon icon-plus">
                                     </i>

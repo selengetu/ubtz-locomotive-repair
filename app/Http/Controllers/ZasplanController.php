@@ -174,4 +174,29 @@ class ZasplanController extends Controller
             )
        );
     }
+    public function getzasplanbase($id)
+    {
+        if($id > 0){
+            $dt=DB::table('ZUTGUUR.ZASPLANBASE')->where('sericode','=',$id)->get();
+        }
+        else{
+            $dt=DB::table('ZUTGUUR.ZASPLANBASE')->get();
+        }
+      
+        return $dt;
+    }
+    public function getzut($id)
+    {
+        if($id > 0){
+            
+                $dt=DB::table('ZUTGUUR.ZUTGUUR')->where('sericode','=',$id)->orderby('zutnumber')->get();
+                return $dt;
+        
+        }
+        else{
+            $dt=DB::table('ZUTGUUR.ZUTGUUR')->get();
+        }
+      
+        return $dt;
+    }
 }

@@ -78,10 +78,8 @@ Route::get('/getzasdetail/{id?}',function($id = 0){
 });
 
 
-Route::get('/getzasplanbase/{id?}',function($id = 0){
-    $dt=DB::table('ZUTGUUR.ZASPLANBASE')->where('sericode','=',$id)->get();
-    return $dt;
-});
+Route::get('/getzasplanbase/{id?}', 'ZasplanController@getzasplanbase')->name('getzasplanbase');
+Route::get('/getzut/{id?}', 'ZasplanController@getzut')->name('getzut');
 Route::match(['get', 'post'],'/zastul', 'ZastulController@index')->name('zastul');
 Route::get('/destroyzastul/{id}/delete', ['as' => 'zastul.destroy', 'uses' => 'ZastulController@destroy']);
 Route::post('/addzastul','ZastulController@store');
@@ -144,10 +142,7 @@ Route::get('/getgemtel/{id?}',function($id = 0){
     $dt=DB::table('SET_GEMTEL')->where('gemtel_type','=',$id)->get();
     return $dt;
 });
-Route::get('/getzut/{id?}/{id1?}',function($id = 0,$id1=0){
-    $dt=DB::table('ZUTGUUR.ZUTGUUR')->where('sericode','=',$id)->orderby('zutnumber')->get();
-    return $dt;
-});
+
 Route::get('/getloc/{id?}',function($id = 0){
     $dt=DB::table('V_ZUTGUUR')->where('depocode','=',$id)->get();
     return $dt;

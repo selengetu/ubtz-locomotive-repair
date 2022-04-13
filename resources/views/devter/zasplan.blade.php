@@ -21,7 +21,7 @@
                     </div>
                     <div class="actions">
                         <div class="btn-group btn-group-devided" data-toggle="buttons">
-                            <a class="joshview1 " id="add" data-toggle="modal" data-target="#myModal1" data-backdrop="static" data-keyboard="false">
+                            <a class="add" data-toggle="modal" data-target="#myModal1" data-backdrop="static" data-keyboard="false">
                                 <label class="btn btn-transparent green btn-circle btn-sm active">
                                     <i class="icon icon-plus">
                                     </i>
@@ -158,7 +158,7 @@
                                         <td>{{$zasplans->stopsum}}</td>
                                         <td>{{$zasplans->done}}</td>
                                         <td>{{$zasplans->do}}</td>
-                                        <td class='m2'> <button type='button' class='btn btn-primary update' data-toggle='modal' data-target='#myModal1' data-backdrop='static' data-keyboard='false' style='background-color: #2EB9A8; border-color: #2EB9A8'><i class='fa fa-pencil' aria-hidden='true'></i></button></td>
+                                        <td class='m2'> <button type='button' tag="{{$zasplans->repairid}}" class='btn btn-primary update' data-toggle='modal' data-target='#myModal1' data-backdrop='static' data-keyboard='false' style='background-color: #2EB9A8; border-color: #2EB9A8'><i class='fa fa-pencil' aria-hidden='true'></i></button></td>
                         
                                         </tr>
                                     <?php $no++; ?>
@@ -281,15 +281,25 @@
                                               <div class="form-group">
                                                   <label for="name">Зүтгүүрийн сери</label>
                                                   <input class="form-control hidden" id="zastype" name="zastype" type="text" value="{{$zastype}}">
+                                                  <div id="zas_seridiv">
                                                   <select class="form-control select2" id="zas_seri" name="zas_seri" required="true">
                                                       <option value="0">Бүгд</option>
                                                       @foreach($locserial as $locserials)
                                                           <option value= "{{$locserials->sericode}}"> {{$locserials->seriname}}</option>
                                                       @endforeach
                                                   </select>
-
+                                                     </div>
+                                                     <div id="zas_seridiv1">
+                                                  <select class="form-control select2" id="zas_seri1" name="zas_seri1" required="true">
+                                                      <option value="0">Бүгд</option>
+                                                      @foreach($locserial as $locserials)
+                                                          <option value= "{{$locserials->sericode}}"> {{$locserials->seriname}}</option>
+                                                      @endforeach
+                                                  </select>
+                                                  </div>
                                               </div>
                                           </div>
+                                          
                                           <div class="col-md-3">
                                               <div class="form-group">
                                                   <label for="name">Зүтгүүрийн дугаар</label>
@@ -570,43 +580,38 @@
             @section('cscript')
           <script type="text/javascript">
             $("#zas_start").datepicker( {
-    format: "yyyy-mm-dd",
-
-});
-$("#zas_end").datepicker( {
-    format: "yyyy-mm-dd",
-
-});
-$("#zas_end").datepicker( {
-    format: "yyyy-mm-dd HH:SS",
-
-});
-$("#repindate").datetimepicker({format: 'YYYY-MM-DD HH:mm'});
-$("#replastdate").datetimepicker({format: 'YYYY-MM-DD HH:mm'});
-$("#repouteddate").datetimepicker({format: 'YYYY-MM-DD HH:mm'});
-$("#repplandate").datetimepicker({format: 'YYYY-MM-DD HH:mm'});
-$('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', function (event) {
-    var date1 = $("#repoutdate").val();   
-        var date2 = $("#repindate").val();
-        var fromDate = parseInt(new Date($("#repindate").val()).getTime()/1000); 
-    var toDate = parseInt(new Date( $("#repoutdate").val()).getTime()/1000);
-    var timeDiff = parseFloat((toDate - fromDate)/3600).toFixed(2);  // will give difference in hrs
-    $("#stopsum").val(timeDiff);
-    var stopadd = (timeDiff- $("#stoprep").val());
-    $("#stopadd").val(stopadd);
+                format: "yyyy-mm-dd HH:SS",
             });
+            $("#zas_end").datepicker( {
+                format: "yyyy-mm-dd HH:SS",
 
- function printDiv() {
+            });
+            $("#repindate").datetimepicker({format: 'YYYY-MM-DD HH:mm'});
+            $("#replastdate").datetimepicker({format: 'YYYY-MM-DD HH:mm'});
+            $("#repouteddate").datetimepicker({format: 'YYYY-MM-DD HH:mm'});
+            $("#repplandate").datetimepicker({format: 'YYYY-MM-DD HH:mm'});
+            $('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', function (event) {
+                var date1 = $("#repoutdate").val();   
+                    var date2 = $("#repindate").val();
+                    var fromDate = parseInt(new Date($("#repindate").val()).getTime()/1000); 
+                var toDate = parseInt(new Date( $("#repoutdate").val()).getTime()/1000);
+                var timeDiff = parseFloat((toDate - fromDate)/3600).toFixed(2);  // will give difference in hrs
+                $("#stopsum").val(timeDiff);
+                var stopadd = (timeDiff- $("#stoprep").val());
+                $("#stopadd").val(stopadd);
+                        });
 
-     var printContents = document.getElementById('printarea').innerHTML;
-     var originalContents = document.body.innerHTML;
+            function printDiv() {
 
-     document.body.innerHTML = printContents;
+                var printContents = document.getElementById('printarea').innerHTML;
+                var originalContents = document.body.innerHTML;
 
-     window.print();
+                document.body.innerHTML = printContents;
 
-     document.body.innerHTML = originalContents;
-}
+                window.print();
+
+                document.body.innerHTML = originalContents;
+            }
 
 </script>
  <script type="text/javascript">
@@ -664,22 +669,30 @@ $('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', fu
                       ]
 
                   } );
-                  $('#example tbody').off('click');
-              $('#example tbody').on('click', 'tr', function () {
+                  $('.add').on('click', function () {
+                    $('#zas_seridiv1').hide();
+                    $('#zas_seridiv').show();
+
+                } );   
+              $('.update').on('click', function () {
                 var itag=$(this).attr('tag');
+                $('#zas_seridiv1').show();
+                $('#zas_seridiv').hide();
+                getrep(0);
+              getzutnumber(0);
         $.get('getplan/'+itag,function(data){
               $("#planzas tbody").empty();
+           
               $.each(data,function(i,qwe){
-                          $('#zas_seri').val(qwe.seri_code);
-                          $('#zas_zutnumber').val(qwe.zutnumber);
-                          $('#repid').val(qwe.repid);
-                          $('#repindate').val(qwe.reprate);
+                          $('#zas_seri1').val(qwe.sericode).trigger('change'); 
+                          $('#repindate').val(qwe.repindate);
                           $('#repoutdate').val(qwe.repoutdate);
                           $('#repouteddate').val(qwe.repouteddate);
                           $('#repplandate').val(qwe.repplandate);
                           $('#done').val(qwe.done);
                           $('#do').val(qwe.do);
-                        
+                          $('#zas_zutnumber').val(qwe.zutnumber).trigger('change');
+                          $('#repid').val(qwe.repid).trigger('change');
 
                   var sHtml1 = "<tr>" +
                       "   <td class='m1'>" + qwe.seriname +"-"+ qwe.zutnumber + "</td>" +
@@ -752,28 +765,9 @@ $('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', fu
                   $('#zas_seri').change(function(){
                       var itag=$(this).val();
           
-                      $.get('getzut/'+itag,function(data){
-                          $('#zas_zutnumber').empty();
-
-                          $.each(data,function(i,qwe){
-                              $('#zas_zutnumber').append($('<option>', {
-                                  value: qwe.zutnumber,
-                                  id: qwe.zutnumber,
-                                  text: qwe.zutnumber
-                              })).trigger('change');
-                          });
-                      });
-                      $.get('getzasplanbase/'+itag,function(data){
-                          $('#repid').empty();
-
-                          $.each(data,function(i,qwe){
-                              $('#repid').append($('<option>', {
-                                  value: qwe.repid,
-                                  id: qwe.repid,
-                                  text: qwe.repshname
-                              })).trigger('change');
-                          });
-                      });
+                    getzutnumber(itag);
+                    getrep(itag);
+                  
                   });
                   $('#locgroup').change(function(){
                       var itag=$(this).val();
@@ -785,28 +779,7 @@ $('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', fu
                     getaddname(itag);
            
                   });
-                  $('#repid').change(function(){
-                      var itag=$(this).val();
-                      var itag1=$('#zas_seri').val();
-                      var itag2=$('#zas_zutnumber').val();
-                      $.get('getzashour/'+itag1+'/'+itag,function(data){
-
-                          $.each(data,function(i,qwe){
-                            $('#stoprep').val(qwe.stoptsag);
-                          });
-                      });
-                      $.get('getzasguilt/'+itag1+'/'+itag2+'/'+itag,function(data){
-                                console.log(data);
-                               if(data.length>0) {
-                                   $.each(data,function(i,qwe){
-                                           $('#zasrun').val(qwe.runkm);
-                                   });
-                               }
-                               else{
-                                   $('#zasrun').val(0);
-                               }
-                      });
-                  });
+                
 
                   function getgemtel($id){
                       $.get('getgemtel/'+$id,function(data){
@@ -979,6 +952,32 @@ $('#repoutdate').datetimepicker({format: 'YYYY-MM-DD HH:mm'}).on('dp.change', fu
                           });
                       });
                       }
+                      function getzutnumber(itag){
+                        $.get('getzut/'+itag,function(data){
+                          $('#zas_zutnumber').empty();
+
+                          $.each(data,function(i,qwe){
+                              $('#zas_zutnumber').append($('<option>', {
+                                  value: qwe.zutnumber,
+                                  id: qwe.zutnumber,
+                                  text: qwe.zutnumber
+                              })).trigger('change');
+                          });
+                      });
+                      }
+                      function getrep(itag){
+                      $.get('getzasplanbase/'+itag,function(data){
+                          $('#repid').empty();
+
+                          $.each(data,function(i,qwe){
+                              $('#repid').append($('<option>', {
+                                  value: qwe.repid,
+                                  id: qwe.repid,
+                                  text: qwe.repshname
+                              })).trigger('change');
+                          });
+                      });
+                    }
           </script>
           <style type="text/css">
              
