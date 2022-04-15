@@ -39,13 +39,6 @@ class ZasplanController extends Controller
      */
     public function index()
     {
-        if(Route::getFacadeRoot()->current()->uri()== 'zasplan'){
-            $zastype=1;
-        }
-
-        if(Route::getFacadeRoot()->current()->uri()== 'zasunplan'){
-            $zastype=2;
-        }
         $part=Part::orderby('part_name')->get();
         $rep=Rep::all();
         $depo=DB::select("select * from set_depo order by depocode");
@@ -59,6 +52,7 @@ class ZasplanController extends Controller
         $machinist= Input::get('machinist'); 
         $z= Input::get('zurch_type'); 
         $sericode= Input::get('zas_sericode'); 
+        $zastype= Input::get('zas_type'); 
         $query = "";
     
            if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {

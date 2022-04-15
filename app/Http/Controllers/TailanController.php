@@ -40,14 +40,6 @@ class TailanController extends Controller
     public function index()
     {
 
-       
-        if(Route::getFacadeRoot()->current()->uri()== 'reportplan'){
-            $zastype=1;
-        }
-
-        if(Route::getFacadeRoot()->current()->uri()== 'reportunplan'){
-            $zastype=2;
-        }
         $part=Part::orderby('part_name')->get();
         $rep=Rep::all();
         $depo=DB::select("select * from set_depo order by depocode");
