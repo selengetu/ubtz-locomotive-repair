@@ -88,7 +88,15 @@
                                            
                                             <div class="col-md-12" style="margin-top:60px">
 
-                                                    <div class="col-md-3 col-md-offset-3">
+                                            <div class="col-md-3">
+                                            <div class="card " style="border-left: .25rem solid #f58027 ">
+                                                    <div class="container">
+                                                    <h4 style="color: #f58027"><b>Гүйлт</b></h4>
+                                                  
+                                                    </div>
+                                                    </div>
+                                                    </div>
+                                                    <div class="col-md-3">
                                                     <div class="card" style="border-left: .25rem solid green ">
                                                     <div class="container">
                                                     <h4 style="color: green"><b><a href="{{ route('urtuu30') }}">Тууз бүртгэл</a></b></h4>
