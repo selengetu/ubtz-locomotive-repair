@@ -148,7 +148,7 @@
                                       <select class="form-control select2" id="seri_code" name="seri_code">
                                           <option value="0">Бүгд</option>
                                           @foreach($locserial as $locserials)
-                                              <option value= "{{$locserials->sericode}}"> {{$locserials->sericode}} - {{$locserials->seriname}}</option>
+                                              <option value= "{{$locserials->sericode}}"> {{$locserials->seriname}}</option>
                                           @endforeach
                                       </select>
                                     

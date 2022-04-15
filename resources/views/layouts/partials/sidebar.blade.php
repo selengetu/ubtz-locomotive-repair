@@ -65,16 +65,11 @@
                          <li class="nav-item  ">
                              <a href="{{ route('zasplan') }}" class="nav-link nav-toggle">
                                  <i class="icon-settings"></i>
-                                 <span class="title">Төлөвлөгөөт засвар</span>
+                                 <span class="title">Засвар</span>
                              </a>
 
                          </li>
-                             <li class="nav-item ">
-                                 <a href="{{ route('zasunplan') }}" class="nav-link nav-toggle">
-                                     <i class="icon-bar-chart"></i>
-                                     <span class="title">Төлөвлөгөөт бус засвар</span>
-                                 </a>
-                             </li>
+                            
 
      <li class="heading">
          <h3 class="uppercase"><b>Засварын тайлан</b></h3>
@@ -82,18 +77,11 @@
      <li class="nav-item ">
          <a href="{{ route('reportplan') }}" class="nav-link nav-toggle">
              <i class="icon-settings"></i>
-             <span class="title">Төлөвлөгөөт засвар</span>
+             <span class="title">Засвар</span>
          </a>
 
      </li>
-     <li class="nav-item  ">
-         <a href="{{ route('reportunplan') }}" class="nav-link nav-toggle">
-             <i class="icon-puzzle"></i>
-             <span class="title">Төлөвлөгөөт бус засвар</span>
-
-         </a>
-
-     </li>
+    
      <li class="nav-item">
          <a href="{{ route('ilchitedangi') }}" class="nav-link nav-toggle">
              <i class="icon-bulb"></i>

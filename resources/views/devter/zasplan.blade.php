@@ -11,11 +11,7 @@
                         <i class="icon-settings font-green">
                         </i>
                         <span class="caption-subject font-green sbold uppercase">
-                        @if($zastype ==1 ) 
-                        Төлөвлөгөөт засвар
-                        @elseif($zastype ==2 ) 
-                        Төлөвлөгөөт бус засвар 
-                        @endif
+                     Засвар бүртгэл
                             
                         </span>
                     </div>
