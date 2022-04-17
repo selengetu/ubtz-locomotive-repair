@@ -42,7 +42,7 @@
                                             <div class="col-md-3">
                                             <div class="card  text-white bg-danger" style="border-left: .25rem solid #8F0000 ">
                                             <div class="container">
-                                            <h3 style="color: #8F0000"><img src="{{asset('image/Picture9.png')}}" alt="logo" class="logo-default" width="35px" /> <b>Хөдөлгөөний аюулгүй байдал</b></h3>
+                                            <h3 style="color: #8F0000"><img src="{{asset('image/Picture9.png')}}" alt="logo" class="logo-default" width="35px" /> <b>Аюулгүй байдал</b></h3>
                                            
                                             </div>
                                             </div>

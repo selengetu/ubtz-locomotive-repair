@@ -313,6 +313,7 @@
                                               <div class="form-group">
                                                   <label for="name">Урсгал засварын томьёолол</label>
                                                   <select class="form-control select2" id="repid" name="repid" >
+                                                  <option value= "999" tag="Меж">Меж</option>
                                                       @foreach($rep as $reps)
                                                           <option value= "{{$reps->repid}}" tag="{{$reps->repshname}}"> {{$reps->repshname}} - {{$reps->repname}}</option>
                                                       @endforeach
@@ -973,7 +974,7 @@
                       function getrep(itag){
                       $.get('getzasplanbase/'+itag,function(data){
                           $('#repid').empty();
-
+                          $('#repid').append($(' <option value= "999" tag="Меж">Меж</option>'));
                           $.each(data,function(i,qwe){
                               $('#repid').append($('<option>', {
                                   value: qwe.repid,
