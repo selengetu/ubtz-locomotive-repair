@@ -35,8 +35,8 @@
                                                     <select class="form-control select2" id="achaa_seri" name="achaa_seri" >
                                                         <option value="1">Бүгд</option>
                                                         <option value="1">ТЧ-1</option>
-                                                        <option value="0">ТЧ-2</option>
-                                                        <option value="0">ТЧ-3</option>
+                                                        <option value="2">ТЧ-2</option>
+                                                        <option value="3">ТЧ-3</option>
                                                     </select>
                                                 </div>
 
