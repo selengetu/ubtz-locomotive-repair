@@ -43,15 +43,7 @@
                                             <div id="sear" class="panel-collapse collapse in">
                                                 <div class="panel-body">
                                                     <fieldset class="scheduler-border">
-                                                     <form method="post"    
-                                                     @if($zastype ==1 ) 
-                                                     action="zasplan"
-                        @elseif($zastype ==2 ) 
-                        action="zasunplan"
-                        @endif
-                                                   
-                        
-                         >
+                                                     <form method="post" action="zasplan">
                                         <div class="col-md-12">
                                             <div class="col-md-3">
                                                 <div class="form-group form-md-line-input has-success">
@@ -117,11 +109,7 @@
                         <div id="ho" class="tab-pane fade in active">
                             <button class="btn btn-info" id="buttonprint" onclick="printDiv()"><i class="fa fa-print" aria-hidden="true"></i>Хэвлэх</button>
                             <button class="btn btn-info" id="btnExport" onclick="tableToExcel('testTable', 'Export HTML Table to Excel')"><i class="fa fa-table" aria-hidden="true"></i> Excel </button>
-                            <p><center><b> {{$startdate}} -аас {{$enddate}} -ны @if($zastype ==1 ) 
-                        төлөвлөгөөт засвар
-                        @elseif($zastype ==2 ) 
-                        төлөвлөгөөт бус засвар 
-                        @endif</b></center> </p>
+                            <p><center><b> {{$startdate}} -аас {{$enddate}} -ны засвар</b></center> </p>
                             <table class="table table-striped table-bordered table-hover"  id="example">
                                 <thead style="background-color: #81b5d5; color: #fff">
                                 <tr>
@@ -145,8 +133,11 @@
                                     <tr>
                                         <td>{{$no}}</td>
                                         <td>{{$zasplans->seriname}} -{{$zasplans->zutnumber}}</td> 
-                                       
-                                        <td>{{$zasplans->repshname}}</td>
+                                        <td>  @if($zasplans->repid == 999)
+                                            МЕЖ
+                                        @else
+                                        {{$zasplans->repshname}}
+                                        @endif</td>
                                         <td>{{$zasplans->repindate}}</td>
                                         <td>{{$zasplans->repoutdate}}</td>
                                         <td>{{$zasplans->repplandate}}</td>
@@ -249,11 +240,8 @@
               <div class="modal-dialog modal-lg" role="document">
                   <div class="modal-content">
                       <div class="modal-header">
-                          <h5 class="modal-title" id="modal-title" name="modal-title">  @if($zastype ==1 ) 
-                        Төлөвлөгөөт засвар
-                        @elseif($zastype ==2 ) 
-                        Төлөвлөгөөт бус засвар 
-                        @endifбүртгэх</h5>
+                          <h5 class="modal-title" id="modal-title" name="modal-title">
+                        Засвар бүртгэх</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                           </button>
@@ -265,14 +253,23 @@
                               <li class="disabled disabledTab"><a data-toggle="tab" id="modaltabbaig" href="#menu2">Байгууллага</a></li>
                               <li class="disabled disabledTab"><a data-toggle="tab" id="modaltabmat" href="#menu3">Материал</a></li>
                           </ul>
-
-
                           <div class="tab-content">
                               <div id="home" class="tab-pane fade in active">
                                   <form method="post" action="addzasplan">
                                       <div class="col-md-12">
                                       {{ csrf_field() }}
-                            
+                                      <div class="col-md-3">
+                                              <div class="form-group">
+                                                  <label for="name">Засвар хийсэн депо</label>
+                                                  <select class="form-control select2" id="depocode" name="depocode" >
+                                                      @foreach($depo as $depos)
+                                                          <option value= "{{$depos->depocode}}" tag="{{$depos->depocode}}"> {{$depos->deponame}}</option>
+                                                      @endforeach
+                                                  </select>
+                                              </div>
+
+                                          </div>
+
                                           <div class="col-md-3">
                                               <div class="form-group">
                                                   <label for="name">Зүтгүүрийн сери</label>
@@ -681,7 +678,7 @@
                 var title = document.getElementById("modal-title");
                 title.innerHTML = "Засвар засварлах";
                 $('#zas_seridiv1').show();
-                $('#zas_seridiv').hide();
+                $('#zas_seridiv').hide()
                 $('#type').val('1');
                 getrep(0);
               getzutnumber(0);

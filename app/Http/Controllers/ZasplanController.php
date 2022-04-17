@@ -41,7 +41,7 @@ class ZasplanController extends Controller
     {
         $part=Part::orderby('part_name')->get();
         $rep=Rep::all();
-        $depo=DB::select("select * from set_depo order by depocode");
+        $depo=DB::select("select * from set_depo order by deponame");
         $addbase=DB::select("select * from zutguur.zasaddbase");
         $zasbaig=DB::select("select * from zutguur.zasbaig");
         $damage=DB::select("select * from V_SET_GEMTEL");
@@ -56,16 +56,16 @@ class ZasplanController extends Controller
         $query = "";
     
            if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
-             $query.=" and repindate between TO_DATE( '".$startdate."' , 'yyyy/mm/dd') and TO_DATE( '".$enddate."', 'yyyy/mm/dd')";
+            $query.=" and repouteddate is null";
          }
          else 
          {
             
                 $startdate= Carbon::today()->subDays(7)->toDateString();
                 $enddate=  Carbon::today()->toDateString();
-                $query.=" and repindate between TO_DATE( '".$startdate."' , 'yyyy/mm/dd') and TO_DATE( '".$enddate."', 'yyyy/mm/dd')";
+                $query.=" and repouteddate is null";
+            }
   
-         }
          if ($sericode !=0 && $sericode!=NULL) {
             $query.=" and sericode= '".$sericode."'";
         }
@@ -89,7 +89,7 @@ class ZasplanController extends Controller
     {
         if(Request::input('type') == 0){
             $zasplan = new Zasplan;
-            $zasplan->depocode = Auth::user()->depocode;
+            $zasplan->depocode =Request::input('depocode');
             $zasplan->zasyear = Carbon::now()->year;
             $zasplan->zasmonth = Carbon::now()->month;
             $zasplan->sericode = Request::input('zas_seri');
@@ -104,16 +104,11 @@ class ZasplanController extends Controller
             $zasplan->runkm = Request::input('zasrun');
             $zasplan->do = Request::input('do');
             $zasplan->done = Request::input('done');
-            if(Request::input('zastype')== 1){
-            $zasplan->zastype = 1;
-            }
-            if(Request::input('zastype')==1){
+            if(Request::input('repid')== 999){
             $zasplan->zastype = 2;
-            $zasplan->replastdate = Request::input('replastdate');
-            $zasplan->damage = Request::input('damage');
-            $zasplan->locgroup = Request::input('locgroup');
-            $zasplan->decision = Request::input('decision');
-          
+            }
+            else{
+            $zasplan->zastype = 1;
             }
             $zasplan->save();
             $p=DB::getPdo()->lastInsertId();
@@ -131,7 +126,7 @@ class ZasplanController extends Controller
 
             $department = DB::table('ZASPLAN')
             ->where('repairid', Request::input('zasid'))
-            ->update(['sericode' =>  Request::input('zas_seri'),'zutnumber' =>  Request::input('zas_zutnumber'),'repid' =>  Request::input('repid'),'repindate' =>  Request::input('repindate'),
+            ->update(['sericode' =>  Request::input('zas_seri1'),'zutnumber' =>  Request::input('zas_zutnumber'),'repid' =>  Request::input('repid'),'repindate' =>  Request::input('repindate'),
             'repoutdate' =>  Request::input('repoutdate'),'repplandate' =>  Request::input('repplandate'),'repouteddate' =>  Request::input('repouteddate'),'stopsum' =>  Request::input('stopsum'),'do' =>  Request::input('do'),'done' => Request::input('done')]);
         
         }
