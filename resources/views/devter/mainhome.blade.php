@@ -61,7 +61,7 @@
                                             <div class="col-md-3">
                             <div class="card" style="border-left: .25rem solid green ">
                                 <div class="container">
-                                    <h4 style="color: green"><b>Машинчийн маршрут, түлш зарцуулалт</b></h4>
+                                    <h4 style="color: green"><b><a href="{{ route('report01') }}">Машинчийн маршрут, түлш зарцуулалт</a></b></h4>
                                   
                                 </div>
                             </div>
@@ -107,7 +107,7 @@
                                                     <div class="col-md-3">
                                                     <div class="card" style="border-left: .25rem solid #2A00FF ">
                                                     <div class="container">
-                                                    <h4 style="color: #2A00FF"><b><a href="{{ route('home') }}">Засварын чанарын хяналт, стандартчилал</a></b></h4>
+                                                    <h4 style="color: #2A00FF"><b><a href="{{ route('zasplan') }}">Засварын чанарын хяналт, стандартчилал</a></b></h4>
                                                   
                                                     </div>
                                                     </div>

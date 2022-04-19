@@ -207,3 +207,7 @@ Route::match(['get', 'post'],'/tuslamj', 'TuuzController@tuslamj')->name('tuslam
 Route::match(['get', 'post'],'/nagon', 'TuuzController@nagon')->name('nagon');
 Route::match(['get', 'post'],'/norm', 'TuuzController@norm')->name('norm');
 Route::match(['get', 'post'],'/machinistnagon', 'TuuzController@machinistnagon')->name('machinistnagon');
+
+
+
+Route::match(['get', 'post'],'/report01', 'MarshrutController@report01')->name('report01');
