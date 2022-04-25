@@ -40,8 +40,8 @@ class MarshrutController extends Controller
     public function report01()
     {
  
-        $startdate=Input::get('zas_start'); 
-        $enddate= Input::get('zas_end'); 
+        $startdate=2; 
+        $enddate= 3; 
         $query = "";
         if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
             $query.=" and repouteddate is null";
@@ -49,8 +49,8 @@ class MarshrutController extends Controller
          else 
          {
             
-                $startdate= Carbon::today()->subDays(7)->toDateString();
-                $enddate=  Carbon::today()->toDateString();
+            $startdate=2; 
+            $enddate= 3; 
                 $query.=" and repouteddate is null";
             }
             $bindings = [
@@ -96,8 +96,8 @@ class MarshrutController extends Controller
     public function report03()
     {
  
-        $startdate=Input::get('zas_start'); 
-        $enddate= Input::get('zas_end'); 
+        $startdate=2; 
+        $enddate= 3; 
         $query = "";
         if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
             $query.=" and repouteddate is null";
@@ -105,8 +105,8 @@ class MarshrutController extends Controller
          else 
          {
             
-                $startdate= Carbon::today()->subDays(7)->toDateString();
-                $enddate=  Carbon::today()->toDateString();
+            $startdate=2; 
+            $enddate= 3; 
                 $query.=" and repouteddate is null";
             }
             $bindings = [
