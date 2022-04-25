@@ -56,10 +56,10 @@ class MarshrutController extends Controller
             $bindings = [
                 'varType'  =>  1,
                 'varYear'  => 2022,
-                'begMonth'  => 1,
+                'begMonth'  => 2,
                 'endMonth'  => 3,
-                'varDepo'  =>  1,
-                'varDepo1'  => 5
+                'varDepo'  =>  2,
+                'varDepo1'  => 2
                 ];
          
             $report = DB::executeProcedureWithCursor('zutguur.procSelenge', $bindings);
@@ -112,10 +112,10 @@ class MarshrutController extends Controller
             $bindings = [
                 'varType'  =>  3,
                 'varYear'  => 2022,
-                'begMonth'  => 1,
+                'begMonth'  => 2,
                 'endMonth'  => 3,
-                'varDepo'  =>  1,
-                'varDepo1'  => 5
+                'varDepo'  =>  2,
+                'varDepo1'  => 2
                 ];
          
             $report = DB::executeProcedureWithCursor('zutguur.procSelenge', $bindings);
