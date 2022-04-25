@@ -6,7 +6,7 @@
                                  </li>
                                
                          <li class="nav-item  ">
-                            <a href="{{ route('report01') }}" class="nav-link nav-toggle">
+                            <a href="" class="nav-link nav-toggle">
                            <i class="icon-bar-chart"></i>
                                 <span class="title">Машинчийн тайлан</span>
                                    <span class="arrow"></span>
@@ -14,11 +14,19 @@
                             <ul class="sub-menu">
                                 <li class="nav-item  ">
                                     <a href="{{ route('report01') }}" class="nav-link ">
-                                        <span class="title">Бригадын ажилласан цаг</span>
+                                        <span class="title">Түлшний тайлан</span>
                                     </a>
                                 </li>
-                             
-                               
+                                <li class="nav-item  ">
+                                    <a href="{{ route('report02') }}" class="nav-link ">
+                                        <span class="title">Техник аялал</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item  ">
+                                    <a href="{{ route('report03') }}" class="nav-link ">
+                                        <span class="title">Аялалын судалгаа</span>
+                                    </a>
+                                </li>
                              
                             </ul>
                         </li>

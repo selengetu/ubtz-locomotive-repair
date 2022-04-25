@@ -211,3 +211,5 @@ Route::match(['get', 'post'],'/machinistnagon', 'TuuzController@machinistnagon')
 
 
 Route::match(['get', 'post'],'/report01', 'MarshrutController@report01')->name('report01');
+Route::match(['get', 'post'],'/report02', 'MarshrutController@report02')->name('report02');
+Route::match(['get', 'post'],'/report03', 'MarshrutController@report03')->name('report03');

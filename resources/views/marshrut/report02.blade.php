@@ -11,7 +11,7 @@
                         <i class="icon-settings font-green">
                         </i>
                         <span class="caption-subject font-green sbold uppercase">
-                          Түлшний тайлан
+                          Техник аяллын үзүүлэлт
                         </span>
                     </div>
                
@@ -78,7 +78,7 @@
                    <div class="table-container">
                     <button class="btn btn-info" id="buttonprint" onclick="printDiv()"><i class="fa fa-print" aria-hidden="true"></i>Хэвлэх</button>
                         <button class="btn btn-info" id="btnExport" onclick="tablesToExcel(array1, array2, 'myfile.xls')" value="Export to Excel"><i class="fa fa-table" aria-hidden="true"></i> Excel </button>
-                      <p><center><b> {{$startdate}} -аас {{$enddate}} дугаар сарын түлшний тайлан</b></center> </p>
+                      <p><center><b> {{$startdate}} -аас {{$enddate}} дугаар сарын техник аялал</b></center> </p>
           <div class="table-responsive">
       <table class="table table-striped table-bordered table-hover"  id="example">
                                                   <thead style="background-color: #81b5d5; color: #fff">
@@ -87,32 +87,32 @@
                                                         <th> Табель </th>
                                                         <th> Машинчийн нэр </th>
                                                         <th> Албан тушаал  </th>
-                                                        <th> Зарцуулалт /жинхэнэ/ </th>
-                                                        <th> Нормоор </th>
-                                                        <th> Хэмнэлт </th>
-                                                        <th> Хэтрэлт </th>
-                                                        <th> Бохир тн км </th>
+                                                        <th> Цувааны дугаар </th>
+                                                        <th> Нийт аялал </th>
+                                                        <th> Техникийн аялал </th>
+                                                        <th> Хувь </th>
+                                                        <th> Шагнал </th>
                                                       </tr>
                                                 </thead>
     
                                               <tbody>
                                               <?php $no = 1; ?>
+                                              <?php $tipslastmonth = 0; ?>
                               @foreach($report as $item)
                                                     <tr>
                                 <td>{{$no}}</td>
                                 <td>{{$item->mashcode}}</td>
                                 <td>{{$item->mashname}}</td>
                                 <td>{{$item->tushcode}}</td>
-                                <td>{{$item->sumlife}}</td>
-                                <td>{{$item->sumnorm}}</td>
-                                @if($item->sumzur>0)
-                                <td>{{$item->sumzur}}</td>
-                                <td>0</td>
-                                @else
-                                <td>0</td>
-                                <td>{{$item->sumzur}}</td>
-                                @endif
-                                <td>{{$item->sumdirty}}</td>
+                                <td>{{$item->tsuvcode}}</td>
+                                <td>{{$item->allsum}}</td>
+                                <td>{{$item->techcount}}</td>
+                               
+                                <td> <?php
+                                if($item->techcount > 0 && $item->allsum){
+                                echo number_format((($item->techcount)/($item->allsum)*100), 2, '.', ' ');}?>
+                               </td>
+                                <td>{{$item->techsum}}</td>
                              
                           </tr>
                              <?php $no++; ?>

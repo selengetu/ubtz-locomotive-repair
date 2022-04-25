@@ -11,7 +11,7 @@
                         <i class="icon-settings font-green">
                         </i>
                         <span class="caption-subject font-green sbold uppercase">
-                          Түлшний тайлан
+                        Аялалын судалгаа
                         </span>
                     </div>
                
@@ -78,7 +78,7 @@
                    <div class="table-container">
                     <button class="btn btn-info" id="buttonprint" onclick="printDiv()"><i class="fa fa-print" aria-hidden="true"></i>Хэвлэх</button>
                         <button class="btn btn-info" id="btnExport" onclick="tablesToExcel(array1, array2, 'myfile.xls')" value="Export to Excel"><i class="fa fa-table" aria-hidden="true"></i> Excel </button>
-                      <p><center><b> {{$startdate}} -аас {{$enddate}} дугаар сарын түлшний тайлан</b></center> </p>
+                      <p><center><b> {{$startdate}} -аас {{$enddate}} дугаар аялалын судалгаа</b></center> </p>
           <div class="table-responsive">
       <table class="table table-striped table-bordered table-hover"  id="example">
                                                   <thead style="background-color: #81b5d5; color: #fff">
@@ -87,11 +87,27 @@
                                                         <th> Табель </th>
                                                         <th> Машинчийн нэр </th>
                                                         <th> Албан тушаал  </th>
-                                                        <th> Зарцуулалт /жинхэнэ/ </th>
-                                                        <th> Нормоор </th>
-                                                        <th> Хэмнэлт </th>
-                                                        <th> Хэтрэлт </th>
-                                                        <th> Бохир тн км </th>
+                                                        <th> Цувааны дугаар </th>
+                                                        <th> Нийт аялал </th>
+                                                        <th> Техникийн аялал </th>
+                                                        <th> Тооцогдоогүй </th>
+                                                        <th> Хувь</th>
+                                                        <th> Хурд + </th>
+                                                        <th> Хурд - </th>
+                                                        <th> Түлш + </th>
+                                                        <th> Түлш - </th>
+                                                        <th> ТО-1 + </th>
+                                                        <th> ТО-1 - </th>
+                                                        <th> Цикл + </th>
+                                                        <th> Цикл - </th>
+                                                        <th> Ломбо + </th>
+                                                        <th> Ломбо - </th>
+                                                        <th> Маршрут + </th>
+                                                        <th> Маршрут - </th>
+                                                        <th> ТУ-152 + </th>
+                                                        <th> ТУ-152 - </th>
+                                                        <th> ИТ БҮРЭН + </th>
+                                                        <th> ИТ БҮРЭН - </th>
                                                       </tr>
                                                 </thead>
     
@@ -103,17 +119,31 @@
                                 <td>{{$item->mashcode}}</td>
                                 <td>{{$item->mashname}}</td>
                                 <td>{{$item->tushcode}}</td>
-                                <td>{{$item->sumlife}}</td>
-                                <td>{{$item->sumnorm}}</td>
-                                @if($item->sumzur>0)
-                                <td>{{$item->sumzur}}</td>
-                                <td>0</td>
-                                @else
-                                <td>0</td>
-                                <td>{{$item->sumzur}}</td>
-                                @endif
-                                <td>{{$item->sumdirty}}</td>
-                             
+                                <td>{{$item->tsuvcode}}</td>
+                                <td>{{$item->sumtravel}}</td>
+                                <td>{{$item->sumtech}}</td>
+                                <td>{{$item->sumtravel - $item->sumtech}}</td>
+                                <td> <?php
+                                if($item->sumtech > 0 && $item->sumtravel){
+                                echo number_format((($item->sumtech)/($item->sumtravel)*100), 2, '.', ' ');}?>
+                               </td>
+                                <td>{{$item->sumspeed}}</td>
+                                <td>{{$item->sumtravel - $item->sumspeed}}</td>
+                                <td>{{$item->sumoil}}</td>
+                                <td>{{$item->sumtravel - $item->sumoil}}</td>
+                                <td>{{$item->sumto1}}</td>
+                                <td>{{$item->sumtravel - $item->sumto1}}</td>
+                                <td>{{$item->sumcycle}}</td>
+                                <td>{{$item->sumtravel - $item->sumcycle}}</td>
+                                <td>{{$item->sumlombo}}</td>
+                                <td>{{$item->sumtravel - $item->sumlombo}}</td>
+                                <td>{{$item->summarsh}}</td>
+                                <td>{{$item->sumtravel - $item->summarsh}}</td>
+                                <td>{{$item->sumressiv}}</td>
+                                <td>{{$item->sumtravel - $item->sumressiv}}</td>
+                                <td>{{$item->sumsel}}</td>
+                                <td>{{$item->sumtravel - $item->sumsel}}</td>
+
                           </tr>
                              <?php $no++; ?>
                          @endforeach       
@@ -183,7 +213,7 @@ var tablesToExcel=null;
         var uri = 'data:application/vnd.ms-excel;base64,'
         , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets>'
         , templateend = '</x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head>'
-        , body = '<body> <p><center><b> {{$startdate}} -аас {{$enddate}} -ны түлшний тайлан</b></center> </p>'
+        , body = '<body> <p><center><b> {{$startdate}} -аас {{$enddate}} дугаар аялалын судалгаа</b></center> </p>'
         , tablevar = '<table border="1">{table'
         , tablevarend = '}</table><br><br>'
         , bodyend = '<span> ТАЙЛАН ГАРГАСАН:</span><span style="margin-left: 180px"> {{ Auth::user()->name }}</span></body></html>'

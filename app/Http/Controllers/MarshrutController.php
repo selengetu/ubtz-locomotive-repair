@@ -39,20 +39,9 @@ class MarshrutController extends Controller
      */
     public function report01()
     {
-        $part=Part::orderby('part_name')->get();
-        $rep=Rep::all();
-        $depo=DB::select("select * from set_depo order by deponame");
-        $addbase=DB::select("select * from zutguur.zasaddbase");
-        $zasbaig=DB::select("select * from zutguur.zasbaig");
-        $damage=DB::select("select * from V_SET_GEMTEL");
-        $locserial=DB::select("select * from V_ZUTGUURSERI");
+ 
         $startdate=Input::get('zas_start'); 
         $enddate= Input::get('zas_end'); 
-        $unit=DB::select("select * from set_unit");
-        $machinist= Input::get('machinist'); 
-        $z= Input::get('zurch_type'); 
-        $sericode= Input::get('zas_sericode'); 
-        $zastype= Input::get('zas_type'); 
         $query = "";
         if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
             $query.=" and repouteddate is null";
@@ -64,10 +53,73 @@ class MarshrutController extends Controller
                 $enddate=  Carbon::today()->toDateString();
                 $query.=" and repouteddate is null";
             }
-         $zasplan=DB::select('select * from V_ZASPLAN where 1=1 '.$query.'');
-        return view('marshrut.report01')->with(['unit'=>$unit,'part'=>$part, 'locserial' => $locserial, 'startdate' =>$startdate,
-                                             'enddate' => $enddate, 'zasplan' => $zasplan,'rep' => $rep,'addbase' => $addbase,
-                                             'zasbaig' => $zasbaig,'zastype' => $zastype,'damage' => $damage,'depo' => $depo]);
+            $bindings = [
+                'varType'  =>  1,
+                'varYear'  => 2022,
+                'begMonth'  => 1,
+                'endMonth'  => 3,
+                'varDepo'  =>  1,
+                'varDepo1'  => 5
+                ];
+         
+            $report = DB::executeProcedureWithCursor('zutguur.procSelenge', $bindings);
+        
+        return view('marshrut.report01')->with(['report'=>$report, 'startdate' =>$startdate,'enddate' => $enddate]);
     }
-   
+    public function report02()
+    {
+ 
+        $startdate=2; 
+        $enddate= 3; 
+        $query = "";
+        if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
+            
+         }
+         else 
+         {
+            $startdate=2; 
+            $enddate= 3; 
+            }
+            $bindings = [
+                'varType'  =>  2,
+                'varYear'  => 2022,
+                'begMonth'  => 2,
+                'endMonth'  => 3,
+                'varDepo'  =>  2,
+                'varDepo1'  => 2
+                ];
+         
+            $report = DB::executeProcedureWithCursor('zutguur.procSelenge', $bindings);
+        
+        return view('marshrut.report02')->with(['report'=>$report, 'startdate' =>$startdate,'enddate' => $enddate]);
+    }
+    public function report03()
+    {
+ 
+        $startdate=Input::get('zas_start'); 
+        $enddate= Input::get('zas_end'); 
+        $query = "";
+        if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
+            $query.=" and repouteddate is null";
+         }
+         else 
+         {
+            
+                $startdate= Carbon::today()->subDays(7)->toDateString();
+                $enddate=  Carbon::today()->toDateString();
+                $query.=" and repouteddate is null";
+            }
+            $bindings = [
+                'varType'  =>  3,
+                'varYear'  => 2022,
+                'begMonth'  => 1,
+                'endMonth'  => 3,
+                'varDepo'  =>  1,
+                'varDepo1'  => 5
+                ];
+         
+            $report = DB::executeProcedureWithCursor('zutguur.procSelenge', $bindings);
+        
+        return view('marshrut.report03')->with(['report'=>$report, 'startdate' =>$startdate,'enddate' => $enddate]);
+    }
 }
