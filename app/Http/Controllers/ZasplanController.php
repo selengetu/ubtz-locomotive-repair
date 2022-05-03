@@ -40,7 +40,7 @@ class ZasplanController extends Controller
     public function index()
     {
         $part=Part::orderby('part_name')->get();
-        $rep=Rep::all();
+        $rep=DB::select("select * from SET_REP order by rep_id");
         $depo=DB::select("select * from set_depo order by deponame");
         $addbase=DB::select("select * from zutguur.zasaddbase");
         $zasbaig=DB::select("select * from zutguur.zasbaig");
@@ -50,22 +50,26 @@ class ZasplanController extends Controller
         $enddate= Input::get('zas_end'); 
         $unit=DB::select("select * from set_unit");
         $machinist= Input::get('machinist'); 
-        $z= Input::get('zurch_type'); 
+        $zas_status= Input::get('zas_status'); 
         $sericode= Input::get('zas_sericode'); 
         $zastype= Input::get('zas_type'); 
         $query = "";
     
-           if ($startdate !=0 && $startdate && $enddate !=0 && $enddate !=NULL) {
-            $query.=" and repouteddate is null";
-         }
-         else 
-         {
-            
+        if ($zas_status == 1) {
+            if ($startdate !=0 && $startdate!=NULL) {
+                $query.=" and repouteddate between TO_DATE( '".$startdate."' , 'yyyy/mm/dd') and TO_DATE( '".$enddate."', 'yyyy/mm/dd')";
+            }
+            else{
                 $startdate= Carbon::today()->subDays(7)->toDateString();
                 $enddate=  Carbon::today()->toDateString();
-                $query.=" and repouteddate is null";
+                $query.=" and repouteddate between TO_DATE( '".$startdate."' , 'yyyy/mm/dd') and TO_DATE( '".$enddate."', 'yyyy/mm/dd')";
             }
-  
+         
+        }
+        else
+        {
+            $query.=" and repouteddate is null";
+        }
          if ($sericode !=0 && $sericode!=NULL) {
             $query.=" and sericode= '".$sericode."'";
         }
@@ -80,10 +84,11 @@ class ZasplanController extends Controller
         {
             $query.=" ";
         }
+
          $zasplan=DB::select('select * from V_ZASPLAN where 1=1 '.$query.'');
         return view('devter.zasplan')->with(['unit'=>$unit,'part'=>$part, 'locserial' => $locserial, 'startdate' =>$startdate,
                                              'enddate' => $enddate, 'zasplan' => $zasplan,'rep' => $rep,'addbase' => $addbase,
-                                             'zasbaig' => $zasbaig,'zastype' => $zastype,'damage' => $damage,'depo' => $depo]);
+                                             'zasbaig' => $zasbaig,'zastype' => $zastype,'damage' => $damage,'depo' => $depo,'zas_status' => $zas_status]);
     }
     public function store()
     {
@@ -99,6 +104,7 @@ class ZasplanController extends Controller
             $zasplan->repoutdate = Request::input('repoutdate');
             $zasplan->repplandate = Request::input('repplandate');
             $zasplan->repouteddate = Request::input('repouteddate');
+            $zasplan->section = Request::input('section');
             $zasplan->stopsum = Request::input('stopsum');
             $zasplan->stopclean = Request::input('stoprep');
             $zasplan->runkm = Request::input('zasrun');
@@ -126,7 +132,7 @@ class ZasplanController extends Controller
 
             $department = DB::table('ZASPLAN')
             ->where('repairid', Request::input('zasid'))
-            ->update(['sericode' =>  Request::input('zas_seri1'),'zutnumber' =>  Request::input('zas_zutnumber'),'repid' =>  Request::input('repid'),'repindate' =>  Request::input('repindate'),
+            ->update(['sericode' =>  Request::input('zas_seri1'),'zutnumber' =>  Request::input('zas_zutnumber'),'section' =>  Request::input('section'),'repid' =>  Request::input('repid'),'repindate' =>  Request::input('repindate'),
             'repoutdate' =>  Request::input('repoutdate'),'repplandate' =>  Request::input('repplandate'),'repouteddate' =>  Request::input('repouteddate'),'stopsum' =>  Request::input('stopsum'),'do' =>  Request::input('do'),'done' => Request::input('done')]);
         
         }

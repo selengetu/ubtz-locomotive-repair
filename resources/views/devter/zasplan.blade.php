@@ -1,4 +1,4 @@
-         @extends('layouts.app')
+@extends('layouts.app')
 @section('content')
 
           <div class="page-content-wrapper">
@@ -21,12 +21,7 @@
                                 <label class="btn btn-transparent green btn-circle btn-sm active">
                                     <i class="icon icon-plus">
                                     </i>
-                                    @if($zastype ==1 ) 
-                        Төлөвлөгөөт засвар
-                        @elseif($zastype ==2 ) 
-                        Төлөвлөгөөт бус засвар 
-                        @endif
-                                    бүртгэх
+                                   Засвар бүртгэх
                                 </label>
                             </a>
                         </div>
@@ -44,8 +39,19 @@
                                                 <div class="panel-body">
                                                     <fieldset class="scheduler-border">
                                                      <form method="post" action="zasplan">
+                                                         
                                         <div class="col-md-12">
-                                            <div class="col-md-3">
+                                        <div class="col-md-3">
+                                              <div class="form-group">
+                                                  <label for="name">Төлөв</label>
+                                                  <select class="form-control select2" id="zas_status" name="zas_status" required="true">
+                                                      <option value="0" >Засвараас гараагүй</option>
+                                                      <option value="1"  @if($zas_status == 1 ) selected @endif>Засвараас гарсан</option>
+                                                  </select>
+
+                                              </div>
+                                          </div>
+                                            <div class="col-md-2">
                                                 <div class="form-group form-md-line-input has-success">
                                                     <div class="input-icon">
                                                         <input class="form-control datepicker" id="zas_start" name="zas_start" type="text" value="{{$startdate}}">
@@ -59,7 +65,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <div class="form-group form-md-line-input has-success">
                                                     <div class="input-icon">
                                                         <input class="form-control datepicker" id="zas_end" name="zas_end" type="text" value="{{$enddate}}">
@@ -109,7 +115,12 @@
                         <div id="ho" class="tab-pane fade in active">
                             <button class="btn btn-info" id="buttonprint" onclick="printDiv()"><i class="fa fa-print" aria-hidden="true"></i>Хэвлэх</button>
                             <button class="btn btn-info" id="btnExport" onclick="tableToExcel('testTable', 'Export HTML Table to Excel')"><i class="fa fa-table" aria-hidden="true"></i> Excel </button>
-                            <p><center><b> {{$startdate}} -аас {{$enddate}} -ны засвар</b></center> </p>
+                            <p><center><b> @if($zas_status ==1 ) 
+                            {{$startdate}}-с {{$enddate}} хооронд засвараас гарсан тэргүүд
+                        @elseif($zas_status == 0 ) 
+                      Өнөөдөр засварт байгаа тэргүүд
+                        @endif
+                        </b></center> </p>
                             <table class="table table-striped table-bordered table-hover"  id="example">
                                 <thead style="background-color: #81b5d5; color: #fff">
                                 <tr>
@@ -132,12 +143,8 @@
                                 @foreach($zasplan as $zasplans)
                                     <tr>
                                         <td>{{$no}}</td>
-                                        <td>{{$zasplans->seriname}} -{{$zasplans->zutnumber}}</td> 
-                                        <td>  @if($zasplans->repid == 999)
-                                            МЕЖ
-                                        @else
-                                        {{$zasplans->repshname}}
-                                        @endif</td>
+                                        <td>{{$zasplans->seriname}} -{{$zasplans->zutnumber}} -{{$zasplans->section}}</td> 
+                                        <td> {{$zasplans->rep_name}} </td>
                                         <td>{{$zasplans->repindate}}</td>
                                         <td>{{$zasplans->repoutdate}}</td>
                                         <td>{{$zasplans->repplandate}}</td>
@@ -258,7 +265,7 @@
                                   <form method="post" action="addzasplan">
                                       <div class="col-md-12">
                                       {{ csrf_field() }}
-                                      <div class="col-md-3">
+                                      <div class="col-md-2">
                                               <div class="form-group">
                                                   <label for="name">Засвар хийсэн депо</label>
                                                   <select class="form-control select2" id="depocode" name="depocode" >
@@ -270,7 +277,7 @@
 
                                           </div>
 
-                                          <div class="col-md-3">
+                                          <div class="col-md-2">
                                               <div class="form-group">
                                                   <label for="name">Зүтгүүрийн сери</label>
                                                   <input class="form-control hidden" id="zastype" name="zastype" type="text" value="{{$zastype}}">
@@ -294,7 +301,7 @@
                                                   </div>
                                               </div>
                                           </div>
-                                          
+                                         
                                           <div class="col-md-3">
                                               <div class="form-group">
                                                   <label for="name">Зүтгүүрийн дугаар</label>
@@ -305,14 +312,23 @@
                                               </div>
 
                                           </div>
-                                          
+                                          <div class="col-md-2">
+                                              <div class="form-group">
+                                                  <label for="name">Секц</label>
+                                                  <select class="form-control select2" id="section" name="section" >
+                                                          <option value= "А">А</option>
+                                                          <option value= "Б">Б</option>
+                                                  </select>
+                                              </div>
+
+                                          </div>
+
                                           <div class="col-md-3">
                                               <div class="form-group">
-                                                  <label for="name">Урсгал засварын томьёолол</label>
+                                                  <label for="name">Засвар</label>
                                                   <select class="form-control select2" id="repid" name="repid" >
-                                                  <option value= "999" tag="Меж">Меж</option>
                                                       @foreach($rep as $reps)
-                                                          <option value= "{{$reps->repid}}" tag="{{$reps->repshname}}"> {{$reps->repshname}} - {{$reps->repname}}</option>
+                                                          <option value= "{{$reps->rep_id}}">  {{$reps->rep_name}}</option>
                                                       @endforeach
                                                   </select>
                                               </div>
@@ -680,7 +696,7 @@
                 $('#zas_seridiv1').show();
                 $('#zas_seridiv').hide()
                 $('#type').val('1');
-                getrep(0);
+  
               getzutnumber(0);
         $.get('getplan/'+itag,function(data){
               $("#planzas tbody").empty();
@@ -699,7 +715,7 @@
 
                   var sHtml1 = "<tr>" +
                       "   <td class='m1'>" + qwe.seriname +"-"+ qwe.zutnumber + "</td>" +
-                      "   <td class='m2'>" + qwe.repname + "</td>" +
+                      "   <td class='m2'>" + qwe.rep_name + "</td>" +
                       "   <td class='m2'>" + qwe.repindate + "</td>" +
                       "   <td class='m2'>" + qwe.repoutdate + "</td>" +
                       "   <td class='m2'>" + qwe.repplandate + "</td>" +
@@ -769,7 +785,7 @@
                       var itag=$(this).val();
           
                     getzutnumber(itag);
-                    getrep(itag);
+ 
                   
                   });
                   $('#locgroup').change(function(){
@@ -968,19 +984,8 @@
                           });
                       });
                       }
-                      function getrep(itag){
-                      $.get('getzasplanbase/'+itag,function(data){
-                          $('#repid').empty();
-                          $('#repid').append($(' <option value= "999" tag="Меж">Меж</option>'));
-                          $.each(data,function(i,qwe){
-                              $('#repid').append($('<option>', {
-                                  value: qwe.repid,
-                                  id: qwe.repid,
-                                  text: qwe.repshname
-                              })).trigger('change');
-                          });
-                      });
-                    }
+  
+               
           </script>
           <style type="text/css">
              
